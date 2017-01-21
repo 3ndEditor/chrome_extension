@@ -11,10 +11,15 @@ declare var MediumEditor:any;
     selector: 'editor',
     templateUrl: 'editor.component.html'
 })
+
+// 에디터 컴포넌트 부분으로 역참조한 에디터변수를 가져와서 실제 컴포넌트의 태그에 적용을 시킨다.
 export class EditorComponent implements OnInit {
     private edit;
     constructor(public el:ElementRef,public renderer:Renderer) {
-        this.edit = new MediumEditor(renderer.selectRootElement(el.nativeElement),{});
+        this.edit = new MediumEditor(renderer.selectRootElement(el.nativeElement),{
+            
+
+        });
 
 
      }

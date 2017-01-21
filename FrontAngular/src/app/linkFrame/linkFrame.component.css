@@ -1,0 +1,8 @@
+iframe {
+    width: 600;
+    height: 300;
+    frameborder :10;
+
+    outline: 1px solid red;
+  outline-offset: -4px;
+}
