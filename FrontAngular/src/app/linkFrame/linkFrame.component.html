@@ -1,0 +1,6 @@
+
+
+<!---->
+<input #inputUrl type="url" placeholder="http://" (keyup.enter)="onEnter(inputUrl.value)" />
+
+<iframe sandbox="allow-same-origin allow-forms allow-modals allow-scripts"  [src]="trustResourceURL"></iframe>
