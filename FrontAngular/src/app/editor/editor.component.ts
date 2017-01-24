@@ -3,26 +3,96 @@ import { Component, ElementRef, OnInit, Renderer } from '@angular/core';
 
 
 //CDN으로 가져온 medium_editor 자바스크립트를 역참조한다.
-declare var MediumEditor:any;
+declare var MediumEditor: any;
 
 
 @Component({
     moduleId: 'EditorModule',
     selector: 'editor',
-    templateUrl: 'editor.component.html'
+    templateUrl: 'editor.component.html',
+    styleUrls: ['editor.component.css']
 })
 
 // 에디터 컴포넌트 부분으로 역참조한 에디터변수를 가져와서 실제 컴포넌트의 태그에 적용을 시킨다.
 export class EditorComponent implements OnInit {
     private edit;
-    constructor(public el:ElementRef,public renderer:Renderer) {
-        this.edit = new MediumEditor(renderer.selectRootElement(el.nativeElement),{
-            
+    constructor(public el: ElementRef, public renderer: Renderer) {
+        this.edit = new MediumEditor(renderer.selectRootElement(el.nativeElement), {
+            // 에디터 옵션 부여 객체  // 
+            activeButtonClass: false,
+            // 개행불가 기능
+            disableReturn: false,
+            // 수정불가 기능
+            disableEditing: false,
+            // 문서 작성시 커서 안보임 기능
+            targetBlank: true,
+            // 버튼 레이블 폰트설정(?)
+            buttonLabels: false,
+            // 미확인 기본 옵션
+            allowMultiParagraphSelection: false,
+            contentWindow: window,
+            delay: 0,
+            disableDoubleReturn: false,
+            disableExtraSpaces: true,
+            elementsContainer: false,
+            extensions: {},
+            ownerDocument: document,
+            spellcheck: true,
+
+            // 플레이스 홀더 기능 
+            placeholder: {
+                text: 'Type your text',
+                hideOnClick: true
+            },
+
+            //  에디터 키보드 매핑
+            keyboardCommands: {
+                commands: [
+                    {
+                        command: 'bold',
+                        key: 'b',
+                        meta: true,
+                        shift: false
+                    },
+                    {
+                        command: 'italic',
+                        key: 'i',
+                        meta: true,
+                        shift: false
+                    },
+                    {
+                        command: 'underline',
+                        key: 'u',
+                        meta: true,
+                        shift: false
+                    }
+                ],
+            },
+            //  툴바 옵션
+            toolbar: {
+                allowMultiParagraphSelection: true,
+                buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3', 'quote'],
+                diffLeft: 0,
+                diffTop: -10,
+                firstButtonClass: 'medium-editor-button-first',
+                lastButtonClass: 'medium-editor-button-last',
+                relativeContainer: null,
+                standardizeSelectionStart: false,
+                static: false,
+
+                /* options which only apply when static is true */
+                align: 'center',
+                sticky: true,
+                updateOnEmptySelection: true
+            }
+
+
+
 
         });
 
 
-     }
+    }
 
     ngOnInit() { }
 }
