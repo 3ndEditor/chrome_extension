@@ -22,7 +22,6 @@ import { AppComponent } from './app.component';
     JsonpModule,
     HeaderModule
 
-
   ],
   providers: [],
   bootstrap: [AppComponent]
