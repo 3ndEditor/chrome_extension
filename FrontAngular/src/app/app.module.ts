@@ -21,7 +21,6 @@ import {AppComponent} from './app.component';
     HttpModule,
     AppRoutingModule, OutlineModule, JsonpModule
 
-
   ],
   providers: [],
   bootstrap: [AppComponent]

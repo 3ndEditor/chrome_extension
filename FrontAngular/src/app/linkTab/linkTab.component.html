@@ -1,0 +1,20 @@
+
+<div class="flexible url-tab-menu">
+    <div class="top-bar"> URL List</div>
+    <div class="url-item" *ngFor="let url of urlList"> 
+        <div class="url-box-wrapper">  <!--btn 속성 추가해야함-->
+             <div class="favicon" (click)="url.toggleMenu()">
+                <img src="https://www.google.com/s2/favicons?domain={{url.url}}" alt="favicon" width="20"  height="20">
+             </div>
+             <!--<div class="urlTip hidden">
+                 <b>Title이 들어올 자리</b> <br>
+                 단축키 : ctrl + alt + 숫자패드 @번
+             </div>-->
+        <div>
+    </div>
+    <div>
+        <div>
+             <!--쓰레기통을 위치시켜야함-->
+        </div>
+    </div>
+</div>
