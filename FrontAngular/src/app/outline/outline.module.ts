@@ -1,3 +1,4 @@
+import { linkTabModule } from '../linkTab/linkTab.module';
 import { linkFrameModule } from '../linkFrame/linkFrame.module';
 import { CommonModule } from '@angular/common';
 import { EditorModule } from '../editor/editor.module';
@@ -6,7 +7,7 @@ import { NgModule } from '@angular/core';
 
 
 @NgModule({
-    imports: [EditorModule,CommonModule,linkFrameModule],
+    imports: [EditorModule,CommonModule,linkFrameModule,linkTabModule],
     exports: [OutlineComponent],
     declarations: [OutlineComponent],
     providers: [],

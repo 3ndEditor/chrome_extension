@@ -6,6 +6,11 @@
         <div class="center-align" id="logo-image" *ngIf="isActiveCrtLinkFrameBtn">
             <img src="image/Logo_3ndEditor.png" />
         </div>
+
+
+        
+
+
         <!--링크 프레임(아이프레임으로 구현되는 곳)이 들어가는 자리임. 링크프레임생성버튼 활성유무에 따라 없어지고 나타난다.-->
         <div class="col l{{linkFrameSize}} m{{linkFrameSize}} s{{linkFrameSize}}" id="linkFrame" *ngIf="!isActiveCrtLinkFrameBtn">
             <linkFrame></linkFrame>

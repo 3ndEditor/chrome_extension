@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls:['./outline.component.css']
 })
 export class OutlineComponent implements OnInit {
+    
     private linkFrameSize:number=6;
     private editorSize:number = 12;
     private isActiveCrtLinkFrameBtn:boolean = true;

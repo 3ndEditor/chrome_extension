@@ -1,5 +1,10 @@
+<button (click)="toggleMenu()" class="btn">
+  <span>toggle menu</span>
+</button>
 
-
-<input #inputUrl type="url" placeholder="http://" (keyup.enter)="onEnter(inputUrl.value)"/>
-
-<iframe width="100%" height="600" frameborder="10" [src]="trustResourceURL"></iframe>
+<linkTab [@slideInOut]="menuState"></linkTab>
+<div>
+  <input #inputUrl type="url" placeholder="http://" (keyup.enter)="onEnter(inputUrl.value)"/>
+  <span><!--<img>iframe 종료 기능을 하는 x자 이미지</img>--></span>
+</div>
+<iframe width="100%" height="600" frameborder="10" [src]="trustResourceURL" scrolling="yes"></iframe>
