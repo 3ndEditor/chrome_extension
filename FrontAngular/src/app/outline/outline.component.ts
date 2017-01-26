@@ -32,6 +32,8 @@ export class OutlineComponent implements OnInit {
     private isActiveCrtLinkFrameBtn: boolean = false;
     constructor() {
         this.state = "deActive"
+
+        
     }
     public createLinkFrame(): void {
         if (this.isActiveCrtLinkFrameBtn == false) {
