@@ -28,7 +28,7 @@ export class linkFrameComponent implements OnInit {
     private trustResourceURL: SafeResourceUrl;
     private linkUrl:string = '';
     constructor(private _sanitizer: DomSanitizer, private connectService:LinkFrameService) {
-        let defaultUrl ="http://www.naver.com";
+        let defaultUrl ="http://www.tistory.com/";
         
         this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl(defaultUrl);
     }

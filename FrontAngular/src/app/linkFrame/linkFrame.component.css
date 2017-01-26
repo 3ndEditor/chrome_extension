@@ -5,7 +5,6 @@
   top: auto;
   right: auto;
   bottom: 0;
-  z-index: 9999;
   width: 49%;
   /*높이는 실제로 2배가 되기떄문에 실제 높이는 윈도우의 94퍼센트라 할수 있다.*/
   height: 47%;
