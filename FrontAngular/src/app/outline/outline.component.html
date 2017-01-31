@@ -23,7 +23,9 @@
 
 </div>
 
-<a routerLink="/editor" routerLinkActive="active" >route-text</a>
+<a routerLink="/index/editor" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >route-text</a>
+<a routerLink="/index/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >route-text</a>
 
+<input type="text">
 
-<router-outlet id="outlinerouter"></router-outlet>
+<router-outlet id="outlinerouter" >자식라우터</router-outlet>

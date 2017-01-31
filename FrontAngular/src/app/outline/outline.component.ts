@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { animate, Component, OnInit, transition, state, style, trigger } from '@angular/core';
 
 @Component({
@@ -30,7 +31,7 @@ export class OutlineComponent implements OnInit {
     state: string;
     // 링크프레임 생성 활성화 유무
     private isActiveCrtLinkFrameBtn: boolean = false;
-    constructor() {
+    constructor(private route : ActivatedRoute) {
         this.state = "deActive"
 
         
