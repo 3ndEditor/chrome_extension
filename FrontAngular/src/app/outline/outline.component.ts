@@ -30,6 +30,8 @@ export class OutlineComponent implements OnInit {
     state: string;
     // 링크프레임 생성 활성화 유무
     private isActiveCrtLinkFrameBtn: boolean = false;
+
+    
     constructor() {
         this.state = "deActive"
 
