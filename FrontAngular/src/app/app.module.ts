@@ -1,3 +1,5 @@
+import { AuthGuard } from './auth-guard/auth-guard.service';
+import { CanDeactivateGuard } from './auth-guard/can-deactivate-guard.service';
 import { HeaderModule } from './header/header.module';
 import { OutlineModule } from './outline/outline.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +25,7 @@ import { AppComponent } from './app.component';
     HeaderModule
 
   ],
-  providers: [],
+  providers: [AuthGuard,CanDeactivateGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,15 @@
+CACHE MANIFEST  
+# version 0.1.0
+
+CACHE:  
+favicon.ico  
+https://code.jquery.com/jquery-2.1.1.min.js
+http://fonts.googleapis.com/icon?family=Material+Icons
+medium_editor/js/medium-editor.min.js
+medium_editor/css/medium-editor.css
+medium_editor/css/themes/beagle.css
+materialize_css/css/materialize.min.css
+materialize_css/js/materialize.min.js
+NETWORK:
+
+FALLBACK:  
