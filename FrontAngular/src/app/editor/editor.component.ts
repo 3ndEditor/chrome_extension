@@ -29,7 +29,7 @@ export class EditorComponent implements OnInit {
             // 버튼 레이블 폰트설정(?)
             buttonLabels: false,
             // 미확인 기본 옵션
-            allowMultiParagraphSelection: false,
+            allowMultiParagraphSelection: true,
             contentWindow: window,
             delay: 0,
             disableDoubleReturn: false,

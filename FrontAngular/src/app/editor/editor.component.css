@@ -1,15 +1,7 @@
-:host-context(body){
-    height: 90%;
-}
+
 /*현재 컴포넌트의 상위 컨텍스트를 살펴볼수 있다. body를 지정할수 있는 것으로 보아 트리를 검색하는 것으로 보인다. */
 
 
-:host {
-  position: fixed;
-  overflow: auto;
-  width: 100%;
-  height: auto;
-  
-}
+
 
 
