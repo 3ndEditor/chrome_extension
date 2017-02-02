@@ -15,9 +15,10 @@ declare var MediumEditor: any;
 
 // 에디터 컴포넌트 부분으로 역참조한 에디터변수를 가져와서 실제 컴포넌트의 태그에 적용을 시킨다.
 export class EditorComponent implements OnInit {
-    private edit;
+    private editor;
     constructor(public el: ElementRef, public renderer: Renderer) {
-        this.edit = new MediumEditor(renderer.selectRootElement(el.nativeElement), {
+        
+        this.editor = new MediumEditor(renderer.selectRootElement(el.nativeElement), {
             // 에디터 옵션 부여 객체  // 
             activeButtonClass: false,
             // 개행불가 기능
@@ -29,7 +30,7 @@ export class EditorComponent implements OnInit {
             // 버튼 레이블 폰트설정(?)
             buttonLabels: false,
             // 미확인 기본 옵션
-            allowMultiParagraphSelection: false,
+            allowMultiParagraphSelection: true,
             contentWindow: window,
             delay: 0,
             disableDoubleReturn: false,
@@ -84,12 +85,26 @@ export class EditorComponent implements OnInit {
                 align: 'center',
                 sticky: true,
                 updateOnEmptySelection: true
+            },
+            //붙여 넣기 옵션
+            paste: {
+                /* This example includes the default options for paste,
+                   if nothing is passed this is what it used */
+                forcePlainText: true,
+                cleanPastedHTML: true,
+                cleanReplacements: [],
+                cleanAttrs: ['class', 'style', 'dir'],
+                cleanTags: ['meta'],
+                unwrapTags: []
             }
-
-
-
-
         });
+
+
+        // 에디터에 대한 커스텀 이벤트 리스너 추가 
+        this.el.nativeElement.addEventListener('drop', ($event:DragEvent)=>{
+            $event.preventDefault();
+            var data = $event.dataTransfer.getData
+        } )
 
 
     }

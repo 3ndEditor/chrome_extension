@@ -1,18 +1,16 @@
-<button (click)="toggleMenu()" class="btn">
+<div #makeit>
+  <button (click)="toggleMenu()" class="btn">
   <span>toggle menu</span>
 </button>
 
-<linkTab [@slideInOut]="menuState"></linkTab>
-<div>
-  <input #inputUrl type="url" placeholder="http://" (keyup.enter)="onEnter(inputUrl.value)"/>
-  <span><!--<img>iframe 종료 기능을 하는 x자 이미지</img>--></span>
+  <linkTab [@slideInOut]="menuState"></linkTab>
+  <div>
+    <input #inputUrl type="url" placeholder="http://" (keyup.enter)="onEnter(inputUrl.value)" />
+    <span><!--<img>iframe 종료 기능을 하는 x자 이미지</img>--></span>
+  </div>
+
+  <iframe #somevar (load)="testtt()"  sandbox="allow-same-origin allow-forms allow-modals allow-scripts" [src]="trustResourceURL">
+
+
+  </iframe>
 </div>
-
-<iframe sandbox="allow-same-origin allow-forms allow-modals allow-scripts"  [src]="trustResourceURL"></iframe>
-
-<script src="http://code.jquery.com/jquery-latest.js">
-  $(document).bind('mousemove',function(e){ 
-    console.log(e.pageX + ", " + e.pageY); 
-  }); 
-  console.log(4);
-</script>

@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: 'editor', component: EditorComponent },
+  // { path: 'editor', component: EditorComponent },
 ];
 
 @NgModule({
