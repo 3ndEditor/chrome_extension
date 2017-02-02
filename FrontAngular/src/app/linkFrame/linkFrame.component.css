@@ -1,20 +1,9 @@
-:host {
-  /*position 값을 고정시켜두면 하나의 레이어층이 생기는 효과를 받는것 같다. 그러나 어디까지나 부모 태그 안에서의 제한을 지니고 있다.*/
-  position: fixed; 
-  left: 0.5%;
-  top: auto;
-  right: auto;
-  bottom: 0;
-  width: 49%;
-  /*높이는 실제로 2배가 되기떄문에 실제 높이는 윈도우의 94퍼센트라 할수 있다.*/
-  height: 47%;
-  
-  
-}
+
 
 iframe{
   width: 100%;
   position: relative;
+  height: 130%;
   
 }
 
