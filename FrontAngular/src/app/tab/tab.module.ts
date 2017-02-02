@@ -1,11 +1,11 @@
+import { LinkModule } from '../linkTab/link/linkTab.link.module';
 import { CommonModule } from '@angular/common';
-import { linkTabComponent } from './linkTab.component';
 import { NgModule } from '@angular/core';
 
 
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [CommonModule,LinkModule],
     exports: [linkTabComponent],
     declarations: [linkTabComponent],
     providers: [],

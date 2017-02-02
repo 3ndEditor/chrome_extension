@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
 
 
 @NgModule({
-    imports: [linkTabModule, CommonModule],
+    imports: [CommonModule],
     exports: [linkFrameComponent],
     declarations: [linkFrameComponent],
     providers: [LinkFrameService],

@@ -9,3 +9,10 @@
 </div>
 
 <iframe sandbox="allow-same-origin allow-forms allow-modals allow-scripts"  [src]="trustResourceURL"></iframe>
+
+<script src="http://code.jquery.com/jquery-latest.js">
+  $(document).bind('mousemove',function(e){ 
+    console.log(e.pageX + ", " + e.pageY); 
+  }); 
+  console.log(4);
+</script>

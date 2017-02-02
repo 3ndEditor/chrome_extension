@@ -1,4 +1,4 @@
-import { animate, Component, OnInit, transition, state, style, trigger } from '@angular/core';
+import { animate, Component, OnInit, transition, state, style, trigger, HostListener } from '@angular/core';
 
 @Component({
     selector: 'outline',
@@ -44,6 +44,4 @@ export class OutlineComponent implements OnInit {
 
     }
     ngOnInit() { }
-
-
 }

@@ -48,6 +48,6 @@ export class linkFrameComponent implements OnInit {
     toggleMenu() {
     // 1-line if statement that toggles the value:
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
-  }
+    }
 
 }
