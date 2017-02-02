@@ -28,12 +28,16 @@ let savedEditorWidth: number = innerWidth;
                 state('deActive', style({})),
                 state('active',
                     style({ transform: 'translate3d(' +(innerWidth * 0.5 + savedDividerWidth) + 'px,0,0)', width: (savedEditorWidth * 0.5 - savedDividerWidth) + 'px' })),
-                transition('deActive<=>active', animate(500))
+                transition('deActive<=>active', animate(550))
             ]
         )
     ]
 })
+
+
 export class OutlineComponent implements OnInit {
+
+    items = [1,2,3];
     // 애니메이션 관련 변수
     private state: string;
     private linkFrameWidth: string;
@@ -43,6 +47,7 @@ export class OutlineComponent implements OnInit {
     private linkFrameTransform: string;
     private dividerTransform: string;
     private isActiveCrtLinkFrameBtn: boolean = false;
+    
 
     constructor(private route: ActivatedRoute) {
         // 초기화 진행
@@ -59,6 +64,7 @@ export class OutlineComponent implements OnInit {
             this.isActiveCrtLinkFrameBtn = true;
             this.state = "active"
             this.dividerTransform = 'translate3d(' + (innerWidth * 0.5 - savedDividerWidth) + 'px,0,0)';
+            this.editorTransform = (savedEditorWidth * 0.5 - savedDividerWidth) +'px' ;
 
         } else {
             this.isActiveCrtLinkFrameBtn = false;
@@ -73,18 +79,24 @@ export class OutlineComponent implements OnInit {
         console.log($event.x+ savedDividerWidth);
         this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
         this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
-        this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth)  + 'px,0,0)';
+        if(!($event.x===0)){
+            this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth)  + 'px,0,0)';
+        }
+        
+        
+        
     }
 
     public screenResizeEnd($event: DragEvent) {
         
         this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
         this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
-        console.log(this.editorWidth + " link " + this.linkFrameWidth);
         this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth)  + 'px,0,0)';
         this.dividerTransform = 'translate3d(' + ($event.x)  + 'px,0,0)';
     }
-    // 
+    
+
+    
 
 
     ngOnInit() { }
