@@ -1,5 +1,3 @@
-import { linkTabComponent } from '../linkTab/linkTab.component';
-import { linkTabModule } from '../linkTab/linkTab.module';
 import { CommonModule } from '@angular/common';
 import { Jsonp } from '@angular/http';
 import { LinkFrameService } from './linkFrame.service.promise';
@@ -9,7 +7,7 @@ import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 
 
 @NgModule({
-    imports: [linkTabModule, CommonModule,DragulaModule],
+    imports: [CommonModule,DragulaModule],
     exports: [linkFrameComponent],
     declarations: [linkFrameComponent],
     providers: [LinkFrameService],

@@ -3,11 +3,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'linkTab',
+    selector: 'tab',
     templateUrl: 'linkTab.component.html',
     styleUrls:['linkTab.component.css']
 })
-export class linkTabComponent implements OnInit{
+export class TabComponent implements OnInit{
     urlList: LinkComponent[] = [];
     
     // 서버로부터 받은 url로 배열 생성
