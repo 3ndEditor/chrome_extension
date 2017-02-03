@@ -2,7 +2,7 @@ import { EditorModule } from './editor.module';
 import { Component, ElementRef, OnInit, Renderer } from '@angular/core';
 
 
-//CDN으로 가져온 medium_editor 자바스크립트를 역참조한다.
+//head에 선언된 medium_editor 자바스크립트를 역참조한다.
 declare var MediumEditor: any;
 
 
@@ -30,7 +30,6 @@ export class EditorComponent implements OnInit {
             // 버튼 레이블 폰트설정(?)
             buttonLabels: false,
             // 미확인 기본 옵션
-            allowMultiParagraphSelection: true,
             contentWindow: window,
             delay: 0,
             disableDoubleReturn: false,
