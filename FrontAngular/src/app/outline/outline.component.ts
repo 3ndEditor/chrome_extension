@@ -17,9 +17,9 @@ let savedEditorWidth: number = innerWidth;
             [
                 // transform 속성은 위치의 변경을 의미한다. translate3d 함수는 x,y,z축의 움직임을 나타내는데 음수값도 허용한다. 
                 // 초기에 width 와 height 값을 0으로 지정해서 보이지 않도록 한다.
-                state('deActive', style({ transform: 'translate3d(-100%,0,0)', width: '0px', height: '0px' })),
-                state('active', style({ transform: 'translate3d(0,-100%,0)', width: savedLinkFrameWidth + 'px' })),
-                transition('deActive <=> active', animate(550)),
+                state('deActive', style({ transform: 'translate3d(0,0,-100%)', opacity:0  })),
+                state('active', style({ transform: 'translate3d(0,0,100%)', opacity:1 })),
+                transition('deActive <=> active', animate(300)),
 
             ]
         ),
@@ -29,7 +29,7 @@ let savedEditorWidth: number = innerWidth;
                 state('deActive', style({})),
                 state('active',
                     style({ transform: 'translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,0,0)', width: (savedEditorWidth * 0.5 - savedDividerWidth) + 'px' })),
-                transition('deActive<=>active', animate(550))
+                transition('deActive<=>active', animate(300))
             ]
         )
     ]
@@ -51,15 +51,15 @@ export class OutlineComponent implements OnInit {
     private linkFrameTransform: string;
     private dividerTransform: string;
     private isActiveCrtLinkFrameBtn: boolean = false;
-
-
+    private btnTransition : string;
+    private test:string;
     constructor(private route: ActivatedRoute, private dragulaService: DragulaService) {
         // 초기화 진행
         this.state = "deActive"
-        this.editorWidth = savedEditorWidth + 'px';
+        this.editorWidth ='100%';
         this.linkFrameWidth = savedLinkFrameWidth + 'px';
         this.dividerWidth = (savedDividerWidth * 2) + 'px';
-
+        this.btnTransition = "scale-transition ";
         //
         
 
@@ -73,10 +73,11 @@ export class OutlineComponent implements OnInit {
             this.state = "active"
             this.dividerTransform = 'translate3d(' + (innerWidth * 0.5 - savedDividerWidth) + 'px,0,0)';
             this.editorTransform = (savedEditorWidth * 0.5 - savedDividerWidth) + 'px';
-
+        
         } else {
             this.isActiveCrtLinkFrameBtn = false;
             this.state = "deActive"
+            this.test = "";
         }
 
     }
@@ -84,7 +85,6 @@ export class OutlineComponent implements OnInit {
     // 드래그로 화면 크기 조절 메소드
     public screenResizeStart($event: DragEvent): void {
 
-        console.log($event.x + savedDividerWidth);
         this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
         this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
         if (!($event.x === 0)) {
@@ -105,7 +105,9 @@ export class OutlineComponent implements OnInit {
 
     //
 
-
+    ngAfterViewInit() {
+        // this.btnTransition = "scale-out"
+    }
 
     ngOnInit() {
         // ViewChild 를 통해 dom 객체에 얼마든지 접근을 하수 있다. 다만 nativeElement 로 만들어줘야 쓸수 있다는 것. 
