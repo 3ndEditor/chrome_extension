@@ -1,4 +1,4 @@
-<div #makeit>
+<div>
   <button (click)="toggleMenu()" class="btn">
   <span>toggle menu</span>
 </button>
@@ -8,7 +8,7 @@
     <span><!--<img>iframe 종료 기능을 하는 x자 이미지</img>--></span>
   </div>
 
-  <iframe #somevar (load)="testtt()"  sandbox="allow-same-origin allow-forms allow-modals allow-scripts" [src]="trustResourceURL">
+  <iframe #somevar [dragula]="'bag-one'"   sandbox="allow-same-origin allow-forms allow-modals allow-scripts" [src]="trustResourceURL" scrolling='no' >
 
 
   </iframe>

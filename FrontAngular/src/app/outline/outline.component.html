@@ -3,32 +3,28 @@
     <!--row 클래스 아래에서만 grid를 줄 수 있다. css 비율값으로 분할을 대체하였다.-->
     <div class="row">
         <!--링크 프레임(아이프레임으로 구현되는 곳)이 들어가는 자리임. 링크프레임생성버튼 활성유무에 따라 없어지고 나타난다. -->
-        <linkFrame   [@createLinkFrame]="state" [ngStyle]="{'width': linkFrameWidth, 'transform': linkFrameTransform }"></linkFrame>
+        <linkFrame  class="z-depth-3" [@createLinkFrame]="state" [ngStyle]="{'width': linkFrameWidth, 'transform': linkFrameTransform }"></linkFrame>
 
         <span id="devider"  draggable="true" [ngStyle]="{'width': dividerWidth, 'transform': dividerTransform}"
           (drag)="screenResizeStart($event)" (dragend)="screenResizeEnd($event)" ></span>
 
         <!--에디터 프레임(미디움 에디터로 구현되는 곳)이 들어가는 자리, 링크프레임생성버튼 활성유무에 따라 크기가 조절된다. (12->6)-->
-        <editor [dragula]='"first-bag"' class="z-depth-3"  [@shrinkEditorSize]="state" [ngStyle]="{'width': editorWidth, 'transform': editorTransform}"></editor>
+        <editor class="flow-text" [dragula]='"first-bag"'    [@shrinkEditorSize]="state" [ngStyle]="{'width': editorWidth, 'transform': editorTransform}"></editor>
 
     </div>
-    <div id="activeBtn">
-        <a class="btn-floating btn-large waves-effect waves-light  red" (click)="createLinkFrame()">
+    <div id="activeBtn" [ngClass]="btnTransition">
+        <a class="btn-floating btn-large waves-effect waves-light red"    (click)="createLinkFrame()">
             <i class="material-icons">add</i>
         </a>
     </div>
 </div>
+    
 
 
 
 
 
-......
-<ul [dragula]='"bag-one"' [dragulaModel]='items'>
-  <li *ngFor="let item of items">
-      {{item}}
-  </li>
-</ul>
+
 
 <!--<a routerLink="/index/editor" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >route-text</a>
 <a routerLink="/index/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >route-text</a>-->

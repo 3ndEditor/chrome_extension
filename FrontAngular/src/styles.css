@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    width:100%;
+    background-color: white;
+    height: 100% 
+}    
+html{
+    background-color:  white;
+    height: 100%
+}
+
+
+#space{
+    margin-bottom: 20%;
+}
