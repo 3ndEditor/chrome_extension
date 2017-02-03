@@ -48,6 +48,9 @@ export class OutlineComponent implements OnInit {
     private dividerTransform: string;
     private isActiveCrtLinkFrameBtn: boolean = false;
     
+    // tab 사용 변수
+    private tabUsage_link: string = "linkTab";
+    private tabUsage_editor: string = "editorTab";
 
     constructor(private route: ActivatedRoute) {
         // 초기화 진행
@@ -55,7 +58,7 @@ export class OutlineComponent implements OnInit {
         this.editorWidth = savedEditorWidth + 'px';
         this.linkFrameWidth = savedLinkFrameWidth + 'px';
         this.dividerWidth = (savedDividerWidth*2) + 'px' ;
-
+        
     }
 
     // 버튼 활성화 유무에 따른 화면 분할 함수

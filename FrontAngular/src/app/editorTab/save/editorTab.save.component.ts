@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 @Component({
     selector:"save",
     templateUrl: 'editorTab.save.component.html',
-    styleUrls:['editorTab.export.component.css']
+    styleUrls:['editorTab.save.component.css']
 })
 export class SaveComponent{
 

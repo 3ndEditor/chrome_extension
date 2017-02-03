@@ -1,3 +1,4 @@
+import { TabModule } from '../tab/tab.module';
 import { OutlineRoutingModule } from './outline-routing.module';
 
 import { linkFrameModule } from '../linkFrame/linkFrame.module';
@@ -8,7 +9,7 @@ import { NgModule } from '@angular/core';
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 
 @NgModule({
-    imports: [EditorModule, CommonModule, linkFrameModule, OutlineRoutingModule, DragulaModule],
+    imports: [EditorModule, CommonModule, linkFrameModule, OutlineRoutingModule, DragulaModule, TabModule],
     exports: [],
     declarations: [OutlineComponent],
     providers: [],

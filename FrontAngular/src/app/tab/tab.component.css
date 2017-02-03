@@ -18,10 +18,10 @@
   background: black;
   color: #fff;
   position: fixed;
-  left: 0;
-  top: 0;
-  right: auto;
-  bottom: 0;
+  left: auto;
+  top: auto;
+  right: 0;
+  bottom: auto;
   width: 5%;
   min-width: 50px;
   z-index: 9999;
