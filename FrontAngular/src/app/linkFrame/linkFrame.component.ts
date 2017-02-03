@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 
 import { LinkFrameService } from './linkFrame.service.promise';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml, SafeResourceUrl } from '@angular/platform-browser';
 import {
     animate,
     Component,
@@ -37,9 +37,6 @@ import { DragulaService,dragula } from 'ng2-dragula/ng2-dragula';
 })
 export class linkFrameComponent implements OnInit {
 
-  @ViewChild('somevar') iframeCmp : ElementRef;
-  @ViewChild('makeit') makeit: ElementRef;
-  test: string;
   result: Observable<string[]>;
   private state: string = 'close';
   private trustResourceURL: SafeResourceUrl;
@@ -50,7 +47,6 @@ export class linkFrameComponent implements OnInit {
 
     this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl(defaultUrl);
     
-
     
   }
 
@@ -61,7 +57,6 @@ export class linkFrameComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   private menuState: string = 'in';
@@ -71,14 +66,13 @@ export class linkFrameComponent implements OnInit {
     this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 
-  testtt() {
-    this.test = "first-bag";
-    console.log(this.iframeCmp) ;
-    let drake = dragula([this.iframeCmp,this.makeit]);
-    // this.dragulaService.add("first-bag",drake);
-    console.log(drake);
+     
+    // this.trustHtml= this._sanitizer.bypassSecurityTrustHtml(
+    // this.rd.selectRootElement(this.iframeCmp.nativeElement).contentWindow.postMessage('','*'));
+    // let drake = dragula([this.trustHtml,this.makeit.nativeElement]);
+    //  iframe 내부로 접근하는 방법은 현재 막혀 있다. 보안 문제를 더 공부하고 도전해야 겠다.
     
-  }
+    
 
   ngAfterViewInit() {
   }
