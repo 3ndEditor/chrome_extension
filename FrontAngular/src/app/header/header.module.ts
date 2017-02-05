@@ -1,3 +1,5 @@
+import { SharedModule } from '../shared/shared.module';
+import { KeymapDirective } from '../keymap/keymap.directive';
 import { LoginModule } from './login/login.module';
 
 import { HelpComponent } from './help/help.component';
@@ -11,7 +13,7 @@ import { NgModule } from '@angular/core';
 
 
 @NgModule({
-    imports: [LoginModule, CommonModule],
+    imports: [LoginModule, SharedModule],
     exports: [HeaderComponent],
     declarations: [HeaderComponent, HelpComponent],
     providers: [],

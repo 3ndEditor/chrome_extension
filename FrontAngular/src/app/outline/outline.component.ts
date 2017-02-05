@@ -1,3 +1,4 @@
+import { Keymap } from '../keymap/keymap.provider';
 import { ActivatedRoute } from '@angular/router';
 import { animate, Component, ElementRef, OnInit, state, style, transition, trigger, ViewChild } from '@angular/core';
 import { DragulaService, dragula } from 'ng2-dragula/ng2-dragula';
@@ -18,20 +19,21 @@ let savedEditorWidth: number = innerWidth;
                 // transform 속성은 위치의 변경을 의미한다. translate3d 함수는 x,y,z축의 움직임을 나타내는데 음수값도 허용한다. 
                 // 초기에 width 와 height 값을 0으로 지정해서 보이지 않도록 한다.
                 state('deActive', style({ transform: 'translate3d(0,0,-100%)', opacity:0  })),
-                state('active', style({ transform: 'translate3d(0,0,100%)', opacity:1 })),
-                transition('deActive <=> active', animate(300)),
+                state('active', style({ transform: 'translate3d(0,0,100%)', opacity:1  })),
+                transition('deActive <=> active', animate(200)),
 
             ]
         ),
-        trigger(
-            'shrinkEditorSize',
-            [
-                state('deActive', style({})),
-                state('active',
-                    style({ transform: 'translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,0,0)', width: (savedEditorWidth * 0.5 - savedDividerWidth) + 'px' })),
-                transition('deActive<=>active', animate(300))
-            ]
-        )
+        // 애니메이션은 초기값을 주고나면 값변경이 안됨...
+        // trigger(
+        //     'shrinkEditorSize',
+        //     [
+        //         state('deActive', style({})),
+        //         state('active',
+        //             style({ transform: 'translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,0,0)', width: (savedEditorWidth * 0.5 - savedDividerWidth) + 'px' })),
+        //         transition('deActive<=>active', animate(300))
+        //     ]
+        // )
     ]
 })
 
@@ -41,7 +43,7 @@ export class OutlineComponent implements OnInit {
     
 
     
-
+    
     // 애니메이션 관련 변수
     private state: string;
     private linkFrameWidth: string;
@@ -53,7 +55,7 @@ export class OutlineComponent implements OnInit {
     private isActiveCrtLinkFrameBtn: boolean = false;
     private btnTransition : string;
     private test:string;
-    constructor(private route: ActivatedRoute, private dragulaService: DragulaService) {
+    constructor(private route: ActivatedRoute, private dragulaService: DragulaService,private keymap:Keymap) {
         // 초기화 진행
         this.state = "deActive"
         this.editorWidth ='100%';
@@ -72,12 +74,14 @@ export class OutlineComponent implements OnInit {
             this.isActiveCrtLinkFrameBtn = true;
             this.state = "active"
             this.dividerTransform = 'translate3d(' + (innerWidth * 0.5 - savedDividerWidth) + 'px,0,0)';
-            this.editorTransform = (savedEditorWidth * 0.5 - savedDividerWidth) + 'px';
-        
+            this.linkFrameWidth = savedLinkFrameWidth + 'px';
+            this.editorWidth = (savedEditorWidth * 0.5 - savedDividerWidth) + 'px';
+            this.editorTransform ='translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,0,0)';
         } else {
             this.isActiveCrtLinkFrameBtn = false;
             this.state = "deActive"
-            this.test = "";
+            this.editorWidth= savedEditorWidth + 'px';
+            this.editorTransform = 'translate3d(0,0,0)'
         }
 
     }
@@ -107,6 +111,8 @@ export class OutlineComponent implements OnInit {
 
     ngAfterViewInit() {
         // this.btnTransition = "scale-out"
+
+        
     }
 
     ngOnInit() {
