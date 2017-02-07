@@ -26,6 +26,7 @@
       ],
       "scripts": [
         "../node_modules/materialize-css/dist/js/materialize.min.js"
+        
       ],
       "environments": {
         "source": "environments/environment.ts",

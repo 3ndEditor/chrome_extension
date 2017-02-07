@@ -63,5 +63,8 @@ export class HeaderComponent implements OnInit {
         this.isHeaderFixed = this.isHeaderFixed == 'active' ? 'deActive' : 'active';
     }
 
-    ngAfterViewInit() { }
+    ngAfterViewInit() {
+
+        
+     }
 }

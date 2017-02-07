@@ -12,6 +12,10 @@
     z-index: 555;
 
     /*뒤쪽 display 를 조절 */
-
+    display: none;
     
+}
+
+#hoho{
+
 }

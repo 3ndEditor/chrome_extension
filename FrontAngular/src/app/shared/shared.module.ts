@@ -1,9 +1,8 @@
-import { KeymapProvider } from '../keymap/keymap.provider';
-import { KeymapDirective } from '../keymap/keymap.directive';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
+import {KeymapDirective} from '/keymap/keymap.provider';
+import {KeymapProvider} from '/keymap/keymap.directive'
 
 
 @NgModule({
