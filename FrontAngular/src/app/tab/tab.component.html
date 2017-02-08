@@ -1,11 +1,11 @@
-
-<span>usage: {{usage}}</span>
-<div *ngIf="usage=='linkTab'" >
+<div class="linkTab center" *ngIf="usage=='linkTab'" >
     <div class="flexible url-tab-menu">
         <div class="top-bar"> URL List</div>
-        <div class="url-item"> 
-            <!--*ngFor="let url of urlList"-->
-            <!--<link></link>-->
+        <div>
+            <add></add>
+        </div>
+        <div>
+            <linkPack></linkPack>
         </div>
         <div>
             <trash-can></trash-can>
@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div *ngIf="usage=='editorTab'">
+<div class="editorTab center" *ngIf="usage=='editorTab'">
     <div class="flexible url-tab-menu">
         <div class="top-bar"> Editor Tab</div>
         <div>

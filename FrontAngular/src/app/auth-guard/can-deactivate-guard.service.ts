@@ -15,5 +15,4 @@ export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate>
         console.log("test");
         return window.confirm("저장되지 않았습니다. 나가시겠습니까")
     }
-
 }
