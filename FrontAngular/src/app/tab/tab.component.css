@@ -1,29 +1,35 @@
-.top-bar {
-  text-align: center;
-}
-
 .hidden{
   visibility: hidden;
 }
 
-.favicon {
-    width: 30dp;
-    height: 30dp;
-    text-align: center;
-    margin-bottom: 50;
-    outline-offset: -4px;
-}
-
-:host {
-  background: black;
-  color: #fff;
+.editorTab {
+  background:hsl(240, 100%, 97%);
+  color: black;
   position: fixed;
-  left: 0;
-  top: 0;
-  right: auto;
-  bottom: 0;
+  left: auto;
+  top: auto;
+  right: 0;
+  bottom: auto;
   width: 5%;
   min-width: 50px;
   z-index: 9999;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.linkTab {
+  background:hsl(240, 100%, 97%);
+  color: black;
+  position: fixed;
+  left: 0;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  width: 5%;
+  min-width: 50px;
+  z-index: 9999;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.tabComponent img {
+  vertical-align: middle
 }

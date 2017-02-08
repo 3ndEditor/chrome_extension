@@ -1,21 +1,47 @@
-<nav class="light-blue darken-1 ">
-    <login [@showLoginModal]="stateLoginModal"></login>
+<nav class="light-blue darken-1">
+
     <div class="nav-wrapper">
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
                 <a class="waves-effect waves-light btn" (click)="showLoginModal()">로그인</a>
+                <login *ngIf="ttttt"> </login>
+
             </li>
+            <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
+            <!-- Dropdown Structure -->
+            <ul id='dropdown1' class='dropdown-content'>
+
+
+
+            </ul>
             <li>
                 <a href="#" data-activates="slide-out" class="button-collapse "><i class="material-icons">menu</i></a>
             </li>
-            <li><a (click)="openWith()"><i class="material-icons ">open_with</i></a></li>
-            <li><a (click)="openHelp()"><i class="material-icons ">live_help</i></a></li>
-            <li><a (click)="lockOpen()"><i class="material-icons ">lock_open</i></a></li>
+            <li>
+                <a keyMap [keyCode]="keymap.wide_key" [isAltKey]="'true'" (keyAction)="openWith()" (click)="openWith()">
+                    <i class="material-icons " [@headerFix]="isHeaderFixed">open_with</i></a>
+            </li>
+            <li>
+                <a keyMap [keyCode]="keymap.help_key" (keyAction)="openHelp()" (click)="openHelp()">
+                    <i class="material-icons " [@headerFix]="isHeaderFixed">live_help</i></a>
+            </li>
+            <li><a keyMap [keyCode]="keymap.header_fixed_key" [isAltKey]="'true'" (keyAction)="headerFix()" (click)="headerFix()"><i class="material-icons" [@headerFix]="isHeaderFixed" >lock_open</i></a></li>
+
+            <li (click)="sidenav.open()">dddd</li>
         </ul>
 
     </div>
 </nav>
 
-<help *ngIf="isHelpActive" ></help>
+<help *ngIf="isHelpActive"></help>
 
-<!--<router-outlet></router-outlet>-->
+<!--<md-sidenav-container class="example-container">
+  <md-sidenav #sidenav class="example-sidenav">
+    Jolly good!
+  </md-sidenav>
+
+  <div class="example-sidenav-content">
+    
+  </div>
+
+</md-sidenav-container>-->
