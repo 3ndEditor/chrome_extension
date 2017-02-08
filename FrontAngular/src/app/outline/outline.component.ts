@@ -55,17 +55,31 @@ export class OutlineComponent implements OnInit {
     private linkFrameTransform: string;
     private dividerTransform: string;
     private isActiveCrtLinkFrameBtn: boolean = false;
+
     private btnTransition: string;
     private test: string;
+
+
+    // tab 사용 변수
+    private tabUsage_link: string = "linkTab";
+    private tabUsage_editor: string = "editorTab";
+
     constructor(private route: ActivatedRoute,
         private dragulaService: DragulaService, private keymap: Keymap, private routeParam: ActivatedRoute) {
+
+
+
+
+
+
+
+
         // 초기화 진행
         this.state = "deActive"
         this.editorWidth = '100%';
         this.linkFrameWidth = savedLinkFrameWidth + 'px';
         this.dividerWidth = (savedDividerWidth * 2) + 'px';
         this.btnTransition = "scale-transition ";
-        //
 
 
 
@@ -150,7 +164,7 @@ export class OutlineComponent implements OnInit {
         // });
         // this.dragulaService.add('bag-one', drake);
 
-        this.routeParam.data.forEach((data:{userResolveService : LoginUser}) => {
+        this.routeParam.data.forEach((data: { userResolveService: LoginUser }) => {
             console.log(data.userResolveService);
             this.inputParam = data.userResolveService.name
         });

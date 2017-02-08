@@ -8,4 +8,4 @@ import { NgModule } from '@angular/core';
     declarations: [TrashCanComponent],
     providers: [],
 })
-export class NameModule { }
+export class TrashCanModule { }
