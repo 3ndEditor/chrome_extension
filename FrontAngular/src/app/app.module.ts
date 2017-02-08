@@ -1,3 +1,7 @@
+import { SectionModule } from './section/section.module';
+import { InvalidUrlPageComponent } from './invalid-url-page.component';
+import { LoginUserService } from './user/user';
+import { UserResolveService } from './user/user-resolve.service';
 import { AuthGuard } from './auth-guard/auth-guard.service';
 import { CanDeactivateGuard } from './auth-guard/can-deactivate-guard.service';
 import { HeaderModule } from './header/header.module';
@@ -14,23 +18,24 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,InvalidUrlPageComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    OutlineModule,
-    JsonpModule,
     HeaderModule,
+    SectionModule,
+    OutlineModule,
+    JsonpModule
     // 앵귤라에 최적화된 마테리얼 디자인을 쓸 수 있으나 아직 베타버전이고 성능이 구짐. 나중에 좋아지면 적용하자.
     // MaterialModule.forRoot()
-
+    
     
 
   ],
-  providers: [AuthGuard,CanDeactivateGuard],
+  providers: [AuthGuard,CanDeactivateGuard,UserResolveService,LoginUserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

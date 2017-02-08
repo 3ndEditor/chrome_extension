@@ -1,5 +1,5 @@
 import { EditorModule } from './editor.module';
-import { Component, ElementRef, OnInit, Renderer } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer,Input } from '@angular/core';
 import * as UsingEditor from 'medium-editor';
 
 //head에 선언된 medium_editor 자바스크립트를 역참조한다.
@@ -14,7 +14,7 @@ import * as UsingEditor from 'medium-editor';
 
 // 에디터 컴포넌트 부분으로 역참조한 에디터변수를 가져와서 실제 컴포넌트의 태그에 적용을 시킨다.
 export class EditorComponent implements OnInit {
-
+    @Input() routeData : string;
     editorOptions: MediumEditor.CoreOptions = {
         activeButtonClass: 'medium-editor-button-active',
         // 에디터 사용유무
