@@ -9,11 +9,13 @@
           (drag)="screenResizeStart($event)" (dragend)="screenResizeEnd($event)" ></span>
 
         <!--에디터 프레임(미디움 에디터로 구현되는 곳)이 들어가는 자리, 링크프레임생성버튼 활성유무에 따라 크기가 조절된다. (12->6)-->
-        <editor class="flow-text" [dragula]='"first-bag"'    [@shrinkEditorSize]="state" [ngStyle]="{'width': editorWidth, 'transform': editorTransform}"></editor>
+        <editor class="flow-text" [dragula]='"first-bag"'  [routeData]="inputParam"   [ngStyle]="{'width': editorWidth, 'transform': editorTransform}"></editor>
 
     </div>
     <div id="activeBtn" [ngClass]="btnTransition">
-        <a class="btn-floating btn-large waves-effect waves-light red"    (click)="createLinkFrame()">
+        <a class="btn-floating btn-large waves-effect waves-light red" 
+        keyMap [keyCode]="keymap.create_frame_key" [isCtrKey]="'false'"  [isAltKey]="'true'" (keyAction)="createLinkFrame()"
+           (click)="createLinkFrame()">
             <i class="material-icons">add</i>
         </a>
     </div>
@@ -27,4 +29,3 @@
 
 <!--<a routerLink="/index/editor" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >route-text</a>
 <a routerLink="/index/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >route-text</a>-->
-<!--<router-outlet id="outlinerouter" >자식라우터</router-outlet>-->

@@ -18,9 +18,16 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/medium-editor/dist/css/medium-editor.min.css",
+        "../node_modules/medium-editor/dist/css/themes/beagle.min.css",
+        "../node_modules/materialize-css/dist/css/materialize.min.css",
+        "../node_modules/dragula/dist/dragula.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/materialize-css/dist/js/materialize.min.js"
+        
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
