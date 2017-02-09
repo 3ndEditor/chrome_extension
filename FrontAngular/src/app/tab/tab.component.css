@@ -2,7 +2,14 @@
   visibility: hidden;
 }
 
-.editorTab {
+.tab-btn { 
+  padding-top:10px; 
+  padding-right:5px; 
+  padding-bottom:5px; 
+  padding-left:10px; 
+}
+
+#editorTab {
   background:hsl(240, 100%, 97%);
   color: black;
   position: fixed;
@@ -16,7 +23,7 @@
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
-.linkTab {
+#linkTab {
   background:hsl(240, 100%, 97%);
   color: black;
   position: fixed;

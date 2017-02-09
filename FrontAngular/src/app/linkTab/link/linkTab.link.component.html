@@ -2,8 +2,8 @@
     <div class="url-box-wrapper FixedLink" *ngFor="let linkA of listLinkFixed">  <!--btn 속성 추가해야함-->
         <div>
             <!--(click)="url.toggleMenu()"-->
-            <div class="tabComponent">
-                <img class="fixbar-left" src="image/fixedBar.png" width="4" height="40"/>
+            <div class="tab-btn">
+                <img class="left" src="image/fixedBar.png" width="4" height="30"/>
                 <img src="https://www.google.com/s2/favicons?domain={{linkA.link.url}}" alt="favicon" width="30"  height="30">
             </div>
         </div>
@@ -15,8 +15,8 @@
     <div class="url-box-wrapper UnfixedLink" *ngFor="let linkB of listLinkUnfixed">  <!--btn 속성 추가해야함-->
         <div>
             <!--(click)="url.toggleMenu()"-->
-            <div class="tabComponent">
-                <img class="fixbar-left" src="image/unfixedBar.png" width="4" height="40"/>
+            <div class="tab-btn">
+                <img class="left" src="image/unfixedBar.png" width="4" height="30"/>
                 <img src="https://www.google.com/s2/favicons?domain={{linkB.link.url}}" alt="favicon" width="30"  height="30">
             </div>
         </div>

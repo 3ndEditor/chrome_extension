@@ -119,8 +119,6 @@ export class EditorComponent implements OnInit {
             $event.preventDefault();
             var data = $event.dataTransfer.getData
         })
-
-
     }
 
     ngOnInit() { }
