@@ -1,4 +1,4 @@
-import { OutlineModule } from '../outline/outline.module';
+import { OutlineModule } from './outline/outline.module';
 import { SectionRoutingModule } from './section-routing.module';
 import { SectionComponent } from './section.component';
 import { InvalidUrlPageComponent } from '../invalid-url-page.component';
