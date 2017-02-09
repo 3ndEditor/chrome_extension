@@ -1,6 +1,6 @@
-import { LoginUser } from '../user/user';
-import { UserResolveService } from '../user/user-resolve.service';
-import { Keymap } from '../shared/keymap/keymap.provider';
+import { LoginUser } from '../../user/user';
+import { UserResolveService } from '../../user/user-resolve.service';
+import { Keymap } from '../../shared/keymap/keymap.provider';
 import { ActivatedRoute } from '@angular/router';
 import { animate, Component, ElementRef, OnInit, state, style, transition, trigger, ViewChild } from '@angular/core';
 import { DragulaService, dragula } from 'ng2-dragula/ng2-dragula';

@@ -1,4 +1,4 @@
-import { handleError } from '../async-handling.promise';
+import { handleError } from '../../../async-handling.promise';
 import { Http, Jsonp, Request, RequestMethod, RequestOptions, Response, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 

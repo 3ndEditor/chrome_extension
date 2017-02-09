@@ -1,6 +1,6 @@
 
-import { AuthGuard } from '../auth-guard/auth-guard.service';
-import { CanDeactivateGuard } from '../auth-guard/can-deactivate-guard.service';
+import { AuthGuard } from './auth-guard/auth-guard.service';
+import { CanDeactivateGuard } from './auth-guard/can-deactivate-guard.service';
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';

@@ -1,4 +1,4 @@
-import { LinkComponent } from '../linkTab/link/linkTab.link.component';
+import { LinkComponent } from './linkTab/link/linkTab.link.component';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Component, Input, OnInit } from '@angular/core';
 
