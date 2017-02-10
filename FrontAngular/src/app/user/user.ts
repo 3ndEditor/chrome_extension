@@ -10,6 +10,7 @@ const LOGINUSERS = [
     new LoginUser('kim','kim@editor.com'),
     new LoginUser('lee','lee@editor.com'),
     new LoginUser('park','park@editor.com'),
+    new LoginUser('Kadler Kim','cicada0014@gmail.com')
 ]
 
 export let userPromise = Promise.resolve(LOGINUSERS);

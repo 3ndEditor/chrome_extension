@@ -1,10 +1,9 @@
+import { OutlineComponent } from './section/outline/outline.component';
 import { UserResolveService } from './user/user-resolve.service';
 import { SectionComponent } from './section/section.component';
 import { InvalidUrlPageComponent } from './invalid-url-page.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './header/login/login.component';
-import { AuthGuard } from './auth-guard/auth-guard.service';
-import { OutlineComponent } from './outline/outline.component';
 import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
