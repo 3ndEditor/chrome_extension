@@ -1,5 +1,17 @@
 <div>
     <div>
-        <img src="assets/image/pdfIcon.png" width="30px" height="40px"/>
+        <a class="waves-effect waves-light" href="#modal1" keyMap [keyCode]="keymap.help_key" (keyAction)="openExport()" (click)="openExport()">
+            <img [@exportActive]="isExportActive" src="assets/image/pdfIcon.png" width="30px" height="40px"/>
+        </a>
     </div>
 </div>
+
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
