@@ -42,7 +42,7 @@ let savedEditorWidth: number = innerWidth;
 
 export class OutlineComponent implements OnInit {
 
-    value='';
+
 
     private inputParam: string;
 

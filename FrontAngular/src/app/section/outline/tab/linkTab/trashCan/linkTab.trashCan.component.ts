@@ -5,11 +5,5 @@ import { Component } from '@angular/core';
     styleUrls:['linkTab.trashCan.component.css']
 })
 export class TrashCanComponent{
-    /**
-    * @file linkTab.trashCan.component.ts
-    * @author KimTaemin 17/02/08
-    * @brief to discard Link
-    * @see 
-    * @todo intersect with server, make method
-    */
+    
 }

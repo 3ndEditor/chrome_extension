@@ -2,7 +2,6 @@
 <div class="outline" >
     <!--row 클래스 아래에서만 grid를 줄 수 있다. css 비율값으로 분할을 대체하였다.-->
     <div class="row">
-        <!--<input [(ngModel)]="value"> <br><p>{{value}}</p>-->
         <!--링크 프레임(아이프레임으로 구현되는 곳)이 들어가는 자리임. 링크프레임생성버튼 활성유무에 따라 없어지고 나타난다. -->
         <linkFrame  class="z-depth-3" [@createLinkFrame]="state" [ngStyle]="{'width': linkFrameWidth, 'transform': linkFrameTransform }"></linkFrame>
 
@@ -24,8 +23,8 @@
     
 
 
-<tab id="linkTab" [usage]="tabUsage_link"></tab> 
-<tab id="editorTab" [usage]="tabUsage_editor"></tab>
+<tab [usage]="tabUsage_link"></tab> 
+<tab [usage]="tabUsage_editor"></tab>
 
 
 <!--<a routerLink="/index/editor" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >route-text</a>

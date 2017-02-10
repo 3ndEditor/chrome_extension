@@ -8,5 +8,5 @@ export let LINK: Link[]=[
     {url:'www.daum.net', fixed:[true,3], trushed:false},
     {url:'www.nate.com', fixed:[true,4], trushed:false},
     {url:'www.google.com', fixed:[false,0], trushed:true},
-    {url:'www.notforme.kr/angular2', fixed:[false,2], trushed:false},
+    {url:'www.nate.com', fixed:[false,2], trushed:false},
 ]
