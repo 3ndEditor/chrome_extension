@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     private userImageUrl:SafeUrl;
     constructor(private zone: NgZone, private render: Renderer,private router:Router,private _sanitizer:DomSanitizer) {
         this.clientId = '199152716518-9vgjiiunustbt8el3saorikuk7ngkmta.apps.googleusercontent.com';
-        that= this;
+        that = this;
         
     }
 
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     }
 
     public googleInit() {
-        that = this;
+        
         // 구글 로그인 설정 
         gapi.load('auth2', function () {
             // 구글 로그인 초기화부분
@@ -67,8 +67,6 @@ export class LoginComponent implements OnInit {
             
             auth2.isSignedIn.listen(that.signinChanged);
             console.log('tetstt')
-            // 구글로그인 클릭리스너 부여 
-            // that.attachSignin(that.render.selectRootElement(that.el.nativeElement));
         });
     }
     signIn() {

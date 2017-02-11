@@ -10,6 +10,7 @@
   z-index: 10;
 }
 
+
 linkFrame {
   /*position 값을 고정시켜두면 하나의 레이어층이 생기는 효과를 받는것 같다. 그러나 어디까지나 부모 태그 안에서의 제한을 지니고 있다.*/
   position: fixed; 
@@ -22,14 +23,16 @@ linkFrame {
   z-index: 10;
   user-select: none;
   width: 100%;
+  transform: translateY(9%);
 }
 
 
 #devider{
   position: fixed;
-  height: 90%;
+  height: 91%;
   z-index: 0;
   cursor: col-resize;
+  transform: translateY(9%);
   
 }
 
@@ -39,5 +42,6 @@ editor {
   width: 100%; 
   height: 91%;
   z-index: 10;
+  transform: translateY(9%);
   
 }

@@ -21,15 +21,15 @@
             </li>
             <li>
                 <a class="waves-effect" keyMap [keyCode]="keymap.wide_key" [isAltKey]="'true'" (keyAction)="openWith()" (click)="openWith()">
-                    <i class="material-icons " [@headerFix]="isHeaderFixed">open_with</i></a>
+                    <i class="material-icons " >open_with</i></a>
             </li>
             <li>
                 <a class="waves-effect" keyMap [keyCode]="keymap.help_key" (keyAction)="openHelp()" (click)="openHelp()">
-                    <i class="material-icons " [@headerFix]="isHeaderFixed">live_help</i></a>
+                    <i class="material-icons " >live_help</i></a>
             </li>
             <li>
                 <a class="waves-effect" keyMap [keyCode]="keymap.header_fixed_key" [isAltKey]="'true'" (keyAction)="headerFix()" (click)="headerFix()">
-                    <i class="material-icons" [@headerFix]="isHeaderFixed">lock_open</i>
+                    <i class="material-icons" >lock_open</i>
                 </a>
             </li>
         </ul>

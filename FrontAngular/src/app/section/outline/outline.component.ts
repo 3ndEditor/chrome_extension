@@ -1,41 +1,45 @@
+import { NavBarService } from '../../shared/nav-bar.service';
 import { LoginUser } from '../../user/user';
 import { UserResolveService } from '../../user/user-resolve.service';
 import { Keymap } from '../../shared/keymap/keymap.provider';
 import { ActivatedRoute } from '@angular/router';
-import { animate, Component, ElementRef, OnInit, state, style, transition, trigger, ViewChild } from '@angular/core';
+import {
+    animate,
+    AnimationStyles,
+    Component,
+    ElementRef,
+    OnInit,
+    Renderer,
+    state,
+    style,
+    transition,
+    trigger,
+    ViewChild
+} from '@angular/core';
 import { DragulaService, dragula } from 'ng2-dragula/ng2-dragula';
 
 // 초기값과 애니메이션에도 동일한 값을 주기 위해 클래스밖 전역변수(?)로 빼내었다.
-let savedDividerWidth: number = 10;
-let savedLinkFrameWidth: number = (innerWidth * 0.5) - savedDividerWidth;
-let savedEditorWidth: number = innerWidth;
-
+var savedDividerWidth: number = 10;
+var savedLinkFrameWidth: number = (innerWidth * 0.5) - savedDividerWidth;
+var savedEditorWidth: number = innerWidth;
+var savedEdiotrTransForm: string;
+var savedDividerTransForm: string;
+var savedEdiotrTransX: number = 0;
 @Component({
     selector: 'outline',
     templateUrl: 'outline.component.html',
     styleUrls: ['./outline.component.css'],
     animations: [
         trigger(
-            'createLinkFrame',
+            'navbarAction',
             [
-                // transform 속성은 위치의 변경을 의미한다. translate3d 함수는 x,y,z축의 움직임을 나타내는데 음수값도 허용한다. 
-                // 초기에 width 와 height 값을 0으로 지정해서 보이지 않도록 한다.
-                state('deActive', style({ transform: 'translate3d(0,0,-100%)', opacity: 0 })),
-                state('active', style({ transform: 'translate3d(0,0,100%)', opacity: 1 })),
-                transition('deActive <=> active', animate(200)),
-
+                state('false', style({})),
+                state('true',
+                    style({ height: '99%' })),
+                transition('false <=> true', animate(10))
             ]
-        ),
-        // 애니메이션은 초기값을 주고나면 값변경이 안됨...
-        // trigger(
-        //     'shrinkEditorSize',
-        //     [
-        //         state('deActive', style({})),
-        //         state('active',
-        //             style({ transform: 'translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,0,0)', width: (savedEditorWidth * 0.5 - savedDividerWidth) + 'px' })),
-        //         transition('deActive<=>active', animate(300))
-        //     ]
-        // )
+        )
+
     ]
 })
 
@@ -43,7 +47,6 @@ let savedEditorWidth: number = innerWidth;
 export class OutlineComponent implements OnInit {
 
     /**
-     * 이 주석의 위치는 클래스 바로 아래가 좋을 듯 함. (생성자 이전)
      * 전반적인 클래스에 대한 주석
      * @file outline.component.ts (나중에 프로그램으로 돌릴때 필요할수도 있다고 해서)
      * @author youngtae 2017.02.09
@@ -58,7 +61,6 @@ export class OutlineComponent implements OnInit {
     private inputParam: string;
 
     // 애니메이션 관련 변수
-    private state: string;
     private linkFrameWidth: string;
     private editorWidth: string;
     private editorTransform: string;
@@ -66,34 +68,29 @@ export class OutlineComponent implements OnInit {
     private linkFrameTransform: string;
     private dividerTransform: string;
     private isActiveCrtLinkFrameBtn: boolean = false;
-
-    private btnTransition: string;
-    private test: string;
-
+    private navbarAction: string = "false";
+    private editorNavbarAction: string;
+    private linkFrameOpacity: string = '0';
+    private isResized: boolean = false;
 
     // tab 사용 변수
     private tabUsage_link: string = "linkTab";
     private tabUsage_editor: string = "editorTab";
 
-    constructor(private route: ActivatedRoute,
-        private dragulaService: DragulaService, private keymap: Keymap, private routeParam: ActivatedRoute) {
-
-
-
-
-
-
-
-
+    constructor(
+        private route: ActivatedRoute,
+        private dragulaService: DragulaService,
+        private keymap: Keymap,
+        private routeParam: ActivatedRoute,
+        private navService: NavBarService,
+        private renderer: Renderer,
+        private el: ElementRef) {
         // 초기화 진행
-        this.state = "deActive"
         this.editorWidth = '100%';
-        this.linkFrameWidth = savedLinkFrameWidth + 'px';
+        this.linkFrameWidth = '0px';
         this.dividerWidth = (savedDividerWidth * 2) + 'px';
-        this.btnTransition = "scale-transition ";
-
-
-
+        this.linkFrameTransform = 'translate3d(-10%,0,0)';
+        this.navbarAction = this.navService.action + "";
     }
 
     /**
@@ -102,18 +99,47 @@ export class OutlineComponent implements OnInit {
     * @returns void
     */
     public createLinkFrame(): void {
-        if (this.isActiveCrtLinkFrameBtn == false) {
+        // 화면분할
+        if (this.isActiveCrtLinkFrameBtn === false) {
             this.isActiveCrtLinkFrameBtn = true;
-            this.state = "active"
-            this.dividerTransform = 'translate3d(' + (innerWidth * 0.5 - savedDividerWidth) + 'px,0,0)';
-            this.linkFrameWidth = savedLinkFrameWidth + 'px';
-            this.editorWidth = (savedEditorWidth * 0.5 - savedDividerWidth) + 'px';
-            this.editorTransform = 'translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,0,0)';
+            this.linkFrameOpacity = '1';
+
+
+
+            if (!this.isResized) {
+                this.editorWidth = (innerWidth * 0.5 - savedDividerWidth) + 'px';
+                this.linkFrameWidth = (innerWidth * 0.5) - savedDividerWidth + 'px';
+
+                if (this.navService.action) {
+                    this.editorTransform = 'translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,0,0)';
+                    this.dividerTransform = 'translate3d(' + (innerWidth * 0.5 - savedDividerWidth) + 'px,0,0)';
+                } else {
+                    this.editorTransform = 'translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,9%,0)';
+                    this.dividerTransform = 'translate3d(' + (innerWidth * 0.5 - savedDividerWidth) + 'px,9%,0)';
+                }
+                savedEdiotrTransX = (innerWidth * 0.5 + savedDividerWidth);
+            } else {
+                this.editorWidth = (savedEditorWidth) + 'px';
+                this.linkFrameWidth = savedLinkFrameWidth + 'px';
+                this.editorTransform = savedEdiotrTransForm;
+                this.dividerTransform = savedDividerTransForm;
+
+            }
+
+            //화면 초기화
         } else {
             this.isActiveCrtLinkFrameBtn = false;
-            this.state = "deActive"
-            this.editorWidth = savedEditorWidth + 'px';
-            this.editorTransform = 'translate3d(0,0,0)'
+            this.editorWidth = '100%';
+            this.linkFrameWidth = '0%';
+            this.linkFrameOpacity = '0';
+            if (this.navService.action) {
+                this.editorTransform = 'translate3d(0,0,0)'
+                this.linkFrameTransform = 'translate3d(-10%,0,0)';
+            } else {
+                this.editorTransform = 'translate3d(0,9%,0)'
+                this.linkFrameTransform = 'translate3d(-10%,9%,0)';
+            }
+
         }
 
     }
@@ -124,11 +150,21 @@ export class OutlineComponent implements OnInit {
     */
 
     public screenResizeStart($event: DragEvent): void {
+        if (this.isResized === false) {
+            this.isResized = true;
+        }
 
         this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
         this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
         if (!($event.x === 0)) {
-            this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,0,0)';
+            if (this.navService.action) {
+                this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,0,0)';
+                this.linkFrameTransform = 'translate3d(0,0,0)';
+            } else {
+                this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,9%,0)';
+                this.linkFrameTransform = 'translate3d(0,9%,0)';
+            }
+
         }
 
 
@@ -141,18 +177,50 @@ export class OutlineComponent implements OnInit {
 
         this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
         this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
-        this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,0,0)';
-        this.dividerTransform = 'translate3d(' + ($event.x) + 'px,0,0)';
+        savedLinkFrameWidth = ($event.x - savedDividerWidth);
+        savedEditorWidth = (innerWidth - $event.x - savedDividerWidth);
+        if (this.navService.action) {
+            this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,0,0)';
+            savedEdiotrTransForm = this.editorTransform;
+            this.dividerTransform = 'translate3d(' + ($event.x) + 'px,0,0)';
+            savedDividerTransForm = this.dividerTransform;
+
+
+        } else {
+            this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,9%,0)';
+            savedEdiotrTransForm = this.editorTransform;
+            this.dividerTransform = 'translate3d(' + ($event.x) + 'px,9%,0)';
+            savedDividerTransForm = this.dividerTransform;
+
+
+        }
+
+        savedEdiotrTransX = ($event.x + savedDividerWidth);
+
     }
 
     //
 
-    ngAfterViewInit() {
-        // this.btnTransition = "scale-out"
+    ngAfterContentChecked() {
+        if (this.navbarAction !== this.navService.action + "") {
+            this.navbarAction = this.navService.action + "";
+            if (this.navService.action) {
+                this.linkFrameTransform = 'translate3d(0,0,0)';
+                this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,0,0)';
+                savedEdiotrTransForm = this.editorTransform;
+            } else {
+                this.linkFrameTransform = 'translate3d(0,9%,0)';
+                this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,9%,0)';
+                savedEdiotrTransForm = this.editorTransform;
+            }
+
+
+        }
+
 
 
     }
-    
+
     /**
     * 드래그로 화면 크기 조절 메소드
     * @param $event 드래그 이벤트 타입.
