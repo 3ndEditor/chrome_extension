@@ -29,8 +29,9 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     HeaderModule,
     SectionModule,
-    JsonpModule
+    JsonpModule,
     // 앵귤라에 최적화된 마테리얼 디자인을 쓸 수 있으나 아직 베타버전이고 성능이 구짐. 나중에 좋아지면 적용하자.
+    // 적용하면 최소 1초는 더 연장됨.... 쓰지 말자.
     // MaterialModule.forRoot()
     
     

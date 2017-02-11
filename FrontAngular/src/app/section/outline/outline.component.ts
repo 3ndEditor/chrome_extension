@@ -42,7 +42,16 @@ let savedEditorWidth: number = innerWidth;
 
 export class OutlineComponent implements OnInit {
 
-    value='';
+    /**
+     * 이 주석의 위치는 클래스 바로 아래가 좋을 듯 함. (생성자 이전)
+     * 전반적인 클래스에 대한 주석
+     * @file outline.component.ts (나중에 프로그램으로 돌릴때 필요할수도 있다고 해서)
+     * @author youngtae 2017.02.09
+     * @brief 화면 구성요소(에디터, 링크프레임, 탭) 을 연결하고 담는 역할.
+     * @see 참고사항 해당 컴포넌트는 라우터를 통해 표현된다. 라우터에 표현되어질때 라우터 변수를 통해 서버단에서 정보를 가져온다.
+     * 해당 객체는 전반적인 화면표시 내용을 객체로 나타낼것이다. 
+     * @todo 추가적으로 해야할 사항
+     */
 
     private inputParam: string;
 
@@ -85,7 +94,11 @@ export class OutlineComponent implements OnInit {
 
     }
 
-    // 버튼 활성화 유무에 따른 화면 분할 메소드
+    /**
+    * 버튼 활성화 유무에 따른 화면 분할 메소드
+    * @param void
+    * @returns void
+    */
     public createLinkFrame(): void {
         if (this.isActiveCrtLinkFrameBtn == false) {
             this.isActiveCrtLinkFrameBtn = true;
@@ -102,8 +115,12 @@ export class OutlineComponent implements OnInit {
         }
 
     }
+    /**
+    * 드래그로 화면 크기 조절 메소드
+    * @param $event 드래그 이벤트 타입.
+    * @returns void
+    */
 
-    // 드래그로 화면 크기 조절 메소드
     public screenResizeStart($event: DragEvent): void {
 
         this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
@@ -115,6 +132,8 @@ export class OutlineComponent implements OnInit {
 
 
     }
+
+
 
     public screenResizeEnd($event: DragEvent) {
 
@@ -131,15 +150,29 @@ export class OutlineComponent implements OnInit {
 
 
     }
+    
+    /**
+    * 드래그로 화면 크기 조절 메소드
+    * @param $event 드래그 이벤트 타입.
+    * @returns void
+    */
 
     ngOnInit() {
+
+        this.routeParam.data.forEach((data: { userResolveService: LoginUser }) => {
+            console.log(data.userResolveService);
+            this.inputParam = data.userResolveService.name
+        });
+    }
+
+
+
+}
         // ViewChild 를 통해 dom 객체에 얼마든지 접근을 하수 있다. 다만 nativeElement 로 만들어줘야 쓸수 있다는 것. 
         // 추가적으로 Renderer를 통해 보안적 이슈까지 꼼꼼히 체크하자.
         // dragula 메소드에 dom 객체를 통과시키면 drake로 불리우는 객체가 된다. 이 객체는 드래그앤 드랍이 잘 적용이된다. 
         // dom객체가 한번 로딩 되어진 다음에 작동되어야 하므로 생명주기는 적어도 ngOnInit 단계에서 적용시켜주어야 작동된다.
         // 아래 코드는 dragula 관련 옵션을 줄수 있는 코드이다. 
-
-        // console.log(this.testCmp);
         // let drake = dragula([this.testCmp.nativeElement], {
         //     isContainer: function (el) {
 
@@ -163,13 +196,3 @@ export class OutlineComponent implements OnInit {
         //     ignoreInputTextSelection: true     // allows users to select input text, see details below
         // });
         // this.dragulaService.add('bag-one', drake);
-
-        this.routeParam.data.forEach((data: { userResolveService: LoginUser }) => {
-            console.log(data.userResolveService);
-            this.inputParam = data.userResolveService.name
-        });
-    }
-
-
-
-}
