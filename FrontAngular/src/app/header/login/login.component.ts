@@ -8,6 +8,7 @@ import {
     ElementRef,
     EventEmitter,
     HostListener,
+    Input,
     NgZone,
     OnInit,
     Output,
@@ -24,14 +25,19 @@ var that;
 })
 export class LoginComponent implements OnInit {
 
-    @Output() signAction = new EventEmitter<Object>();
+    
+    private btnActivate :string;
+    
+
     private apiKey: string;
     private clientId: string;
     private loginState: boolean;
     private isSignChange: boolean;
     private userImageUrl: SafeUrl;
+    private deFaultImageUrl : SafeUrl;
     constructor(private zone: NgZone, private render: Renderer, private router: Router, private _sanitizer: DomSanitizer) {
         this.clientId = '199152716518-9vgjiiunustbt8el3saorikuk7ngkmta.apps.googleusercontent.com';
+        this.userImageUrl = this.deFaultImageUrl =this._sanitizer.bypassSecurityTrustResourceUrl("assets/image/defaultUserImage.png");
         that = this;
 
     }
@@ -49,7 +55,6 @@ export class LoginComponent implements OnInit {
     ngAfterViewChecked() {
         if (this.loginState === this.isSignChange) {
             this.loginState = this.isSignChange;
-            // this.signAction.emit();
         }
     }
 
@@ -99,13 +104,17 @@ export class LoginComponent implements OnInit {
             let url = that.router.createUrlTree(['3ndEditor']);
             that.router.navigateByUrl(url);
             that.loginState = 'signIn';
+            that.userImageUrl = that.deFaultImageUrl;
             // that.signAction.emit();
         }
 
     }
 
-    public userChanged(user) {
-
+    public mouseenter() {
+        this.btnActivate = "z-depth-2 grey lighten-3 ";
+    }
+    public mouseout() {
+        this.btnActivate = "";
     }
 
 

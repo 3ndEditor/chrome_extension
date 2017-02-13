@@ -31,7 +31,7 @@ linkFrame {
 #devider{
   position: fixed;
   height: 91%;
-  z-index: 0;
+  z-index: 9;
   cursor: col-resize;
   transform: translateY(9%);
   

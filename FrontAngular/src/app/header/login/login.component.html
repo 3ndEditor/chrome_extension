@@ -9,8 +9,13 @@
     </div>
   </div>
 
-  <div class="card-action" style="padding-top: 0">
-    <a (click)="signIn()"  *ngIf="loginState =='signIn'">{{loginState}}</a>
-    <a (click)="signOut()"  *ngIf="loginState =='signOut'">{{loginState}} </a>
+  <div class="card-action black-text"(mouseenter)="mouseenter()" (mouseout)="mouseout()" style="padding: 0; font-size: 150%">
+    <div (click)="signIn()" (mouseenter)="mouseenter()"  [ngClass]="btnActivate"  class="center-align" *ngIf="loginState =='signIn'" style="width: 100%">
+      <span (click)="signIn()" (mouseenter)="mouseenter()" *ngIf="loginState =='signIn'">{{loginState}}</span>
+    </div>
+    <div (click)="signOut()"(mouseenter)="mouseenter()"  [ngClass]="btnActivate" class="center-align" *ngIf="loginState =='signOut'" style="width: 100%">
+      <span (click)="signOut()" (mouseenter)="mouseenter()" *ngIf="loginState =='signOut'">{{loginState}} </span>
+    </div>
+
   </div>
 </div>

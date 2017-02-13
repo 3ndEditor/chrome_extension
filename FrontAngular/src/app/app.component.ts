@@ -41,7 +41,7 @@ export class AppComponent {
     * @param void 서비스로 주입된 NavBarService 의 boolean 값을 감지하면 애니메이션을 동작시킴.
     * @returns void
     */
-  ngAfterContentChecked(){
+  lockAction(){
         this.navbarAction = this.navService.action+"";
     }
 }
