@@ -1,3 +1,4 @@
+import { DomSanitizer } from '@angular/platform-browser';
 import { NavBarService } from '../../shared/nav-bar.service';
 import { LoginUser } from '../../user/user';
 import { UserResolveService } from '../../user/user-resolve.service';
@@ -10,6 +11,7 @@ import {
     ElementRef,
     OnInit,
     Renderer,
+    SecurityContext,
     state,
     style,
     transition,
@@ -25,6 +27,7 @@ var savedEditorWidth: number = innerWidth;
 var savedEdiotrTransForm: string;
 var savedDividerTransForm: string;
 var savedEdiotrTransX: number = 0;
+var savedDiveiderTransX: number = 0;
 @Component({
     selector: 'outline',
     templateUrl: 'outline.component.html',
@@ -57,7 +60,7 @@ export class OutlineComponent implements OnInit {
      */
 
 
-
+    
     private inputParam: string;
 
     // 애니메이션 관련 변수
@@ -70,12 +73,17 @@ export class OutlineComponent implements OnInit {
     private isActiveCrtLinkFrameBtn: boolean = false;
     private navbarAction: string = "false";
     private editorNavbarAction: string;
-    private linkFrameOpacity: string = '0';
+    private iframeOpacity: number = 0;
+    private iframeHeight:string ='80vh';
     private isResized: boolean = false;
 
     // tab 사용 변수
     private tabUsage_link: string = "linkTab";
     private tabUsage_editor: string = "editorTab";
+
+    //
+
+    private testHtml  ;
 
     constructor(
         private route: ActivatedRoute,
@@ -84,13 +92,16 @@ export class OutlineComponent implements OnInit {
         private routeParam: ActivatedRoute,
         private navService: NavBarService,
         private renderer: Renderer,
-        private el: ElementRef) {
+        private el: ElementRef,
+        private _sanitizer: DomSanitizer,
+        ) {
         // 초기화 진행
         this.editorWidth = '100%';
         this.linkFrameWidth = '0px';
         this.dividerWidth = (savedDividerWidth * 2) + 'px';
         this.linkFrameTransform = 'translate3d(-10%,0,0)';
         this.navbarAction = this.navService.action + "";
+
     }
 
     /**
@@ -102,8 +113,7 @@ export class OutlineComponent implements OnInit {
         // 화면분할
         if (this.isActiveCrtLinkFrameBtn === false) {
             this.isActiveCrtLinkFrameBtn = true;
-            this.linkFrameOpacity = '1';
-
+            this.iframeOpacity = 1;
 
 
             if (!this.isResized) {
@@ -113,11 +123,14 @@ export class OutlineComponent implements OnInit {
                 if (this.navService.action) {
                     this.editorTransform = 'translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,0,0)';
                     this.dividerTransform = 'translate3d(' + (innerWidth * 0.5 - savedDividerWidth) + 'px,0,0)';
+                    this.linkFrameTransform = 'translate3d(0,0,0)';
                 } else {
                     this.editorTransform = 'translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,9%,0)';
                     this.dividerTransform = 'translate3d(' + (innerWidth * 0.5 - savedDividerWidth) + 'px,9%,0)';
+                    this.linkFrameTransform = 'translate3d(0,9%,0)'
                 }
                 savedEdiotrTransX = (innerWidth * 0.5 + savedDividerWidth);
+                savedDiveiderTransX = (innerWidth * 0.5 - savedDividerWidth);
             } else {
                 this.editorWidth = (savedEditorWidth) + 'px';
                 this.linkFrameWidth = savedLinkFrameWidth + 'px';
@@ -131,13 +144,13 @@ export class OutlineComponent implements OnInit {
             this.isActiveCrtLinkFrameBtn = false;
             this.editorWidth = '100%';
             this.linkFrameWidth = '0%';
-            this.linkFrameOpacity = '0';
+            this.iframeOpacity = 0;
             if (this.navService.action) {
                 this.editorTransform = 'translate3d(0,0,0)'
-                this.linkFrameTransform = 'translate3d(-10%,0,0)';
+                this.linkFrameTransform = 'translate3d(0,0,0)';
             } else {
                 this.editorTransform = 'translate3d(0,9%,0)'
-                this.linkFrameTransform = 'translate3d(-10%,9%,0)';
+                this.linkFrameTransform = 'translate3d(0,9%,0)';
             }
 
         }
@@ -196,7 +209,7 @@ export class OutlineComponent implements OnInit {
         }
 
         savedEdiotrTransX = ($event.x + savedDividerWidth);
-
+        savedDiveiderTransX = ($event.x);
     }
 
     //
@@ -204,15 +217,34 @@ export class OutlineComponent implements OnInit {
     ngAfterContentChecked() {
         if (this.navbarAction !== this.navService.action + "") {
             this.navbarAction = this.navService.action + "";
-            if (this.navService.action) {
-                this.linkFrameTransform = 'translate3d(0,0,0)';
-                this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,0,0)';
-                savedEdiotrTransForm = this.editorTransform;
+            if (this.isActiveCrtLinkFrameBtn) {
+                if (this.navService.action) {
+                    this.linkFrameTransform = 'translate3d(0,0,0)';
+                    this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,0,0)';
+                    savedEdiotrTransForm = this.editorTransform;
+                    this.dividerTransform = 'translate3d(' + savedDiveiderTransX + 'px,0,0)';
+                    this.iframeHeight = '100vh';
+                } else {
+                    this.linkFrameTransform = 'translate3d(0,9%,0)';
+                    this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,9%,0)';
+                    savedEdiotrTransForm = this.editorTransform;
+                    this.dividerTransform = 'translate3d(' + savedDiveiderTransX + 'px,9%,0)';
+                    this.iframeHeight = '80vh';
+                }
+
             } else {
-                this.linkFrameTransform = 'translate3d(0,9%,0)';
-                this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,9%,0)';
-                savedEdiotrTransForm = this.editorTransform;
+                if (this.navService.action) {
+                    this.editorTransform = 'translate3d(0,0,0)'
+                    this.linkFrameTransform = 'translate3d(0,0,0)';
+                    this.iframeHeight = '100vh';
+                } else {
+                    this.editorTransform = 'translate3d(0,9%,0)'
+                    this.linkFrameTransform = 'translate3d(0,9%,0)';
+                    this.iframeHeight = '80vh';
+                }
+
             }
+
 
 
         }
@@ -231,7 +263,11 @@ export class OutlineComponent implements OnInit {
 
         this.routeParam.data.forEach((data: { userResolveService: LoginUser }) => {
             console.log(data.userResolveService);
-            this.inputParam = data.userResolveService.name
+            //필터링을 거쳐서 넣어줄수 있겠다. 
+             
+            this.inputParam = this._sanitizer.sanitize(SecurityContext.HTML,data.userResolveService.email);
+            // this.inputParam = data.userResolveService.email;
+
         });
     }
 

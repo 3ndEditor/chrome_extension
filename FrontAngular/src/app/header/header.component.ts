@@ -22,6 +22,14 @@ import { animate, Component, ElementRef, OnInit, state, style, transition, trigg
     ]
 })
 export class HeaderComponent implements OnInit {
+    /**
+     * 전반적인 클래스에 대한 주석
+     * @file header.component.ts 
+     * @author youngtae 2017.02.01
+     * @brief 상단바 관련 컴포넌트이다. 
+     * @see 참고사항 
+     * @todo 추가적으로 해야할 사항
+     */
 
     private isShowLoginModal: string;
     
@@ -36,25 +44,16 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-
     }
     openWith() {
-
         document.body.webkitRequestFullScreen();
-
     }
     openHelp() {
-
         this.isHelpActive = this.isHelpActive ? false : true;
     }
-
     headerFix() {
-        
         this.navService.navAction();
     }
 
-    ngAfterViewInit() {
-
-
-    }
+    
 }

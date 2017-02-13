@@ -15,19 +15,32 @@ import './app.rxjs-operators';
                 state('false', style({  })),
                 state('true', style({transform:'translate3d(0,-99%,0)'})),
                 transition('false <=> true', animate(10)),
-
             ]
         )
 
     ]
 })
 export class AppComponent {
+    /**
+     * 전반적인 클래스에 대한 주석
+     * @file app.component.ts 
+     * @author youngtae 2017.01.23
+     * @brief 최상위 Root Component 이다.
+     * @see 참고사항 헤더와 라우터 아웃렛을 가지고 있다.
+     * @todo 추가적으로 해야할 사항
+     */
+
   private navbarAction: string;
 
   constructor(private navService:NavBarService){
     this.navbarAction = "false";
   }
 
+  /**
+    * 상단바 에니메이션 관련 메소드
+    * @param void 서비스로 주입된 NavBarService 의 boolean 값을 감지하면 애니메이션을 동작시킴.
+    * @returns void
+    */
   ngAfterContentChecked(){
         this.navbarAction = this.navService.action+"";
     }

@@ -27,12 +27,13 @@ export class LoginComponent implements OnInit {
     @Output() signAction = new EventEmitter<Object>();
     private apiKey: string;
     private clientId: string;
-    private loginState : string;
-    private userImageUrl:SafeUrl;
-    constructor(private zone: NgZone, private render: Renderer,private router:Router,private _sanitizer:DomSanitizer) {
+    private loginState: boolean;
+    private isSignChange: boolean;
+    private userImageUrl: SafeUrl;
+    constructor(private zone: NgZone, private render: Renderer, private router: Router, private _sanitizer: DomSanitizer) {
         this.clientId = '199152716518-9vgjiiunustbt8el3saorikuk7ngkmta.apps.googleusercontent.com';
         that = this;
-        
+
     }
 
     ngOnInit() { }
@@ -46,27 +47,28 @@ export class LoginComponent implements OnInit {
     }
 
     ngAfterViewChecked() {
-        
+        if (this.loginState === this.isSignChange) {
+            this.loginState = this.isSignChange;
+            // this.signAction.emit();
+        }
     }
 
     public googleInit() {
-        
+
         // 구글 로그인 설정 
         gapi.load('auth2', function () {
             // 구글 로그인 초기화부분
-            auth2= gapi.auth2.init({
+            auth2 = gapi.auth2.init({
                 client_id: that.clientId,
                 cookie_policy: 'single_host_origin',
                 scope: 'profile email'
             });
-            if(auth2.isSignedIn.get()){
+            if (auth2.isSignedIn.get()) {
                 that.loginState = "signOut";
-            }else{
-                that.loginState="signIn"
+            } else {
+                that.loginState = "signIn"
             }
-            
             auth2.isSignedIn.listen(that.signinChanged);
-            console.log('tetstt')
         });
     }
     signIn() {
@@ -82,31 +84,30 @@ export class LoginComponent implements OnInit {
 
     // 접속상태의 변화가 있는 것을 감지. 변화가 있으면 아무 것도 안하다가 상태변화가 일어나면 감지해서 로그인이면 true 로그아웃이면 false를 반환한다. 
     public signinChanged(val) {
-        if(val){
+        that.isSignChange = val;
+        if (val) {
             //로그인 했을때,
-            
-            let url = that.router.createUrlTree(['3ndEditor',auth2.currentUser.get().getBasicProfile().getName()]);
+
+            let url = that.router.createUrlTree(['3ndEditor', auth2.currentUser.get().getBasicProfile().getName()]);
             that.router.navigateByUrl(url);
             that.loginState = 'signOut';
             let trustImageUrl = that._sanitizer.bypassSecurityTrustUrl(auth2.currentUser.get().getBasicProfile().getImageUrl());
-            that.userImageUrl = trustImageUrl; 
-            that.signAction.emit();
-        }else{
-            
+            that.userImageUrl = trustImageUrl;
+
+        } else {
+            //로그아웃 했을때,
             let url = that.router.createUrlTree(['3ndEditor']);
             that.router.navigateByUrl(url);
             that.loginState = 'signIn';
-            that.signAction.emit();
+            // that.signAction.emit();
         }
-        
+
     }
 
     public userChanged(user) {
-        console.log('User now: ', user);
-        // this.updateGoogleUser();
 
     }
-    
+
 
 
 }
