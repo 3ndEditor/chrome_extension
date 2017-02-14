@@ -46,8 +46,8 @@ var savedDiveiderTransX: number = 0;
         trigger(
             'openLinkTab',
             [
-                state('deActive', style({ transform: 'translateX(-100px)', opacity: 0 })),
-                state('active', style({ transform: 'translateX(0)', opacity: 1 })),
+                state('deActive', style({ transform: 'translate3d(-100px,9%,0)', opacity: 0 })),
+                state('active', style({ transform: 'translate3d(0,9%,0)', opacity: 1 })),
                 transition('deActive <=> active', animate(200)),
 
             ]
@@ -56,8 +56,8 @@ var savedDiveiderTransX: number = 0;
         trigger(
             'openEditorTab',
             [
-                state('deActive', style({ transform: 'translateX(100%)', opacity: 0 })),
-                state('active', style({ transform: 'translateX(0)', opacity: 1 })),
+                state('deActive', style({ transform: 'translate3d(100px,9%,0)', opacity: 0 })),
+                state('active', style({ transform: 'translate3d(0,9%,0)', opacity: 1 })),
                 transition('deActive <=> active', animate(200)),
             ]
         )
