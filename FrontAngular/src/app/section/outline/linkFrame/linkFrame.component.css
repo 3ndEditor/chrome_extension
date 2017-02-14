@@ -1,9 +1,9 @@
 
-
+/*:host-context(){
+  height: 100%
+}*/
 iframe{
   width: 100%;
   position: relative;
-  height: 600px;
-  
 }
 

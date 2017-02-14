@@ -1,35 +1,49 @@
 <ul id='dropdown1' class='dropdown-content right'>
-    <li><a href="#!">one</a></li>
-    <li><a href="#!">two</a></li>
     <li class="divider"></li>
-    <li><a href="#!">three</a></li>
+    <!--<li>
+        <a class="waves-effect">
+            <i class=" material-icons" (click)="showLoginModal()">vpn_key</i>
+        </a>
+    </li>
+    <li>
+        <a class="waves-effect" keyMap [keyCode]="keymap.wide_key" [isAltKey]="'true'" (keyAction)="openWith()" (click)="openWith()">
+            <i class="material-icons ">open_with</i></a>
+    </li>
+    <li>
+        <a class="waves-effect" keyMap [keyCode]="keymap.help_key" (keyAction)="openHelp()" (click)="openHelp()">
+            <i class="material-icons ">live_help</i></a>
+    </li>
+    <li>
+        <a class="waves-effect" keyMap [keyCode]="keymap.header_fixed_key" [isAltKey]="'true'" (keyAction)="headerFix()" (click)="headerFix()">
+            <i class="material-icons">lock_open</i>
+        </a>
+    </li>-->
 </ul>
 
-<nav class="light-blue darken-1">
+<nav class="blue-grey darken-2">
     <div class="nav-wrapper">
-        <a  data-activates="dropdown1" class="dropdown-button button-collapse "><i class="material-icons">menu</i></a>
+        <a data-activates="dropdown1" class="dropdown-button button-collapse "><i class="material-icons">menu</i></a>
         <a class="button-collapse"></a>
-        <login [@showLoginModal]="isShowLoginModal" (signAction)="showLoginModal()"> </login>
+        <loginboard [@showLoginModal]="isShowLoginModal" (click)="showLoginModal()"></loginboard>
+        <!--<login  (signAction)="showLoginModal()" [thisHeight]="loginModalHeight">-->
+        <!--</login>-->
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-
-            <li >
-                <a class="waves-effect" >
+            <li>
+                <a class="waves-effect">
                     <i class=" material-icons" (click)="showLoginModal()">vpn_key</i>
                 </a>
-                
-
             </li>
             <li>
                 <a class="waves-effect" keyMap [keyCode]="keymap.wide_key" [isAltKey]="'true'" (keyAction)="openWith()" (click)="openWith()">
-                    <i class="material-icons " [@headerFix]="isHeaderFixed">open_with</i></a>
+                    <i class="material-icons ">open_with</i></a>
             </li>
             <li>
                 <a class="waves-effect" keyMap [keyCode]="keymap.help_key" (keyAction)="openHelp()" (click)="openHelp()">
-                    <i class="material-icons " [@headerFix]="isHeaderFixed">live_help</i></a>
+                    <i class="material-icons ">live_help</i></a>
             </li>
             <li>
                 <a class="waves-effect" keyMap [keyCode]="keymap.header_fixed_key" [isAltKey]="'true'" (keyAction)="headerFix()" (click)="headerFix()">
-                    <i class="material-icons" [@headerFix]="isHeaderFixed">lock_open</i>
+                    <i class="material-icons">lock_open</i>
                 </a>
             </li>
         </ul>
@@ -42,7 +56,3 @@
 </nav>
 
 <help *ngIf="isHelpActive"></help>
-
-<!--<a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
-<ul id='dropdown1' class='dropdown-content'>
-</ul>-->

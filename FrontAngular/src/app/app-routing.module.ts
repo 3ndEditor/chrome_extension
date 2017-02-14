@@ -11,7 +11,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '3ndEditor',
+    redirectTo: '3ndEditor/index',
     pathMatch: 'full'
   },
   {
@@ -20,7 +20,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: OutlineComponent
+        redirectTo: 'index',
+        pathMatch: 'full'
       },
       {
         path: '11',
@@ -30,7 +31,7 @@ const routes: Routes = [
         path: ':loginUserName',
         component: OutlineComponent,
         resolve: {
-          userResolveService : UserResolveService
+          userResolveService: UserResolveService
         }
       }
     ]

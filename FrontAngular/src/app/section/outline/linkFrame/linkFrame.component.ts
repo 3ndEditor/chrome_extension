@@ -6,6 +6,7 @@ import {
   animate,
   Component,
   ElementRef,
+  Input,
   OnInit,
   Renderer,
   state,
@@ -36,16 +37,16 @@ import { DragulaService, dragula } from 'ng2-dragula/ng2-dragula';
   ]
 })
 export class linkFrameComponent implements OnInit {
-
-
+  @Input() iframeHeight: string;
+  @Input() iframeOpacity: number;
   result: Observable<string[]>;
   private state: string = 'close';
- 
-//  sanitization 을 통과한 url을 만들기 위한 변수
+
+  //  sanitization 을 통과한 url을 만들기 위한 변수
   private trustResourceURL: SafeResourceUrl;
   private linkUrl: string = '';
- 
- 
+
+
   constructor(private _sanitizer: DomSanitizer, private connectService: LinkFrameService, private rd: Renderer,
     private dragulaService: DragulaService) {
 
@@ -82,6 +83,6 @@ export class linkFrameComponent implements OnInit {
   //  iframe 내부로 접근하는 방법은 현재 막혀 있다. 보안 문제를 더 공부하고 도전해야 겠다.
 
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() { }
 
 }
