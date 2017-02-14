@@ -41,8 +41,26 @@ var savedDiveiderTransX: number = 0;
                     style({ height: '99%' })),
                 transition('false <=> true', animate(10))
             ]
-        )
+        ),
+        // linkTab 애니메이션
+        trigger(
+            'openLinkTab',
+            [
+                state('deActive', style({ transform: 'translateX(-100px)', opacity: 0 })),
+                state('active', style({ transform: 'translateX(0)', opacity: 1 })),
+                transition('deActive <=> active', animate(200)),
 
+            ]
+        ),
+        // editorTab 애니메이션
+        trigger(
+            'openEditorTab',
+            [
+                state('deActive', style({ transform: 'translateX(100%)', opacity: 0 })),
+                state('active', style({ transform: 'translateX(0)', opacity: 1 })),
+                transition('deActive <=> active', animate(200)),
+            ]
+        )
     ]
 })
 
@@ -52,14 +70,12 @@ export class OutlineComponent implements OnInit {
     /**
      * 전반적인 클래스에 대한 주석
      * @file outline.component.ts (나중에 프로그램으로 돌릴때 필요할수도 있다고 해서)
-     * @author youngtae 2017.02.09
+     * @author KimTaemin 2017.02.14
      * @brief 화면 구성요소(에디터, 링크프레임, 탭) 을 연결하고 담는 역할.
      * @see 참고사항 해당 컴포넌트는 라우터를 통해 표현된다. 라우터에 표현되어질때 라우터 변수를 통해 서버단에서 정보를 가져온다.
      * 해당 객체는 전반적인 화면표시 내용을 객체로 나타낼것이다. 
      * @todo 추가적으로 해야할 사항
      */
-
-
 
     private inputParam: string;
 
@@ -80,8 +96,8 @@ export class OutlineComponent implements OnInit {
     // tab 사용 변수
     private tabUsage_link: string = "linkTab";
     private tabUsage_editor: string = "editorTab";
-
-    //
+    private linkTabState: string;
+    private editorTabState: string;
 
     private testHtml;
 
@@ -100,6 +116,8 @@ export class OutlineComponent implements OnInit {
         this.linkFrameWidth = '0px';
         this.dividerWidth = (savedDividerWidth * 40) + 'px';
         this.navbarAction = this.navService.action + "";
+        this.linkTabState = "deActive";
+        this.editorTabState = "deActive";
     }
 
     /**
@@ -159,14 +177,13 @@ export class OutlineComponent implements OnInit {
             }
 
         }
-
     }
+
     /**
     * 드래그로 화면 크기 조절 메소드
     * @param $event 드래그 이벤트 타입.
     * @returns void
     */
-
     public screenResizeStart($event: DragEvent): void {
         if (this.isResized === false) {
             this.isResized = true;
@@ -194,12 +211,7 @@ export class OutlineComponent implements OnInit {
             savedDiveiderTransX = ($event.x - savedDividerWidth * 35);
             console.log($event.x);
         }
-
-
-
     }
-
-
 
     public screenResizeEnd($event: DragEvent) {
         this.linkFrameZIndex = '10';
@@ -257,14 +269,7 @@ export class OutlineComponent implements OnInit {
                 }
 
             }
-
-
-
         }
-
-
-
-
     }
 
     /**
@@ -276,17 +281,32 @@ export class OutlineComponent implements OnInit {
     ngOnInit() {
         this.routeParam.data.forEach((data: { userResolveService: LoginUser }) => {
             console.log(data.userResolveService);
-            //필터링을 거쳐서 넣어줄수 있겠다. 
-
             this.inputParam = this._sanitizer.sanitize(SecurityContext.HTML, data.userResolveService.email);
-            // this.inputParam = data.userResolveService.email;
-
         });
     }
+
+    /**
+    * 탭 상태 적용 메소드
+    * @param void
+    * @returns void
+    */
+    public enterLinkTab(): void {
+        this.linkTabState = "active";
+    }
+
+    public leaveLinkTab(): void {
+        this.linkTabState = "deActive";
+    }
+
+    public enterEditorTab(): void {
+        this.editorTabState = "active";
+    }
+
+    public leaveEditorTab(): void {
+        this.editorTabState = "deActive";
+    }
+
     ngOnChanges() {
-
-
-
     }
 
 }

@@ -1,3 +1,13 @@
-.fixbar-left {
-    float: left;
+.linkbox{
+  padding-top:15px; 
+  padding-right:1px; 
+  padding-bottom:5px; 
+  padding-left:1px; 
+  display: block;
+  border: 2px solid cornflowerblue;
+  border-radius: 10px;
+}
+
+.linkbox:hover{
+  background:  dimgray
 }

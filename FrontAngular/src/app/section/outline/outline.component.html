@@ -2,6 +2,7 @@
 <div class="outline">
     <!--row 클래스 아래에서만 grid를 줄 수 있다. css 비율값으로 분할을 대체하였다.-->
     <div class="row">
+        <!--<input [(ngModel)]="value"> <br><p>{{value}}</p>-->
         <!--링크 프레임(아이프레임으로 구현되는 곳)이 들어가는 자리임. 링크프레임생성버튼 활성유무에 따라 없어지고 나타난다. -->
         <linkFrame [@navbarAction]="navbarAction" class="z-depth-3" [ngStyle]="{'width': linkFrameWidth, 'transform': linkFrameTransform,'z-index': linkFrameZIndex }"
             [iframeOpacity]="iframeOpacity" [iframeHeight]="iframeHeight"></linkFrame>
@@ -21,10 +22,11 @@
     </div>
 </div>
 
-
-
-
-<!--<tab [usage]="tabUsage_link"></tab> 
-<tab [usage]="tabUsage_editor"></tab>-->
-
-
+<!--탭의 usage에 따라 tab의 종류를 다르게 불러옴-->
+<tab id="linkTab" [@openLinkTab]="linkTabState" [usage]="tabUsage_link"></tab> 
+<tab id="editorTab" [@openEditorTab]="editorTabState" [usage]="tabUsage_editor" (mouseleave)="leaveEditorTab()" ></tab>
+<!--화면의 양극쪽에 마우스가 올려질 때 탭을 나타냄. linkTab은 링크프레임이 true일 때만 활성화-->
+<div id="linkTabEnterDetector" *ngIf="isActiveCrtLinkFrameBtn==true" (mouseenter)="enterLinkTab()"></div>
+<div id="editorTabEnterDetector" (mouseenter)="enterEditorTab()"></div>
+<div id="linkTabLeaveDetector" *ngIf="linkTabState==='active'" (mouseleave)="leaveLinkTab()"></div>
+<!--<div id="editorTabLeaveDetector" *ngIf="editorTabState==='active'" (mouseleave)="leaveEditorTab()"></div>-->

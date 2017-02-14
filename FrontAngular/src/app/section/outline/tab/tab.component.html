@@ -1,29 +1,29 @@
-<div class="linkTab center" *ngIf="usage=='linkTab'" >
-    <div class="flexible url-tab-menu">
+<div id="linkTab-color" *ngIf="usage==='linkTab'" >
+    <div class="center">
         <div class="top-bar"> URL List</div>
         <div>
-            <add></add>
+            <add class="tab-btn"></add>
         </div>
         <div>
             <linkPack></linkPack>
         </div>
         <div>
-            <trash-can></trash-can>
+            <trash-can class="tab-btn"></trash-can>
         </div>
     </div>
 </div>
 
-<div class="editorTab center" *ngIf="usage=='editorTab'">
-    <div class="flexible url-tab-menu">
-        <div class="top-bar"> Editor Tab</div>
+<div id="editorTab-color" *ngIf="usage==='editorTab'">
+    <div class="center">
+        <div class="top-bar">Editor Tab</div>
         <div>
-            <save></save>
+            <save class="tab-btn"></save>
         </div>
         <div>
-            <share></share>
+            <share class="tab-btn"></share>
         </div>
         <div>
-            <export></export>
+            <export class="tab-btn"></export>
         </div>
     </div>
 </div>
