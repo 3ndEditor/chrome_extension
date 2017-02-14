@@ -132,8 +132,15 @@ export class OutlineComponent implements OnInit {
             } else {
                 this.editorWidth = (savedEditorWidth) + 'px';
                 this.linkFrameWidth = savedLinkFrameWidth + 'px';
-                this.editorTransform = savedEdiotrTransForm;
-                this.dividerTransform = savedDividerTransForm;
+                if (this.navService.action) {
+                    this.editorTransform = 'translate3d(' + (savedEdiotrTransX) + 'px,0,0)';
+                    this.dividerTransform = 'translate3d(' + (savedDiveiderTransX) + 'px,0,0)';
+                    this.linkFrameTransform = 'translate3d(0,0,0)';
+                } else {
+                    this.editorTransform = 'translate3d(' + (savedEdiotrTransX) + 'px,9%,0)';
+                    this.dividerTransform = 'translate3d(' + (savedDiveiderTransX) + 'px,9%,0)';
+                    this.linkFrameTransform = 'translate3d(0,9%,0)'
+                }
 
             }
 
@@ -167,15 +174,25 @@ export class OutlineComponent implements OnInit {
         this.linkFrameZIndex = '8';
         this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
         this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
+
         if (!($event.x === 0)) {
             if (this.navService.action) {
                 this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,0,0)';
                 this.linkFrameTransform = 'translate3d(0,0,0)';
+                this.dividerTransform = 'translate3d(' + ($event.x - savedDividerWidth * 35) + 'px,0,0)';
+                savedDividerTransForm = this.dividerTransform;
+
             } else {
                 this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,9%,0)';
                 this.linkFrameTransform = 'translate3d(0,9%,0)';
+                this.dividerTransform = 'translate3d(' + ($event.x - savedDividerWidth * 35) + 'px,9%,0)';
+                savedDividerTransForm = this.dividerTransform;
             }
-
+            savedLinkFrameWidth = ($event.x - savedDividerWidth);
+            savedEditorWidth = (innerWidth - $event.x - savedDividerWidth);
+            savedEdiotrTransX = ($event.x + savedDividerWidth);
+            savedDiveiderTransX = ($event.x - savedDividerWidth * 35);
+            console.log($event.x);
         }
 
 
@@ -185,30 +202,29 @@ export class OutlineComponent implements OnInit {
 
 
     public screenResizeEnd($event: DragEvent) {
-
-        this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
-        this.linkFrameZIndex = '8';
-        this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
-        savedLinkFrameWidth = ($event.x - savedDividerWidth);
-        savedEditorWidth = (innerWidth - $event.x - savedDividerWidth);
-        if (this.navService.action) {
-            this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,0,0)';
-            savedEdiotrTransForm = this.editorTransform;
-            this.dividerTransform = 'translate3d(' + ($event.x - savedDividerWidth * 35) + 'px,0,0)';
-            savedDividerTransForm = this.dividerTransform;
-
-
-        } else {
-            this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,9%,0)';
-            savedEdiotrTransForm = this.editorTransform;
-            this.dividerTransform = 'translate3d(' + ($event.x - savedDividerWidth * 35) + 'px,9%,0)';
-            savedDividerTransForm = this.dividerTransform;
+        this.linkFrameZIndex = '10';
+        // this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
+        // this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
+        // savedLinkFrameWidth = ($event.x - savedDividerWidth);
+        // savedEditorWidth = (innerWidth - $event.x - savedDividerWidth);
+        // if (this.navService.action) {
+        //     this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,0,0)';
+        //     savedEdiotrTransForm = this.editorTransform;
+        //     this.dividerTransform = 'translate3d(' + ($event.x - savedDividerWidth * 35) + 'px,0,0)';
+        //     savedDividerTransForm = this.dividerTransform;
 
 
-        }
+        // } else {
+        //     this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,9%,0)';
+        //     savedEdiotrTransForm = this.editorTransform;
+        //     this.dividerTransform = 'translate3d(' + ($event.x - savedDividerWidth * 35) + 'px,9%,0)';
+        //     savedDividerTransForm = this.dividerTransform;
+        //     console.log("드래그끝" + $event.x);
 
-        savedEdiotrTransX = ($event.x + savedDividerWidth);
-        savedDiveiderTransX = ($event.x - savedDividerWidth * 35);
+        // }
+
+        // savedEdiotrTransX = ($event.x + savedDividerWidth);
+        // savedDiveiderTransX = ($event.x - savedDividerWidth * 35);
     }
 
     //
@@ -220,13 +236,11 @@ export class OutlineComponent implements OnInit {
                 if (this.navService.action) {
                     this.linkFrameTransform = 'translate3d(0,0,0)';
                     this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,0,0)';
-                    savedEdiotrTransForm = this.editorTransform;
                     this.dividerTransform = 'translate3d(' + savedDiveiderTransX + 'px,0,0)';
                     this.iframeHeight = '100vh';
                 } else {
                     this.linkFrameTransform = 'translate3d(0,9%,0)';
                     this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,9%,0)';
-                    savedEdiotrTransForm = this.editorTransform;
                     this.dividerTransform = 'translate3d(' + savedDiveiderTransX + 'px,9%,0)';
                     this.iframeHeight = '80vh';
                 }
@@ -247,7 +261,7 @@ export class OutlineComponent implements OnInit {
 
 
         }
-       
+
 
 
 
@@ -259,8 +273,8 @@ export class OutlineComponent implements OnInit {
     * @returns void
     */
 
-    ngOnInit() { 
-         this.routeParam.data.forEach((data: { userResolveService: LoginUser }) => {
+    ngOnInit() {
+        this.routeParam.data.forEach((data: { userResolveService: LoginUser }) => {
             console.log(data.userResolveService);
             //필터링을 거쳐서 넣어줄수 있겠다. 
 
@@ -269,10 +283,10 @@ export class OutlineComponent implements OnInit {
 
         });
     }
-    ngOnChanges(){
-        
-         
-       
+    ngOnChanges() {
+
+
+
     }
 
 }
