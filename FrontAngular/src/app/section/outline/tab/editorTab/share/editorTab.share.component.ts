@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Keymap } from '../../../../../shared/keymap/keymap.provider';
+import { animate, Component, OnInit, state, style, transition, trigger } from '@angular/core';
 
 @Component({
     selector: "share",

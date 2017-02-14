@@ -1,5 +1,5 @@
-<div id="linkTab-color" *ngIf="usage=='linkTab'" >
-    <div class="flexible center">
+<div id="linkTab-color" *ngIf="usage==='linkTab'" >
+    <div class="center">
         <div class="top-bar"> URL List</div>
         <div>
             <add class="tab-btn"></add>
@@ -13,14 +13,14 @@
     </div>
 </div>
 
-<div id="editorTab-color" *ngIf="usage=='editorTab'">
-    <div class="flexible center">
-        <div class="top-bar"> Editor Tab</div>
+<div id="editorTab-color" *ngIf="usage==='editorTab'">
+    <div class="center">
+        <div class="top-bar">Editor Tab</div>
         <div>
             <save class="tab-btn"></save>
         </div>
         <div>
-            <share class="tab-btn"></share>
+            <share></share>
         </div>
         <div>
             <export class="tab-btn"></export>

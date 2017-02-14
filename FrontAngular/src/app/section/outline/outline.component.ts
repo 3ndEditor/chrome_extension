@@ -26,6 +26,25 @@ let savedEditorWidth: number = innerWidth;
 
             ]
         ),
+        // linkTab 애니메이션
+        trigger(
+            'openLinkTab',
+            [
+                state('deActive', style({ transform: 'translateX(-100px)', opacity: 0 })),
+                state('active', style({ transform: 'translateX(0)', opacity: 1 })),
+                transition('deActive <=> active', animate(200)),
+
+            ]
+        ),
+        // editorTab 애니메이션
+        trigger(
+            'openEditorTab',
+            [
+                state('deActive', style({ transform: 'translateX(100%)', opacity: 0 })),
+                state('active', style({ transform: 'translateX(0)', opacity: 1 })),
+                transition('deActive <=> active', animate(200)),
+            ]
+        )
         // 애니메이션은 초기값을 주고나면 값변경이 안됨...
         // trigger(
         //     'shrinkEditorSize',
@@ -46,7 +65,7 @@ export class OutlineComponent implements OnInit {
      * 이 주석의 위치는 클래스 바로 아래가 좋을 듯 함. (생성자 이전)
      * 전반적인 클래스에 대한 주석
      * @file outline.component.ts (나중에 프로그램으로 돌릴때 필요할수도 있다고 해서)
-     * @author youngtae 2017.02.09
+     * @author KimTaemin 2017.02.14
      * @brief 화면 구성요소(에디터, 링크프레임, 탭) 을 연결하고 담는 역할.
      * @see 참고사항 해당 컴포넌트는 라우터를 통해 표현된다. 라우터에 표현되어질때 라우터 변수를 통해 서버단에서 정보를 가져온다.
      * 해당 객체는 전반적인 화면표시 내용을 객체로 나타낼것이다. 
@@ -72,16 +91,11 @@ export class OutlineComponent implements OnInit {
     // tab 사용 변수
     private tabUsage_link: string = "linkTab";
     private tabUsage_editor: string = "editorTab";
+    private linkTabState : string;
+    private editorTabState : string;
 
     constructor(private route: ActivatedRoute,
         private dragulaService: DragulaService, private keymap: Keymap, private routeParam: ActivatedRoute) {
-
-
-
-
-
-
-
 
         // 초기화 진행
         this.state = "deActive"
@@ -89,9 +103,8 @@ export class OutlineComponent implements OnInit {
         this.linkFrameWidth = savedLinkFrameWidth + 'px';
         this.dividerWidth = (savedDividerWidth * 2) + 'px';
         this.btnTransition = "scale-transition ";
-
-
-
+        this.linkTabState = "deActive";
+        this.editorTabState = "deActive";
     }
 
     /**
@@ -113,14 +126,13 @@ export class OutlineComponent implements OnInit {
             this.editorWidth = savedEditorWidth + 'px';
             this.editorTransform = 'translate3d(0,0,0)'
         }
-
     }
+
     /**
     * 드래그로 화면 크기 조절 메소드
     * @param $event 드래그 이벤트 타입.
     * @returns void
     */
-
     public screenResizeStart($event: DragEvent): void {
 
         this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
@@ -128,12 +140,7 @@ export class OutlineComponent implements OnInit {
         if (!($event.x === 0)) {
             this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,0,0)';
         }
-
-
-
     }
-
-
 
     public screenResizeEnd($event: DragEvent) {
 
@@ -147,8 +154,6 @@ export class OutlineComponent implements OnInit {
 
     ngAfterViewInit() {
         // this.btnTransition = "scale-out"
-
-
     }
     
     /**
@@ -164,7 +169,27 @@ export class OutlineComponent implements OnInit {
             this.inputParam = data.userResolveService.name
         });
     }
+    
+    /**
+    * 탭 상태 적용 메소드
+    * @param void
+    * @returns void
+    */
+    public enterLinkTab() : void {
+        this.linkTabState = "active";
+    }
 
+    public leaveLinkTab() : void {
+        this.linkTabState = "deActive";
+    }
+
+    public enterEditorTab() : void {
+        this.editorTabState = "active";
+    }
+
+    public leaveEditorTab() : void {
+        this.editorTabState = "deActive";
+    }
 
 
 }
