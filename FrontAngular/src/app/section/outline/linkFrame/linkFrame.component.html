@@ -8,8 +8,9 @@
     <span><!--<img>iframe 종료 기능을 하는 x자 이미지</img>--></span>
   </div>
 
-  <iframe #somevar [dragula]="'bag-one'"   sandbox="allow-same-origin allow-forms allow-modals allow-scripts" [src]="trustResourceURL" scrolling='no' >
+  <iframe #somevar [dragula]="'bag-one'" [ngStyle]="{'opacity':iframeOpacity,'height':iframeHeight}" sandbox="allow-same-origin allow-forms allow-modals allow-scripts"
+    [src]="trustResourceURL" >
 
 
-  </iframe>
+    </iframe>
 </div>

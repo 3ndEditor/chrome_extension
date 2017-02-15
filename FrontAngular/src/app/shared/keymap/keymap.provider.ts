@@ -14,10 +14,10 @@ export class Keymap {
 }
 
 let customKeymap = {
-    help_key: 112,
-    wide_key: 87,
-    create_frame_key: 83,
-    header_fixed_key: 69
+    help_key: 112, //f1
+    wide_key: 87, // w
+    create_frame_key: 83, //s
+    header_fixed_key: 69  //e
     
 
 

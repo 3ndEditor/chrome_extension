@@ -8,9 +8,9 @@ import { Component, Directive, EventEmitter, HostListener, Input, Output } from 
 export class KeymapDirective {
     //단축키 적용대상의 키코드를 받아온다.
     @Input() keyCode: number;
-    @Input() isAltKey: boolean;
-    @Input() isCtrKey: boolean;
-    @Input() isShiftKey: boolean;
+    @Input() isAltKey: string;
+    @Input() isCtrKey: string;
+    @Input() isShiftKey: string;
 
 
     // 이 지시자의 사용법 : dom 엘리먼트에 다음과 같은 내용을 추가 하면 된다.
@@ -30,16 +30,16 @@ export class KeymapDirective {
 
     @HostListener('window:keydown', ['$event']) onkeydown($event: KeyboardEvent) {
         // 에디터의 키맵과 충돌방지를 위해 펑션키를 제외하고는 전부 다른 동작키가 있도록 함.
-        if ($event.altKey && this.isAltKey) {
+        if ($event.altKey && this.isAltKey==="true") {
             if ($event.keyCode === this.keyCode) {
                 this.keyAction.emit();
             }
-        } else if ($event.ctrlKey && this.isCtrKey) {
+        } else if ($event.ctrlKey && this.isCtrKey==="true") {
             if ($event.keyCode === this.keyCode) {
                 this.keyAction.emit();
             }
 
-        } else if ($event.shiftKey && this.isShiftKey) {
+        } else if ($event.shiftKey && this.isShiftKey==="true") {
             if ($event.keyCode === this.keyCode) {
                 this.keyAction.emit();
             }

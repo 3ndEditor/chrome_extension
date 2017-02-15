@@ -1,28 +1,35 @@
 <div>
-    <div class="url-box-wrapper FixedLink" *ngFor="let linkA of listLinkFixed">  <!--btn 속성 추가해야함-->
-        <div>
-            <!--(click)="url.toggleMenu()"-->
-            <div class="tabComponent">
-                <img class="fixbar-left" src="assets/image/fixedBar.png" width="4" height="40"/>
-                <img src="https://www.google.com/s2/favicons?domain={{linkA.link.url}}" alt="favicon" width="30"  height="30">
+    <div [dragula]='"fixed-link"' [dragulaModel]='listLinkFixed' >
+        <div class="url-box-wrapper FixedLink" *ngFor="let linkA of listLinkFixed">  <!--btn 속성 추가해야함-->
+            <div class="linkbox">
+                <!--(click)="url.toggleMenu()"-->
+                <div class="tab-btn">
+                    <img class="left" src="assets/image/fixedBar.png" width="4" height="30"/>
+                    <img src="https://www.google.com/s2/favicons?domain={{linkA.url}}" alt="favicon" width="30"  height="30">
+                </div>
             </div>
+            <!--<div class="urlTip hidden">
+                <b>Title이 들어올 자리</b> <br>
+                단축키 : ctrl + alt + 숫자패드 @번
+            </div>-->
         </div>
-        <!--<div class="urlTip hidden">
-            <b>Title이 들어올 자리</b> <br>
-             단축키 : ctrl + alt + 숫자패드 @번
-        </div>-->
     </div>
-    <div class="url-box-wrapper UnfixedLink" *ngFor="let linkB of listLinkUnfixed">  <!--btn 속성 추가해야함-->
-        <div>
-            <!--(click)="url.toggleMenu()"-->
-            <div class="tabComponent">
-                <img class="fixbar-left" src="assets/image/unfixedBar.png" width="4" height="40"/>
-                <img src="https://www.google.com/s2/favicons?domain={{linkB.link.url}}" alt="favicon" width="30"  height="30">
+    <div [dragula]='"unfixed-link"' [dragulaModel]='listLinkUnfixed'>
+        <div class="url-box-wrapper UnfixedLink" *ngFor="let linkB of listLinkUnfixed">  <!--btn 속성 추가해야함-->
+            <div class="linkbox">
+                <!--(click)="url.toggleMenu()"-->
+                <div class="tab-btn">
+                    <img class="left" src="assets/image/unfixedBar.png" width="4" height="30"/>
+                    <img src="https://www.google.com/s2/favicons?domain={{linkB.url}}" alt="favicon" width="30"  height="30">
+                </div>
             </div>
+            <!--<div class="urlTip hidden">
+                <b>Title이 들어올 자리</b> <br>
+                 단축키 : ctrl + alt + 숫자패드 @번
+            </div>-->
         </div>
-        <!--<div class="urlTip hidden">
-            <b>Title이 들어올 자리</b> <br>
-             단축키 : ctrl + alt + 숫자패드 @번
-        </div>-->
     </div>
+    <button (click)="consoleEvent()">콘솔</button><br>
+    
+    <input [(ngModel)]="value"> <br><p>{{value}}</p>
 </div>

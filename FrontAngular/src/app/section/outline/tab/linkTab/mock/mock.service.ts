@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LINK } from './mock-link';
+import { LINKS } from './mock-link';
 
 
 export interface DataServiceStructure{
@@ -10,6 +10,6 @@ export interface DataServiceStructure{
 export class MockService implements DataServiceStructure{
     constructor(){}
     getLink(){
-        return LINK;
+        return LINKS;
     }
 }

@@ -1,31 +1,31 @@
 <!--아웃라인 컴포넌트의 전반적인 컨테이너를 담당한다.-->
-<div class="outline" >
+<div class="outline row" [@navbarAction]="navbarAction">
     <!--row 클래스 아래에서만 grid를 줄 수 있다. css 비율값으로 분할을 대체하였다.-->
-    <div class="row">
-        <!--링크 프레임(아이프레임으로 구현되는 곳)이 들어가는 자리임. 링크프레임생성버튼 활성유무에 따라 없어지고 나타난다. -->
-        <linkFrame  class="z-depth-3" [@createLinkFrame]="state" [ngStyle]="{'width': linkFrameWidth, 'transform': linkFrameTransform }"></linkFrame>
 
-        <span id="devider"  draggable="true" [ngStyle]="{'width': dividerWidth, 'transform': dividerTransform}"
-          (drag)="screenResizeStart($event)" (dragend)="screenResizeEnd($event)" ></span>
+    <!--<input [(ngModel)]="value"> <br><p>{{value}}</p>-->
+    <!--링크 프레임(아이프레임으로 구현되는 곳)이 들어가는 자리임. 링크프레임생성버튼 활성유무에 따라 없어지고 나타난다. -->
+    <linkFrame [@navbarAction]="navbarAction" class="z-depth-3" [ngStyle]="{'width': linkFrameWidth, 'transform': linkFrameTransform,'z-index': linkFrameZIndex }"
+        [iframeOpacity]="iframeOpacity" [iframeHeight]="iframeHeight"></linkFrame>
 
-        <!--에디터 프레임(미디움 에디터로 구현되는 곳)이 들어가는 자리, 링크프레임생성버튼 활성유무에 따라 크기가 조절된다. (12->6)-->
-        <editor class="flow-text" [dragula]='"first-bag"'  [routeData]="inputParam"   [ngStyle]="{'width': editorWidth, 'transform': editorTransform}"></editor>
+        <span id="devider" [@navbarAction]="navbarAction" draggable="true" [ngStyle]="{'display': linkFrameDisplay ,'width': dividerWidth, 'transform': dividerTransform}"
+            (drag)="screenResizeStart($event)" (dragend)="screenResizeEnd($event)"></span>
 
-    </div>
-    <div id="activeBtn" [ngClass]="btnTransition">
-        <a class="btn-floating btn-large waves-effect waves-light red" 
-        keyMap [keyCode]="keymap.create_frame_key" [isCtrKey]="'false'"  [isAltKey]="'true'" (keyAction)="createLinkFrame()"
-           (click)="createLinkFrame()">
-            <i class="material-icons">add</i>
-        </a>
-    </div>
+            <!--에디터 프레임(미디움 에디터로 구현되는 곳)이 들어가는 자리, 링크프레임생성버튼 활성유무에 따라 크기가 조절된다. (12->6)-->
+            <editor class="flow-text" [@navbarAction]="navbarAction" [dragula]='"first-bag"' [routeData]="inputParam" [ngStyle]="{'width': editorWidth, 'transform': editorTransform}"></editor>
+
+
+            <div id="activeBtn" [ngClass]="btnTransition">
+                <a class="btn-floating btn-large waves-effect waves-light red" keyMap [keyCode]="keymap.create_frame_key" [isCtrKey]="'false'"
+                    [isAltKey]="'true'" (keyAction)="createLinkFrame()" (click)="createLinkFrame()">
+                    <i class="material-icons">add</i>
+                    </a>
+            </div>
+            <!--탭의 usage에 따라 tab의 종류를 다르게 불러옴-->
+            <tab id="linkTab" [@navbarAction]="navbarAction" [@openLinkTab]="linkTabState" [usage]="tabUsage_link"></tab>
+            <tab id="editorTab" [@navbarAction]="navbarAction" [@openEditorTab]="editorTabState" [usage]="tabUsage_editor" (mouseleave)="leaveEditorTab()"></tab>
+            <!--화면의 양극쪽에 마우스가 올려질 때 탭을 나타냄. linkTab은 링크프레임이 true일 때만 활성화-->
+            <div id="linkTabEnterDetector" [@navbarAction]="navbarAction" *ngIf="isActiveCrtLinkFrameBtn==true" (mouseenter)="enterLinkTab()"></div>
+            <div id="editorTabEnterDetector" [@navbarAction]="navbarAction" (mouseenter)="enterEditorTab()"></div>
+            <div id="linkTabLeaveDetector" [@navbarAction]="navbarAction" *ngIf="linkTabState==='active'" (mouseleave)="leaveLinkTab()"></div>
+            <!--<div id="editorTabLeaveDetector" *ngIf="editorTabState==='active'" (mouseleave)="leaveEditorTab()"></div>-->
 </div>
-    
-
-
-<tab [usage]="tabUsage_link"></tab> 
-<tab [usage]="tabUsage_editor"></tab>
-
-
-<!--<a routerLink="/index/editor" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >route-text</a>
-<a routerLink="/index/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" >route-text</a>-->

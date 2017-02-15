@@ -1,3 +1,4 @@
+import { NavBarService } from './shared/nav-bar.service';
 import { CanDeactivateGuard } from './header/auth-guard/can-deactivate-guard.service';
 import { AuthGuard } from './header/auth-guard/auth-guard.service';
 import { SectionModule } from './section/section.module';
@@ -37,7 +38,7 @@ import { AppComponent } from './app.component';
     
 
   ],
-  providers: [AuthGuard,CanDeactivateGuard ,UserResolveService,LoginUserService],
+  providers: [AuthGuard,CanDeactivateGuard ,UserResolveService,LoginUserService,NavBarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
