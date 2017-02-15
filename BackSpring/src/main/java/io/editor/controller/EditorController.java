@@ -11,7 +11,7 @@ public class EditorController {
 	
 	@GetMapping("/hello")
 	public Member hello(){
-		return new Member(1L,"Hong");
+		return new Member(1L,"hong");
 	}
 
 }
@@ -19,6 +19,9 @@ public class EditorController {
 @AllArgsConstructor
 @Data
 class Member {
+	public Member(long l, String string) {
+		// TODO Auto-generated constructor stub
+	}
 	private Long id;
 	private String name;
 }
