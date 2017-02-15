@@ -43,6 +43,7 @@ editor {
   height: 91%;
   z-index: 10;
   transform: translateY(9%); 
+  outline: black thick;
 }
 
 #linkTab{

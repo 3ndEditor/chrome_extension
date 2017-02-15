@@ -79,7 +79,10 @@ export class OutlineComponent implements OnInit {
 
     private inputParam: string;
 
+
+
     // 애니메이션 관련 변수
+    private editorFocusOutline:string;
     private linkFrameWidth: string;
     private editorWidth: string;
     private editorTransform: string;
@@ -93,6 +96,7 @@ export class OutlineComponent implements OnInit {
     private iframeHeight: string = '80vh';
     private isResized: boolean = false;
     private linkFrameZIndex: string;
+    private dividerZIndex : string;
     // tab 사용 변수
     private tabUsage_link: string = "linkTab";
     private tabUsage_editor: string = "editorTab";
@@ -212,9 +216,17 @@ export class OutlineComponent implements OnInit {
             console.log($event.x);
         }
     }
+    public dividerClick(){
+        this.dividerZIndex = '100';
+    }
+    public dividerDeActive(){
+        this.dividerZIndex = '10';
+    }
+
 
     public screenResizeEnd($event: DragEvent) {
         this.linkFrameZIndex = '10';
+        this.dividerZIndex = '10';
         // this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
         // this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
         // savedLinkFrameWidth = ($event.x - savedDividerWidth);
