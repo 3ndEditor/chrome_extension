@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs/Rx';
+import { handleError } from '../../../../../async-handling.promise';
+import { Http, Jsonp, ResponseContentType, URLSearchParams } from '@angular/http';
 import { Keymap } from '../../../../../shared/keymap/keymap.provider';
 import { animate, Component, OnInit, state, style, transition, trigger } from '@angular/core';
 
@@ -26,7 +29,7 @@ export class ExportComponent{
     */
 
     private isExportActive: boolean;
-    constructor(private keymap: Keymap) {
+    constructor(private keymap: Keymap, private jsonp : Jsonp ,private http:Http  ) {
         this.isExportActive = false;   
     }
 
@@ -34,4 +37,17 @@ export class ExportComponent{
         this.isExportActive = this.isExportActive ? false : true;
         console.log("openExport클릭됨")
     }
+
+    connectServerTest():Promise<void> {
+        let testUrl="http://localhost:8080/hello";
+        // let params = new URLSearchParams();
+        // params.set('format','json');
+        // params.set('callback','JSONP_CALLBACK');
+        // this.jsonp.get(testUrl,params).toPromise()
+        return this.http.get(testUrl).toPromise().then(response=>{console.log(response+"")});
+        
+        
+    }
+
+
 }

@@ -1,3 +1,4 @@
+import { CanDeactivateGuard } from './header/auth-guard/can-deactivate-guard.service';
 import { OutlineComponent } from './section/outline/outline.component';
 import { UserResolveService } from './user/user-resolve.service';
 import { SectionComponent } from './section/section.component';
@@ -30,6 +31,7 @@ const routes: Routes = [
       {
         path: ':loginUserName',
         component: OutlineComponent,
+        canDeactivate : [CanDeactivateGuard],
         resolve: {
           userResolveService: UserResolveService
         }
