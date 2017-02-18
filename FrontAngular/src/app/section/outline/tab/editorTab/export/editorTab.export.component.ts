@@ -38,13 +38,17 @@ export class ExportComponent{
         console.log("openExport클릭됨")
     }
 
-    connectServerTest():Promise<void> {
-        let testUrl="http://localhost:8080/hello";
-        // let params = new URLSearchParams();
+    connectServerTest() {
+        let testUrl="http://localhost:8080/hello?callback=JSONP_CALLBACK";
+        let params = new URLSearchParams();
         // params.set('format','json');
         // params.set('callback','JSONP_CALLBACK');
-        // this.jsonp.get(testUrl,params).toPromise()
-        return this.http.get(testUrl).toPromise().then(response=>{console.log(response+"")});
+        
+        console.log("서버호출");
+        // jsonp은 json을 콜백으로 한번 감싼 형태이다. http://dev.epiloum.net/1311 참고 사이트.
+        //
+        return this.jsonp.get(testUrl).toPromise().then(response=>console.log(response.json()));
+        // return this.http.get(testUrl).toPromise().then(response=>{console.log(JSON.parse(response.text()).name +"ttt111t///"+response.text())});
         
         
     }
