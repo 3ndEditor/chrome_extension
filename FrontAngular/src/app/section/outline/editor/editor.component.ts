@@ -75,12 +75,12 @@ export class EditorComponent implements OnInit {
             firstButtonClass: 'medium-editor-button-first',
             lastButtonClass: 'medium-editor-button-last',
             relativeContainer: null,
-            standardizeSelectionStart: false,
+            standardizeSelectionStart: true,
             static: false,
             /* options which only apply when static is true */
             align: 'center',
             sticky: false,
-            updateOnEmptySelection: false
+            updateOnEmptySelection: true
         },
         placeholder: {
             /* This example includes the default options for placeholder,

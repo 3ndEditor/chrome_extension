@@ -34,6 +34,9 @@ export class AppComponent {
 
   constructor(private navService:NavBarService){
     this.navbarAction = "false";
+     window.onbeforeunload = function(e) {
+      return window.confirm("전역 비포어 언로드");
+    };
   }
 
   /**
