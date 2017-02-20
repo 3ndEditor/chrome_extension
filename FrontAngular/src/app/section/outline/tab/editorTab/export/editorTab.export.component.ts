@@ -5,16 +5,6 @@ import { animate, Component, OnInit, state, style, transition, trigger } from '@
     selector:"export",
     templateUrl : 'editorTab.export.component.html',
     styleUrls:['editorTab.export.component.css'],
-    animations:[
-        trigger(
-            'exportActive',[
-                state('deActive', style({ height: '0' })),
-                state('active', style({})),
-                transition('deActive <=> active', animate(300)),
-            ]
-        ),
-    
-    ]
 })
 export class ExportComponent{
     /**
@@ -30,7 +20,7 @@ export class ExportComponent{
         this.isExportActive = false;   
     }
 
-    openExport() {
+    openExportBoard() {
         this.isExportActive = this.isExportActive ? false : true;
         console.log("openExport클릭됨")
     }

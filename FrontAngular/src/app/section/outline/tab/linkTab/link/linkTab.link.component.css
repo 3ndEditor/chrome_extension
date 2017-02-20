@@ -1,3 +1,18 @@
+.view{
+  overflow:hidden;
+  height: 550px
+}
+
+.scrollBlind{
+  overflow-y:scroll;
+  height: 100%;
+  -ms-overflow-style: none
+}
+
+::-webkit-scrollbar {
+  display:none;
+}
+
 .linkbox{
   padding-top:15px; 
   padding-right:1px; 
