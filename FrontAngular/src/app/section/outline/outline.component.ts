@@ -82,7 +82,7 @@ export class OutlineComponent implements OnInit {
 
 
     // 애니메이션 관련 변수
-    private editorFocusOutline:string;
+    private editorFocusOutline: string;
     private linkFrameWidth: string;
     private editorWidth: string;
     private editorTransform: string;
@@ -96,7 +96,7 @@ export class OutlineComponent implements OnInit {
     private iframeHeight: string = '80vh';
     private isResized: boolean = false;
     private linkFrameZIndex: string;
-    private dividerZIndex : string;
+    private dividerZIndex: string;
     // tab 사용 변수
     private tabUsage_link: string = "linkTab";
     private tabUsage_editor: string = "editorTab";
@@ -193,8 +193,7 @@ export class OutlineComponent implements OnInit {
             this.isResized = true;
         }
         this.linkFrameZIndex = '8';
-        this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
-        this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
+
 
         if (!($event.x === 0)) {
             if (this.navService.action) {
@@ -209,6 +208,8 @@ export class OutlineComponent implements OnInit {
                 this.dividerTransform = 'translate3d(' + ($event.x - savedDividerWidth * 35) + 'px,9%,0)';
                 savedDividerTransForm = this.dividerTransform;
             }
+            this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
+            this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
             savedLinkFrameWidth = ($event.x - savedDividerWidth);
             savedEditorWidth = (innerWidth - $event.x - savedDividerWidth);
             savedEdiotrTransX = ($event.x + savedDividerWidth);
@@ -216,10 +217,10 @@ export class OutlineComponent implements OnInit {
             console.log($event.x);
         }
     }
-    public dividerClick(){
+    public dividerClick() {
         this.dividerZIndex = '100';
     }
-    public dividerDeActive(){
+    public dividerDeActive() {
         this.dividerZIndex = '10';
     }
 

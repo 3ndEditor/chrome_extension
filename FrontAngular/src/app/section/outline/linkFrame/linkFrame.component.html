@@ -1,11 +1,9 @@
 <div>
-  <!--<button (click)="toggleMenu()" class="btn">
-  <span>toggle menu</span>
-</button>-->
+  
 
-  <div>
-    <input #inputUrl type="url" placeholder="http://" (keyup.enter)="onEnter(inputUrl.value)" />
-    <span><!--<img>iframe 종료 기능을 하는 x자 이미지</img>--></span>
+  <div   style="margin-bottom: 0;">
+    <input  #inputUrl type="url" placeholder="http://" (keyup.enter)="onEnter(inputUrl.value)" style="margin-bottom: 0; height: 50%"  />
+    <!--<span class="col s1 m1 l1"  style="padding: 0"><i class="tiny material-icons">call_received</i></span>-->
   </div>
 
   <iframe #somevar [dragula]="'bag-one'" [ngStyle]="{'opacity':iframeOpacity,'height':iframeHeight}" sandbox="allow-same-origin allow-forms allow-modals allow-scripts"
