@@ -1,21 +1,8 @@
-var HEADERS_TO_STRIP_LOWERCASE = ['conte' + 'nt-security-policy', 'x-fram' + 'e-options', 'x-cont' + 'ent-security-options', 'x-web' + 'kit-csp'];
 chrome.webRequest.onHeadersReceived.addListener(function (details) {
-    return { responseHeaders: details.responseHeaders.filter(function (header) { return HEADERS_TO_STRIP_LOWERCASE.indexOf(header.name.toLowerCase()) < 0; }) };
+    var limitingHeader = ['x-content-security-options', 'x-webkit-csp', 'content-security-policy', 'x-frame-options',];
+    return { responseHeaders: details.responseHeaders.filter(function (header) { return limitingHeader.indexOf(header.name.toLowerCase()) < 0; }) };
 }, {
         urls: ["<all_urls>"]
     }, ["blocking", "responseHeaders"]);
-
-// function setvalue() {
-//     var width = parseInt(localStorage["fwidth"]);
-//     width = isNaN(width) ? 50 : width;
-//     var val = width + "%, " + (100 - width) + "%";
-//     document.getElementById("set").cols = val;
-// }
-
-// function setvalue1() {
-//     if (localStorage["fwidth"] != "50") {
-//         setTimeout(function () { setvalue(); }, 0);
-//     }
-// }
-
-// window.onload = setvalue1();
+// 위 코드 설명 chrome.webRequest.onHeaderReceived = > 크롬의 웹 리스퀘스트 객체중 요청이 서버에갔다 돌아오는 순간에 대한 리스너를 등록해준다.
+// responseHeaders 는 스트링의 배열이다. 그중에서 filter를 거쳐서 header의 name 중 
