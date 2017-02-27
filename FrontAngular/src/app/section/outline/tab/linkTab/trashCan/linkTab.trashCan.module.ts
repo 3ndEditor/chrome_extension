@@ -1,9 +1,10 @@
+import { ShareModule } from '../../editorTab/share/editorTab.share.module';
+import { DragulaModule } from 'ng2-dragula/components/dragular.module';
 import { TrashCanComponent } from './linkTab.trashCan.component';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [DragulaModule, ShareModule],
     exports: [TrashCanComponent],
     declarations: [TrashCanComponent],
     providers: [],

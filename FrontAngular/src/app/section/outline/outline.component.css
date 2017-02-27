@@ -48,6 +48,7 @@ editor {
 
 #linkTab{
   position: fixed;
+  /*overflow: hidden;*/
   left: 0;
   top: auto;
   right: auto;
@@ -56,6 +57,7 @@ editor {
   height: 91%;
   min-width: 50px;
   z-index: 9998;
+  opacity: 0.8;
 }
 
 #editorTab{
@@ -68,6 +70,7 @@ editor {
   height: 91%;
   min-width: 50px;
   z-index: 9998;
+  opacity: 0.5;
 }
 
 

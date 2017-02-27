@@ -12,4 +12,7 @@ export class TrashCanComponent{
     * @see 
     * @todo intersect with server, make method
     */
+    openTrashCanBoard(){
+        console.log("TrashCan이 클릭됨")
+    }
 }

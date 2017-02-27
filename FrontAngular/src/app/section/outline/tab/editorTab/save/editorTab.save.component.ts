@@ -15,4 +15,8 @@ export class SaveComponent{
             Need to translate img, since copyright.
     * @todo intersect with server, make method
     */
+
+    saveBoard(){
+        console.log("save");
+    }
 }

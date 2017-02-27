@@ -1,29 +1,29 @@
 <div id="linkTab-color" *ngIf="usage==='linkTab'" >
-    <div class="center">
-        <div class="top-bar"> URL List</div>
-        <div>
-            <add class="tab-btn"></add>
-        </div>
-        <div>
+    <ul class="center">
+        <li class="top-bar"> URL List</li>
+        <li>
+            <add class="tab-btn waves-effect"></add>
+        </li>
+        <li>
             <linkPack></linkPack>
-        </div>
-        <div>
-            <trash-can class="tab-btn"></trash-can>
-        </div>
-    </div>
+        </li>
+        <li>
+            <trash-can class="tab-btn waves-effect"></trash-can>
+        </li>
+    </ul>
 </div>
 
 <div id="editorTab-color" *ngIf="usage==='editorTab'">
-    <div class="center">
-        <div class="top-bar">Editor Tab</div>
-        <div>
-            <save class="tab-btn"></save>
-        </div>
-        <div>
-            <share class="tab-btn"></share>
-        </div>
-        <div>
-            <export class="tab-btn"></export>
-        </div>
-    </div>
+    <ul class="center">
+        <li class="top-bar">Editor Tab</li>
+        <li>
+            <save class="tab-btn waves-effect"></save>
+        </li>
+        <li>
+            <share class="tab-btn waves-effect"></share>
+        </li>
+        <li>
+            <export class="tab-btn waves-effect"></export>
+        </li>
+    </ul>
 </div>

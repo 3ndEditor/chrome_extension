@@ -13,4 +13,7 @@ export class AddComponent{
     * @see 
     * @todo intersect with server, make method
     */
+    addURL() {
+        console.log("addURL클릭됨")
+    }
 }
