@@ -22,7 +22,9 @@ const LOGINUSERS = [
     new LoginUser('kim', 'kim@editor.com'),
     new LoginUser('lee', 'lee@editor.com'),
     new LoginUser('park', 'park@editor.com'),
-    new LoginUser('Kadler Kim', 'cicada0014@gmail.com')
+    new LoginUser('Kadler Kim', 'cicada0014@gmail.com'),
+    new LoginUser('소리탬', 'taemin3000@gmail.com'),
+    new LoginUser('김태민', 'forest0121@gmail.com')
 ]
 
 export let userPromise = Promise.resolve(LOGINUSERS);

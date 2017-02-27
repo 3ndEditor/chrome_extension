@@ -27,9 +27,4 @@ export class TabComponent implements OnInit{
     ngOnInit(){
 
     }
-
-    getTitle(url:string){
-    }
-
-
 }

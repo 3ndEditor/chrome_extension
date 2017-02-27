@@ -14,4 +14,8 @@ export class ShareComponent{
     * @see Need to translate img, since copyright.
     * @todo intersect with server, make method
     */
+
+    openShareBoard() {
+        console.log("openShare클릭됨")
+    }
 }

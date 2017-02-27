@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
 
     
     private btnActivate :string;
+
     
 
     private apiKey: string;
