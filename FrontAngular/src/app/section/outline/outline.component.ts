@@ -1,3 +1,4 @@
+
 import { DomSanitizer } from '@angular/platform-browser';
 import { NavBarService } from '../../shared/nav-bar.service';
 import { LoginUser } from '../../user/user';
@@ -93,7 +94,7 @@ export class OutlineComponent implements OnInit {
     private navbarAction: string = "false";
     private editorNavbarAction: string;
     private iframeOpacity: number = 0;
-    private iframeHeight: string = '80vh';
+    private iframeHeight: string = '90vh';
     private isResized: boolean = false;
     private linkFrameZIndex: string;
     private dividerZIndex: string;
@@ -225,13 +226,13 @@ export class OutlineComponent implements OnInit {
         this.dividerZIndex = '100';
     }
     public dividerDeActive() {
-        this.dividerZIndex = '10';
+        this.dividerZIndex = '9';
     }
 
 
     public screenResizeEnd($event: DragEvent) {
         this.linkFrameZIndex = '10';
-        this.dividerZIndex = '10';
+        this.dividerZIndex = '9';
         // this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
         // this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
         // savedLinkFrameWidth = ($event.x - savedDividerWidth);
@@ -271,7 +272,7 @@ export class OutlineComponent implements OnInit {
                     this.linkFrameTransform = 'translate3d(0,9%,0)';
                     this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,9%,0)';
                     this.dividerTransform = 'translate3d(' + savedDiveiderTransX + 'px,9%,0)';
-                    this.iframeHeight = '80vh';
+                    this.iframeHeight = '90vh';
                 }
 
             } else {
@@ -282,7 +283,7 @@ export class OutlineComponent implements OnInit {
                 } else {
                     this.editorTransform = 'translate3d(0,9%,0)'
                     this.linkFrameTransform = 'translate3d(0,9%,0)';
-                    this.iframeHeight = '80vh';
+                    this.iframeHeight = '90vh';
                 }
 
             }
@@ -323,7 +324,46 @@ export class OutlineComponent implements OnInit {
         this.editorTabState = "deActive";
     }
 
+    drop(e:DragEvent){
+        console.log("tttt");
+        console.log(e);
+    }
+
     ngOnChanges() {
+        console.log(this.el.nativeElement.querySelectorAll("linkFrame > iframe > img"));
+    }
+
+    ngAfterViewInit(){
+        console.log(this.el.nativeElement.querySelectorAll("linkFrame"));
+        dragula(
+            [
+                this.el.nativeElement.querySelector("editor"),
+                // this.el.nativeElement.querySelectorAll("linkFrame")
+
+            ],
+        
+            {
+                isContainer: function (el) {
+                    return el.getElementsByTagName('div'); // only elements in drake.containers will be taken into account
+                },
+                moves: function (el, source, handle, sibling) {
+                    return true; // elements are always draggable by default
+                },
+                accepts: function (el, target, source, sibling) {
+                    return true; // elements can be dropped in any of the `containers` by default
+                },
+                invalid: function (el, handle) {
+                    return false; // don't prevent any drags from initiating by default
+                },
+                direction: 'vertical',             // Y axis is considered when determining where an element would be dropped
+                copy: false,                       // elements are moved by default, not copied
+                copySortSource: false,             // elements in copy-source containers can be reordered
+                revertOnSpill: false,              // spilling will put the element back where it was dragged from, if this is true
+                removeOnSpill: false,              // spilling will `.remove` the element, if this is true
+                mirrorContainer: document.body,    // set the element that gets mirror elements appended
+                ignoreInputTextSelection: true     // allows users to select input text, see details below
+            }
+        );
     }
 
 }
