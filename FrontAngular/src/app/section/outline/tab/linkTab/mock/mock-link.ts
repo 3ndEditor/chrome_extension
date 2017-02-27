@@ -34,21 +34,6 @@ export let LINKS: Links[]=[
             url : 'http://www.naver.com', 
             fixed : [true, 6], 
             trashed : false
-        },
-        {
-            url : 'http://www.nate.com', 
-            fixed : [true, 7], 
-            trashed : false
-        },
-        {
-            url : 'http://www.nate.com', 
-            fixed : [true, 8], 
-            trashed : false
-        },
-        {
-            url : 'http://www.okky.com', 
-            fixed : [true, 9], 
-            trashed : false
         }
     ]
 }, 
