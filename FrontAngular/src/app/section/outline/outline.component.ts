@@ -134,14 +134,12 @@ export class OutlineComponent implements OnInit {
         // 화면분할
         if (this.isActiveCrtLinkFrameBtn === false) {
             this.isActiveCrtLinkFrameBtn = true;
-            console.log("링크프레임의 값이 true가 됨");
             this.iframeOpacity = 1;
 
 
             if (!this.isResized) {
                 this.editorWidth = (innerWidth * 0.5 - savedDividerWidth) + 'px';
                 this.linkFrameWidth = (innerWidth * 0.5) - savedDividerWidth + 'px';
-                console.log("test01");                
                 if (this.navService.action) {
                     this.editorTransform = 'translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,0,0)';
                     this.dividerTransform = 'translate3d(' + (innerWidth * 0.45 - savedDividerWidth) + 'px,0,0)';
@@ -156,7 +154,6 @@ export class OutlineComponent implements OnInit {
             } else {
                 this.editorWidth = (savedEditorWidth) + 'px';
                 this.linkFrameWidth = savedLinkFrameWidth + 'px';
-                console.log("test02");
                 if (this.navService.action) {
                     this.editorTransform = 'translate3d(' + (savedEdiotrTransX) + 'px,0,0)';
                     this.dividerTransform = 'translate3d(' + (savedDiveiderTransX) + 'px,0,0)';
@@ -176,7 +173,6 @@ export class OutlineComponent implements OnInit {
             this.linkFrameWidth = '0%';
             this.iframeOpacity = 0;
 
-            console.log("linkFrame이 false가 됬을때")
             if (this.navService.action) {
                 this.editorTransform = 'translate3d(0,0,0)'
                 this.linkFrameTransform = 'translate3d(0,0,0)';
@@ -298,7 +294,6 @@ export class OutlineComponent implements OnInit {
 
     ngOnInit() {
         this.routeParam.data.forEach((data: { userResolveService: LoginUser }) => {
-            console.log(data.userResolveService);
             this.inputParam = this._sanitizer.sanitize(SecurityContext.HTML, data.userResolveService.email);
         });
     }
@@ -324,17 +319,15 @@ export class OutlineComponent implements OnInit {
         this.editorTabState = "deActive";
     }
 
-    drop(e:DragEvent){
-        console.log("tttt");
-        console.log(e);
-    }
+    // drop(e:DragEvent){
+    //     console.log("tttt");
+    //     console.log(e);
+    // }
 
     ngOnChanges() {
-        console.log(this.el.nativeElement.querySelectorAll("linkFrame > iframe > img"));
     }
 
     ngAfterViewInit(){
-        console.log(this.el.nativeElement.querySelectorAll("linkFrame"));
         dragula(
             [
                 this.el.nativeElement.querySelector("editor"),

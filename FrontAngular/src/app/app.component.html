@@ -1,5 +1,7 @@
 <!--위쪽 네비게이션 바 (로그인 기능이 들어갈 예정임)-->
-<header [@headerFix]="navbarAction" (lockAction)="lockAction()" ></header>
+<div id="headerDetector"  (mouseenter)="headerMouseEnter()" > </div>
+<header [@headerFix]="navbarAction" (mouseleave)="headerMouseLeave()" [@headerMouseAction]="headerMouseAction" (lockAction)="lockAction()" 
+  ></header>
 
 <!--라우터를 통해 접근 가드를 걸어두고 사용자에 맞게 화면을 표시해주어야한다. -->
 

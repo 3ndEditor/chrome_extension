@@ -60,9 +60,13 @@ export class linkFrameComponent implements OnInit {
 
   // iframe의 url을 바꾼다.
   onEnter(inputUrl: string) {
-    this.linkUrl = inputUrl;
-    this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.linkUrl);
-
+    this.linkUrl = inputUrl;    
+    var urlPattern = new RegExp('^(?:https?):\/\/');
+    if (urlPattern.test(inputUrl)) {
+      this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.linkUrl);
+    } else {
+      this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl("http://"+this.linkUrl);
+    }
   }
 
   ngOnInit() {
