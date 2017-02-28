@@ -31,7 +31,7 @@ const routes: Routes = [
       {
         path: ':loginUserName',
         component: OutlineComponent,
-        canDeactivate : [CanDeactivateGuard],
+        // canDeactivate : [CanDeactivateGuard],
         resolve: {
           userResolveService: UserResolveService
         }

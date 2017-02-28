@@ -21,6 +21,7 @@ export class EditorComponent implements OnInit {
     @Input() routeData: string;
     editorOptions: MediumEditor.CoreOptions = {
         activeButtonClass: 'medium-editor-button-active',
+        buttonLabels:false,
         // 에디터 사용유무
         disableEditing: false,
         // 툴바 옵션
@@ -91,7 +92,7 @@ export class EditorComponent implements OnInit {
         paste: {
             /* This example includes the default options for paste,
                if nothing is passed this is what it used */
-            forcePlainText: true,
+            forcePlainText: false,
             cleanPastedHTML: false,
             cleanReplacements: [],
             cleanAttrs: ['class', 'style', 'dir'],
