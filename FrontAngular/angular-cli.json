@@ -25,6 +25,8 @@
         "../node_modules/dragula/dist/dragula.min.css"
       ],
       "scripts": [
+        
+        "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/materialize-css/dist/js/materialize.min.js"
         
       ],

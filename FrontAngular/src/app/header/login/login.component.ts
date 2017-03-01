@@ -16,7 +16,7 @@ import {
     ViewChild
 } from '@angular/core';
 
-declare var auth2: any;
+var auth2: any;
 var that;
 @Component({
     selector: 'login',

@@ -70,6 +70,9 @@ export class HeaderComponent implements OnInit {
         this.navService.navAction();
         this.lockAction.emit();
     }
+    createLinkFrame(){
+        this.navService.navInputFrame();
+    }
 
     
 }

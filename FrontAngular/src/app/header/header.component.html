@@ -1,49 +1,63 @@
-<ul id='dropdown1' class='dropdown-content right'>
+<ul id='dropdown' class='dropdown-content center'>
     <li class="divider"></li>
-    <!--<li>
-        <a class="waves-effect">
-            <i class=" material-icons" (click)="showLoginModal()">vpn_key</i>
+    <li>
+        <a data-position="right" data-delay="50" data-tooltip="Input Browser" class="waves-effect center  tooltipped"  (click)="createLinkFrame()">
+             <i class=" material-icons">input</i>
+            </a>
+    </li>
+    <li>
+        <a data-position="right" data-delay="50" data-tooltip="Login" class="waves-effect center tooltipped" (click)="showLoginModal()">
+            <i class=" material-icons">vpn_key</i>
         </a>
     </li>
     <li>
-        <a class="waves-effect" keyMap [keyCode]="keymap.wide_key" [isAltKey]="'true'" (keyAction)="openWith()" (click)="openWith()">
+        <a data-position="right" data-delay="50" data-tooltip="Full Screen" class="waves-effect center  tooltipped" (click)="openWith()">
             <i class="material-icons ">open_with</i></a>
     </li>
     <li>
-        <a class="waves-effect" keyMap [keyCode]="keymap.help_key" (keyAction)="openHelp()" (click)="openHelp()">
-            <i class="material-icons ">live_help</i></a>
+        <a data-position="right" data-delay="50" data-tooltip="Help" class="waves-effect  center tooltipped"  (click)="openHelp()">
+            <i class="material-icons ">info_outline</i></a>
     </li>
     <li>
-        <a class="waves-effect" keyMap [keyCode]="keymap.header_fixed_key" [isAltKey]="'true'" (keyAction)="headerFix()" (click)="headerFix()">
-            <i class="material-icons">lock_open</i>
-        </a>
-    </li>-->
+        <a data-position="right" data-delay="50" data-tooltip="Bar Fixed" class="waves-effect  center tooltipped" (click)="headerFix()">
+            <i class="material-icons">import_export</i>
+            </a>
+    </li>
 </ul>
 
 <nav class="blue-grey darken-2">
     <div class="nav-wrapper">
-        <a data-activates="dropdown1" class="dropdown-button button-collapse "><i class="material-icons">menu</i></a>
+        <a data-activates="dropdown" class="dropdown-button button-collapse "><i class="material-icons">menu</i></a>
         <a class="button-collapse"></a>
         <loginboard [@showLoginModal]="isShowLoginModal" (click)="showLoginModal()"></loginboard>
         <a href="#" class="brand-logo center"><i><h4>3ND EDITOR</h4></i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
-                <a class="waves-effect">
-                    <i class=" material-icons" (click)="showLoginModal()">vpn_key</i>
+                <a data-position="bottom" data-delay="50" data-tooltip="Input Browser" class="waves-effect  tooltipped" keyMap [keyCode]="keymap.create_frame_key"
+                    [isCtrKey]="'false'" [isAltKey]="'true'" (keyAction)="createLinkFrame()" (click)="createLinkFrame()">
+                    <i class=" material-icons">input</i>
+                    </a>
+            </li>
+            <li>
+                <a data-position="bottom" data-delay="50" data-tooltip="Login" class="waves-effect  tooltipped" (click)="showLoginModal()">
+                    <i class=" material-icons">vpn_key</i>
                 </a>
             </li>
             <li>
-                <a class="waves-effect" keyMap [keyCode]="keymap.wide_key" [isAltKey]="'true'" (keyAction)="openWith()" (click)="openWith()">
+                <a data-position="bottom" data-delay="50" data-tooltip="Full Screen" class="waves-effect  tooltipped" keyMap [keyCode]="keymap.wide_key"
+                    [isAltKey]="'true'" (keyAction)="openWith()" (click)="openWith()">
                     <i class="material-icons ">open_with</i></a>
             </li>
             <li>
-                <a class="waves-effect" keyMap [keyCode]="keymap.help_key" (keyAction)="openHelp()" (click)="openHelp()">
-                    <i class="material-icons ">live_help</i></a>
+                <a data-position="bottom" data-delay="50" data-tooltip="Help" class="waves-effect  tooltipped" keyMap [keyCode]="keymap.help_key"
+                    (keyAction)="openHelp()" (click)="openHelp()">
+                    <i class="material-icons ">info_outline</i></a>
             </li>
             <li>
-                <a class="waves-effect" keyMap [keyCode]="keymap.header_fixed_key" [isAltKey]="'true'" (keyAction)="headerFix()" (click)="headerFix()">
-                    <i class="material-icons">lock_open</i>
-                </a>
+                <a data-position="bottom" data-delay="50" data-tooltip="Bar Fixed" class="waves-effect  tooltipped" keyMap [keyCode]="keymap.header_fixed_key"
+                    [isAltKey]="'true'" (keyAction)="headerFix()" (click)="headerFix()">
+                    <i class="material-icons">import_export</i>
+                    </a>
             </li>
         </ul>
 
