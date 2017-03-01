@@ -130,7 +130,7 @@ export class OutlineComponent implements OnInit {
     * @param void
     * @returns void
     */
-    public createLinkFrame(): void {
+    createLinkFrame(): void {
         // 화면분할
         if (this.isActiveCrtLinkFrameBtn === false) {
             this.isActiveCrtLinkFrameBtn = true;
@@ -284,6 +284,11 @@ export class OutlineComponent implements OnInit {
 
             }
         }
+
+        if(this.isActiveCrtLinkFrameBtn !== this.navService.isInput){
+            this.createLinkFrame();
+        }
+
     }
 
     /**
@@ -327,14 +332,14 @@ export class OutlineComponent implements OnInit {
     ngOnChanges() {
     }
 
-    ngAfterViewInit(){
+    ngAfterViewInit() {
         dragula(
             [
                 this.el.nativeElement.querySelector("editor"),
-                // this.el.nativeElement.querySelectorAll("linkFrame")
+                this.el.nativeElement.querySelector("linkFrame")
 
             ],
-        
+
             {
                 isContainer: function (el) {
                     return el.getElementsByTagName('div'); // only elements in drake.containers will be taken into account
