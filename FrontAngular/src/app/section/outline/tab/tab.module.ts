@@ -1,5 +1,4 @@
 import { JsonpModule } from '@angular/http';
-import { AddModule } from './linkTab/add/linkTab.add.module';
 import { ShareModule } from './editorTab/share/editorTab.share.module';
 import { ExportModule } from './editorTab/export/editorTab.export.module';
 import { SaveModule } from './editorTab/save/editorTab.save.module';
@@ -10,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-    imports: [CommonModule,AddModule,LinkModule,TrashCanModule,SaveModule,ExportModule,ShareModule,JsonpModule],
+    imports: [CommonModule,LinkModule,TrashCanModule,SaveModule,ExportModule,ShareModule,JsonpModule],
     exports: [TabComponent],
     declarations: [TabComponent],
     providers: [],

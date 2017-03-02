@@ -3,7 +3,7 @@
 </div>    
 <div class="view">
     <div class="scrollBlind" >
-        <div [dragula]='"fixed-link"' [dragulaModel]='listLinkFixed' >
+        <div [dragula]='"go-trashCan"' [dragulaModel]='listLinkFixed' >
             <div class="z-depth-2 FixedLink" *ngFor="let linkA of listLinkFixed">
                 <div class="linkbox waves-effect tooltipped" data-position="right" data-delay="300" data-tooltip="Title"
                     (click)="openURL(linkA.url)">
@@ -15,7 +15,7 @@
                 </div>
             </div>
        </div>
-       <div [dragula]='"unfixed-link"' [dragulaModel]='listLinkUnfixed'>
+       <div [dragula]='"go-trashCan"' [dragulaModel]='listLinkUnfixed'>
           <div class="z-depth-2 UnfixedLink" *ngFor="let linkB of listLinkUnfixed; let i = index">
                <div class="linkbox waves-effect tooltipped" data-position="right" data-delay="300" data-tooltip="Title"
                     (click)="openURL(linkB.url)">
