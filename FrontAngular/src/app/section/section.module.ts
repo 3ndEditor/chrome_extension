@@ -1,3 +1,4 @@
+import { SettingComponent } from './setting/setting.component';
 import { OutlineModule } from './outline/outline.module';
 import { SectionRoutingModule } from './section-routing.module';
 import { SectionComponent } from './section.component';
@@ -9,7 +10,7 @@ import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 @NgModule({
     imports: [SectionRoutingModule,OutlineModule],
     exports: [SectionComponent],
-    declarations: [SectionComponent],
+    declarations: [SectionComponent,SettingComponent],
     providers: [],
 })
 export class SectionModule { }

@@ -1,7 +1,6 @@
 import { Observable, Subject } from 'rxjs/Rx';
 import { handleError } from '../../../../../async-handling.promise';
 import { Http, Jsonp, ResponseContentType, URLSearchParams } from '@angular/http';
-import { Keymap } from '../../../../../shared/keymap/keymap.provider';
 import { animate, Component, ElementRef, OnInit, Renderer, state, style, transition, trigger } from '@angular/core';
 
 @Component({
@@ -21,7 +20,7 @@ export class ExportComponent {
     */
 
     private isExportActive: boolean;
-    constructor(private keymap: Keymap, private jsonp: Jsonp, private http: Http, private el: ElementRef, private renderer: Renderer) {
+    constructor( private jsonp: Jsonp, private http: Http, private el: ElementRef, private renderer: Renderer) {
         this.isExportActive = false;
     }
 

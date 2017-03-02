@@ -3,7 +3,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NavBarService } from '../../shared/nav-bar.service';
 import { LoginUser } from '../../user/user';
 import { UserResolveService } from '../../user/user-resolve.service';
-import { Keymap } from '../../shared/keymap/keymap.provider';
 import { ActivatedRoute } from '@angular/router';
 import {
     animate,
@@ -109,7 +108,6 @@ export class OutlineComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private dragulaService: DragulaService,
-        private keymap: Keymap,
         private routeParam: ActivatedRoute,
         private navService: NavBarService,
         private renderer: Renderer,
@@ -215,7 +213,6 @@ export class OutlineComponent implements OnInit {
             savedEditorWidth = (innerWidth - $event.x - savedDividerWidth);
             savedEdiotrTransX = ($event.x + savedDividerWidth);
             savedDiveiderTransX = ($event.x - savedDividerWidth * 35);
-            console.log($event.x);
         }
     }
     public dividerClick() {
@@ -229,28 +226,6 @@ export class OutlineComponent implements OnInit {
     public screenResizeEnd($event: DragEvent) {
         this.linkFrameZIndex = '10';
         this.dividerZIndex = '9';
-        // this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
-        // this.editorWidth = (innerWidth - $event.x - savedDividerWidth) + 'px';
-        // savedLinkFrameWidth = ($event.x - savedDividerWidth);
-        // savedEditorWidth = (innerWidth - $event.x - savedDividerWidth);
-        // if (this.navService.action) {
-        //     this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,0,0)';
-        //     savedEdiotrTransForm = this.editorTransform;
-        //     this.dividerTransform = 'translate3d(' + ($event.x - savedDividerWidth * 35) + 'px,0,0)';
-        //     savedDividerTransForm = this.dividerTransform;
-
-
-        // } else {
-        //     this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,9%,0)';
-        //     savedEdiotrTransForm = this.editorTransform;
-        //     this.dividerTransform = 'translate3d(' + ($event.x - savedDividerWidth * 35) + 'px,9%,0)';
-        //     savedDividerTransForm = this.dividerTransform;
-        //     console.log("드래그끝" + $event.x);
-
-        // }
-
-        // savedEdiotrTransX = ($event.x + savedDividerWidth);
-        // savedDiveiderTransX = ($event.x - savedDividerWidth * 35);
     }
 
     //
@@ -336,10 +311,7 @@ export class OutlineComponent implements OnInit {
         dragula(
             [
                 this.el.nativeElement.querySelector("editor"),
-                this.el.nativeElement.querySelector("linkFrame")
-
             ],
-
             {
                 isContainer: function (el) {
                     return el.getElementsByTagName('div'); // only elements in drake.containers will be taken into account

@@ -3,8 +3,8 @@ import { Component, ElementRef, OnInit, Renderer, Input } from '@angular/core';
 // import * as MediumEditorTable1 from 'medium-editor-tables';
 // import * as UsingEditor from 'medium-editor';
 //head에 선언된 medium_editor 자바스크립트를 역참조한다.
- declare var MediumEditor:any
- declare var MediumEditorTable:any;
+declare var MediumEditor: any
+declare var MediumEditorTable: any;
 
 
 @Component({
@@ -48,7 +48,8 @@ export class EditorComponent implements OnInit {
                 'bold', // 굵게
                 'italic', //이태릭
                 'underline', //밑줄
-                // 'anchor', // 링크보다도 걍 툴팁만들어준다고 보는게 맘편함
+                // 'anchor', // 링크보다도 걍 툴팁만들어준다고 보는게 맘편함,
+                'fontsize',
                 'h1',
                 'h2',
                 'h3',
@@ -74,8 +75,8 @@ export class EditorComponent implements OnInit {
                 //필요하다면 객체 형식으로 커스텀 버튼 만들어 낼 수 있음. 
             ],
 
-            diffLeft: 0,
-            diffTop: -10,
+            diffLeft: 50,
+            diffTop: -20,
             firstButtonClass: 'medium-editor-button-first',
             lastButtonClass: 'medium-editor-button-last',
             relativeContainer: null,
@@ -88,8 +89,8 @@ export class EditorComponent implements OnInit {
         },
         extensions: {
             'table': new MediumEditorTable({
-                rows: 40,
-                columns: 40
+                rows: 12,
+                columns: 12
             })
         },
         placeholder: {
@@ -144,7 +145,7 @@ export class EditorComponent implements OnInit {
     constructor(public el: ElementRef, public renderer: Renderer) {
         //  에디터 생성!!
         // @types 에 타입을 지정해준다. 다만 사용법이 다 달라서 해당 내부를 뜯어봐야 어떻게 가져다 쓸지 보인다.
-        
+
         new MediumEditor(this.renderer.selectRootElement(this.el.nativeElement), this.editorOptions);
 
 
@@ -154,8 +155,8 @@ export class EditorComponent implements OnInit {
             var data = $event.dataTransfer.getData
         })
     }
-    ngAfterViewInit(){
-        
+    ngAfterViewInit() {
+
     }
     ngOnInit() { }
     ngOnChanges() {
