@@ -4,11 +4,9 @@ import { Http, Jsonp, ResponseContentType, URLSearchParams } from '@angular/http
 import { animate, Component, ElementRef, OnInit, Renderer, state, style, transition, trigger } from '@angular/core';
 
 @Component({
-
     selector:"export",
     templateUrl : 'editorTab.export.component.html',
-    styleUrls:['editorTab.export.component.css'],
-
+    styleUrls:['editorTab.export.component.css']
 })
 export class ExportComponent {
     /**
