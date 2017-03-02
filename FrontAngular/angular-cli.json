@@ -22,11 +22,15 @@
         "../node_modules/medium-editor/dist/css/medium-editor.min.css",
         "../node_modules/medium-editor/dist/css/themes/beagle.min.css",
         "../node_modules/materialize-css/dist/css/materialize.min.css",
-        "../node_modules/dragula/dist/dragula.min.css"
+        "../node_modules/dragula/dist/dragula.min.css",
+        "../node_modules/medium-editor-tables/dist/css/medium-editor-tables.min.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css"
       ],
       "scripts": [
-        "../node_modules/materialize-css/dist/js/materialize.min.js"
-        
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/materialize-css/dist/js/materialize.min.js",
+        "../node_modules/medium-editor/dist/js/medium-editor.min.js",
+        "../node_modules/medium-editor-tables/dist/js/medium-editor-tables.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

@@ -7,7 +7,7 @@ import { animate, Component, ElementRef, OnInit, Renderer, state, style, transit
 @Component({
     selector:"export",
     templateUrl : 'editorTab.export.component.html',
-    styleUrls:['editorTab.export.component.css'],
+    styleUrls:['editorTab.export.component.css']
 })
 export class ExportComponent {
     /**
