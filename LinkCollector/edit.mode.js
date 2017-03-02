@@ -6,3 +6,9 @@ chrome.webRequest.onHeadersReceived.addListener(function (details) {
     }, ["blocking", "responseHeaders"]);
 // 위 코드 설명 chrome.webRequest.onHeaderReceived = > 크롬의 웹 리스퀘스트 객체중 요청이 서버에갔다 돌아오는 순간에 대한 리스너를 등록해준다.
 // responseHeaders 는 스트링의 배열이다. 그중에서 filter를 거쳐서 header의 name 중 
+
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+    var url = chrome.runtime.getURL('index.html');
+    window.open(url);
+});

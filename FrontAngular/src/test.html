@@ -1,6 +1,31 @@
-<script>
-    
-    console.log(parent.document)
-    parent.document.getElementById("devider").innerHTML="ttt"
+<!DOCTYPE html>
+<html>
 
-</script>
+<head>
+    <title></title>
+    
+</head>
+
+<body class="popup_page">
+    <p id="myCanvas">안녕하세요!!! 하하하하하하하하ㅏ핳하ㅏ하핳!!!!!!!!!!
+        <img src="assets/image/addIcon.png">
+         </p>
+</body>
+<script>
+        var canvas = document.getElementById('myCanvas'),
+            ctx = canvas.getContext('2d'),
+            image = new Image();
+
+        image.onload = function () {
+            Promise.all([
+                createImageBitmap(this, 0, 0, 32, 32),
+                createImageBitmap(this, 32, 0, 32, 32)
+            ]).then(function (sprites) {
+                ctx.drawImage(sprites[0], 0, 0);
+                ctx.drawImage(sprites[1], 32, 32);
+            });
+        }
+
+        image.src = 'sprites.png';
+    </script>
+</html>
