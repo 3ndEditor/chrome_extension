@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+
+<head>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            chrome.management.getAll(getAllCallback);
+        });
+
+        var getAllCallback = function (list) {
+            // TODO: Something Awesome
+        };
+        chrome.pageAction.show(0);
+    </script>
+    <meta charset="utf-8">
+    <title>3ndEditorExtension</title>
+    <base href="/">
+
+    <body>
+        test!!!!
+    </body>
+
+</html>

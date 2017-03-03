@@ -1,5 +1,5 @@
+import { KeymapService } from './keymap/keymap.service';
 import { KeymapDirective } from './keymap/keymap.directive';
-import { KeymapProvider } from './keymap/keymap.provider';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -9,6 +9,6 @@ import { NgModule } from '@angular/core';
     imports: [CommonModule, FormsModule,],
     exports: [CommonModule, FormsModule, KeymapDirective ],
     declarations: [KeymapDirective],
-    providers: [KeymapProvider],
+    providers: [KeymapService],
 })
 export class SharedModule { }
