@@ -288,7 +288,6 @@ export class OutlineComponent implements OnInit {
         if(this.isActiveCrtLinkFrameBtn !== this.navService.isInput){
             this.createLinkFrame();
         }
-
     }
 
     /**
