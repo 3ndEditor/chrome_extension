@@ -1,3 +1,4 @@
+import { SettingComponent } from './section/setting/setting.component';
 import { CanDeactivateGuard } from './header/auth-guard/can-deactivate-guard.service';
 import { OutlineComponent } from './section/outline/outline.component';
 import { UserResolveService } from './user/user-resolve.service';
@@ -17,7 +18,6 @@ const routes: Routes = [
   },
   {
     path: '3ndEditor',
-    component: SectionComponent,
     children: [
       {
         path: '',
@@ -25,8 +25,14 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
-        path: '11',
-        component: HeaderComponent
+        path: 'setting',
+        component: SettingComponent,
+        children: [
+          {
+            path:'keymap',
+            component :HeaderComponent
+          }
+        ]
       },
       {
         path: ':loginUserName',

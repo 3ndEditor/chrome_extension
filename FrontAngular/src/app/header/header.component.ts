@@ -1,5 +1,7 @@
+import { KeymapService } from '../shared/keymap/keymap.service';
+import { Router, UrlTree } from '@angular/router';
 import { NavBarService } from '../shared/nav-bar.service';
-import { Keymap } from '../shared/keymap/keymap.provider';
+import { Keymap } from '../shared/keymap/keymap.service';
 import {
     animate,
     Component,
@@ -24,7 +26,7 @@ import {
             [
                 // transform 속성은 위치의 변경을 의미한다. translate3d 함수는 x,y,z축의 움직임을 나타내는데 음수값도 허용한다. 
                 // 초기에 width 와 height 값을 0으로 지정해서 보이지 않도록 한다.
-                state('deActive', style({ opacity: 0 ,transform : 'translateX(100%)'})),
+                state('deActive', style({ opacity: 0, transform: 'translateX(100%)' })),
                 state('active', style({ opacity: 1 })),
                 transition('deActive <=> active', animate(200)),
 
@@ -45,21 +47,33 @@ export class HeaderComponent implements OnInit {
 
     @Output() lockAction = new EventEmitter<Object>();
     private isShowLoginModal: string;
-    private loginModalHeight : string;
+    private loginModalHeight: string;
     private isHelpActive: boolean;
-    constructor(private el: ElementRef,private renderer:Renderer, private keymap: Keymap, private navService: NavBarService) {
+    private settingUrl : UrlTree;
+    private keymap : Keymap;
+    constructor(
+        private el: ElementRef,
+        private renderer: Renderer,
+        private keymapService:KeymapService,
+        private navService: NavBarService,
+        private router: Router) {
+
         this.isHelpActive = false;
         this.isShowLoginModal = 'deActive';
-        
+        // this.keymapService
+        this.keymap = this.keymapService.getKeymap();
+
     }
 
     showLoginModal() {
         this.isShowLoginModal = (this.isShowLoginModal === 'active') ? 'deActive' : 'active';
-        
+
     }
 
     ngOnInit() {
     }
+
+    
     openWith() {
         document.body.webkitRequestFullScreen();
     }
@@ -70,9 +84,13 @@ export class HeaderComponent implements OnInit {
         this.navService.navAction();
         this.lockAction.emit();
     }
-    createLinkFrame(){
+    createLinkFrame() {
         this.navService.navInputFrame();
     }
+    goSetting() {
+        this.settingUrl =  this.router.createUrlTree(['3ndEditor', 'setting']);
+        this.router.navigateByUrl(this.settingUrl);
+    }
 
-    
+
 }
