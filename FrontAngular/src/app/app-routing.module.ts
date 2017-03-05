@@ -1,3 +1,4 @@
+import { SettingKeymapComponent } from './section/setting/setting-keymap.component';
 import { SettingComponent } from './section/setting/setting.component';
 import { CanDeactivateGuard } from './header/auth-guard/can-deactivate-guard.service';
 import { OutlineComponent } from './section/outline/outline.component';
@@ -29,8 +30,13 @@ const routes: Routes = [
         component: SettingComponent,
         children: [
           {
+            path:'',
+            redirectTo:'keymap',
+            pathMatch: 'full'
+          },
+          {
             path:'keymap',
-            component :HeaderComponent
+            component :SettingKeymapComponent
           }
         ]
       },

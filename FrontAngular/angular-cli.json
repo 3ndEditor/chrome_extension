@@ -30,7 +30,8 @@
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/materialize-css/dist/js/materialize.min.js",
         "../node_modules/medium-editor/dist/js/medium-editor.min.js",
-        "../node_modules/medium-editor-tables/dist/js/medium-editor-tables.min.js"
+        "../node_modules/medium-editor-tables/dist/js/medium-editor-tables.min.js",
+        "../node_modules/jspdf/dist/jspdf.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

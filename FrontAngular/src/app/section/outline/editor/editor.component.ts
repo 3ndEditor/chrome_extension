@@ -34,17 +34,17 @@ export class EditorComponent implements OnInit {
             allowMultiParagraphSelection: true,
             // 버튼 옵션
             buttons: [
-                // {
-                //     name: 'h3',
-                //     action: 'append-h2',
-                //     aria: 'header type 1',
-                //     tagNames: ['h2'],
-                //     contentDefault: '<b>H1</b>', // 툴바에 나타나는 이름
-                //     classList: ['custom-class-h1'],
-                //     attrs: {
-                //         'data-custom-attr': 'attr-value-h1'
-                //     }
-                // }, 
+                `{
+                    name: 'h3',
+                    action: 'append-h2',
+                    aria: 'header type 1',
+                    tagNames: ['h2'],
+                    contentDefault: '<b>H1</b>', // 툴바에 나타나는 이름
+                    classList: ['custom-class-h1'],
+                    attrs: {
+                        'data-custom-attr': 'attr-value-h1'
+                    }
+                }`, 
                 'bold', // 굵게
                 'italic', //이태릭
                 'underline', //밑줄
