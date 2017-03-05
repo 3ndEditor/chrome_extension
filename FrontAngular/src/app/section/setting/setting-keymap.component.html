@@ -1,0 +1,19 @@
+<br>
+
+<b>변경할 단축키를 선택한 후 키를 눌러 변경하세요</b>
+
+<br><br>
+
+<!-- 같은 코드가 계속 중복되므로 객체배열로 만들어서 뿌릴 것을 염두할 것 -->
+<ul>
+    <li *ngFor="let shortkey of shortkeys">
+        <key-set  [shortkey]="shortkey" ></key-set>
+    </li>
+    
+    
+</ul>
+
+
+
+<a class="waves-effect waves-light btn"  (click)="keymapChange()" ><i class="fa fa-check-circle-o left"></i>confirm</a>
+<a class="waves-effect waves-light btn" (click)="toEdtior()" ><i class="fa fa-check-circle-o left"></i>To Editor</a>

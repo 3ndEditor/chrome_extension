@@ -1,7 +1,6 @@
-import { KeymapService } from '../shared/keymap/keymap.service';
+import { KeymapService, ShortKey } from '../shared/keymap/keymap.service';
 import { Router, UrlTree } from '@angular/router';
 import { NavBarService } from '../shared/nav-bar.service';
-import { Keymap } from '../shared/keymap/keymap.service';
 import {
     animate,
     Component,
@@ -49,12 +48,12 @@ export class HeaderComponent implements OnInit {
     private isShowLoginModal: string;
     private loginModalHeight: string;
     private isHelpActive: boolean;
-    private settingUrl : UrlTree;
-    private keymap : Keymap;
+    private settingUrl: UrlTree;
+    private keymap: ShortKey[];
     constructor(
         private el: ElementRef,
         private renderer: Renderer,
-        private keymapService:KeymapService,
+        private keymapService: KeymapService,
         private navService: NavBarService,
         private router: Router) {
 
@@ -63,6 +62,7 @@ export class HeaderComponent implements OnInit {
         // this.keymapService
         this.keymap = this.keymapService.getKeymap();
 
+
     }
 
     showLoginModal() {
@@ -70,10 +70,29 @@ export class HeaderComponent implements OnInit {
 
     }
 
+    findShortKeyCode(keyName:string): string {
+        let memo = this.keymap.find(shortkey => {
+            if(shortkey.getKeyName() === keyName){
+                return true;
+            }else{
+                return false;
+            }
+        });
+        if(memo){
+            return memo.getKeyCode();
+        }else{
+        }
+        
+    }
+
+    ngAfterContentChecked(){
+
+    }
+
     ngOnInit() {
     }
 
-    
+
     openWith() {
         document.body.webkitRequestFullScreen();
     }
@@ -88,7 +107,7 @@ export class HeaderComponent implements OnInit {
         this.navService.navInputFrame();
     }
     goSetting() {
-        this.settingUrl =  this.router.createUrlTree(['3ndEditor', 'setting']);
+        this.settingUrl = this.router.createUrlTree(['3ndEditor', 'setting']);
         this.router.navigateByUrl(this.settingUrl);
     }
 
