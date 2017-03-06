@@ -13,6 +13,4 @@ export class NavBarService {
     public navInputFrame() {
         this.isInput = this.isInput === false ? true : false;
     }
-
-
 }
