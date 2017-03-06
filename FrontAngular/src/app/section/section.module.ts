@@ -1,3 +1,5 @@
+import { SettingModule } from './setting/setting.module';
+import { SettingKeymapComponent } from './setting/setting-keymap.component';
 import { SettingComponent } from './setting/setting.component';
 import { OutlineModule } from './outline/outline.module';
 import { SectionRoutingModule } from './section-routing.module';
@@ -8,9 +10,9 @@ import { NgModule } from '@angular/core';
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 
 @NgModule({
-    imports: [SectionRoutingModule,OutlineModule],
+    imports: [SectionRoutingModule,OutlineModule,SettingModule],
     exports: [SectionComponent],
-    declarations: [SectionComponent,SettingComponent],
+    declarations: [SectionComponent],
     providers: [],
 })
 export class SectionModule { }
