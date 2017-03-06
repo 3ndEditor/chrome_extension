@@ -29,10 +29,8 @@ import {
                 state('deActive', style({ opacity: 0, transform: 'translateX(100%)' })),
                 state('active', style({ opacity: 1 })),
                 transition('deActive <=> active', animate(200)),
-
             ]
         ),
-
     ]
 })
 export class HeaderComponent implements OnInit {

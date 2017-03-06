@@ -44,7 +44,6 @@ export class AppComponent {
     private headerDetectorY : string;
     constructor(private navService: NavBarService) {
         this.navbarAction = "false";
-        
         window.onbeforeunload = function (e) {
             return window.confirm("");
         };
