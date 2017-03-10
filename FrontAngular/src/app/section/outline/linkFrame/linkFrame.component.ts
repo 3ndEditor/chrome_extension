@@ -1,3 +1,4 @@
+import { LinkSenderService } from '../../../shared/link-sender.service';
 import { Observable } from 'rxjs/Observable';
 
 import { LinkFrameService } from './linkFrame.service.promise';
@@ -45,16 +46,18 @@ export class linkFrameComponent implements OnInit {
   //  sanitization 을 통과한 url을 만들기 위한 변수
   private trustResourceURL: SafeResourceUrl;
   private linkUrl: string = '';
-
+  private urlChecker : string;
 
   constructor(private _sanitizer: DomSanitizer, private connectService: LinkFrameService, private rd: Renderer,
-    private dragulaService: DragulaService) {
+    private dragulaService: DragulaService, private linkSendService : LinkSenderService) {
 
     // 맨 처음 띄워줄 화면
     let defaultUrl = "http://www.tistory.com/";
+    this.urlChecker = defaultUrl;
+
     // sanitization 을 통과해야 angular app 에서 쓸 수 있다.
     this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl(defaultUrl);
-
+    
 
   }
 
@@ -88,5 +91,14 @@ export class linkFrameComponent implements OnInit {
 
 
   ngAfterViewInit() { }
-
+  
+  ngAfterContentChecked() {
+    // console.log(this.linkSendService.sendURL);
+    if(this.urlChecker !== this.linkSendService.sendURL){
+      var urlPattern = new RegExp('^(?:https?):\/\/');
+      console.log(this.linkSendService.sendURL);
+      this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.linkSendService.sendURL);
+      this.urlChecker = this.linkSendService.sendURL;
+    }
+  }
 }

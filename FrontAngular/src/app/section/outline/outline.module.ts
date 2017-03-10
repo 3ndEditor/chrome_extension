@@ -1,3 +1,4 @@
+import { LinkSenderService } from '../../shared/link-sender.service';
 import { SanitizeHtmlPipe } from '../../shared/sanitizeHtml.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { InvalidUrlPageComponent } from '../../invalid-url-page.component';
@@ -13,6 +14,6 @@ import { DragulaModule } from 'ng2-dragula/ng2-dragula';
     imports: [EditorModule, SharedModule, linkFrameModule, DragulaModule, TabModule, BrowserModule],
     exports: [],
     declarations: [OutlineComponent],
-    providers: [],
+    providers: [LinkSenderService],
 })
 export class OutlineModule { }

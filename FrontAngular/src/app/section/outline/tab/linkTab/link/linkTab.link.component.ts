@@ -1,8 +1,9 @@
+import { LinkSenderService } from '../../../../../shared/link-sender.service';
 import { Links } from './links';
 import { FormsModule } from '@angular/forms';
 import { Link } from './link';
 import { MockService } from '../mock/mock.service';
-import { Component, Provider, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Provider } from '@angular/core';
 import { DragulaService, dragula } from 'ng2-dragula/ng2-dragula';
 
 
@@ -29,11 +30,14 @@ export class LinkComponent {
     listLinkUnfixed : Link[];
     title : string;
 
-    constructor(linkService: MockService){
+    constructor(
+        private linkService: MockService,
+        private linkSendService : LinkSenderService){
         // 목객체의 정보를 받음.
         this.listLinks = linkService.getLink();
         this.listLinkFixed = this.listLinks[0].links;
         this.listLinkUnfixed = this.listLinks[1].links;
+
     }    
 
     public consoleEvent(){
@@ -42,12 +46,16 @@ export class LinkComponent {
         console.log("비고정링크"+this.listLinkUnfixed[0].fixed[1]+this.listLinkUnfixed[0].url+"/"+this.listLinkFixed[1].fixed[1]+this.listLinkFixed[1].url);
     }
 
-    
     getTitle(url:string){
         
     }
 
-    openURL(url:string){
-        console.log(url+"을 로드합니다.")
+    // openURL(url:string){
+    //     console.log(url+"을 로드합니다.")
+    // }
+
+    // url을 LinkSenderService를 통해 iframe으로 전달함.
+    sendURL(url:string){
+        this.linkSendService.sendAction(url);
     }
 }

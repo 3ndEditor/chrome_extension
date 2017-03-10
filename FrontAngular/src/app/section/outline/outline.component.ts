@@ -1,3 +1,4 @@
+import { LinkSenderService } from '../../shared/link-sender.service';
 
 import { DomSanitizer } from '@angular/platform-browser';
 import { NavBarService } from '../../shared/nav-bar.service';
@@ -113,6 +114,7 @@ export class OutlineComponent implements OnInit {
         private renderer: Renderer,
         private el: ElementRef,
         private _sanitizer: DomSanitizer,
+        private linksendService: LinkSenderService
     ) {
         // 초기화 진행
         this.editorWidth = '100%';
@@ -220,7 +222,7 @@ export class OutlineComponent implements OnInit {
     }
     public dividerDeActive() {
         this.dividerZIndex = '9';
-    }
+        }
 
 
     public screenResizeEnd($event: DragEvent) {
@@ -263,7 +265,6 @@ export class OutlineComponent implements OnInit {
         if(this.isActiveCrtLinkFrameBtn !== this.navService.isInput){
             this.createLinkFrame();
         }
-
     }
 
     /**
