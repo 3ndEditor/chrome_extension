@@ -117,7 +117,7 @@ export class OutlineComponent implements OnInit {
         // 초기화 진행
         this.editorWidth = '100%';
         this.linkFrameWidth = '0px';
-        this.dividerWidth = (savedDividerWidth * 40) + 'px';
+        this.dividerWidth = (savedDividerWidth * 100) + 'px';
         this.navbarAction = this.navService.action + "";
         this.linkTabState = "deActive";
         this.editorTabState = "deActive";
