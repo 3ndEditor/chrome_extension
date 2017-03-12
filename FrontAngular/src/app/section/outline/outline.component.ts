@@ -1,3 +1,4 @@
+import { ChromeExtensionService } from '../../shared/chrome-extension.service';
 import { LinkSenderService } from '../../shared/link-sender.service';
 
 import { DomSanitizer } from '@angular/platform-browser';
@@ -61,7 +62,16 @@ var savedDiveiderTransX: number = 0;
                 state('active', style({ transform: 'translate3d(0,9%,0)', opacity: 0.8 })),
                 transition('deActive <=> active', animate(200)),
             ]
-        )
+        ),
+        trigger(
+            'openDriveWindow',
+            [
+                state('deActive', style({ opacity: 0, })),
+                state('active', style({ opacity: 1, "z-index": '9999' })),
+                transition('deActive <=> active', animate(200)),
+            ]
+        ),
+
     ]
 })
 
@@ -103,9 +113,9 @@ export class OutlineComponent implements OnInit {
     private tabUsage_editor: string = "editorTab";
     private linkTabState: string;
     private editorTabState: string;
-
-    private testHtml;
-
+    // drive 사용변수
+    private isDriveWindowOpen: string = "deActive";
+    private driveData: JSON;
     constructor(
         private route: ActivatedRoute,
         private dragulaService: DragulaService,
@@ -114,7 +124,8 @@ export class OutlineComponent implements OnInit {
         private renderer: Renderer,
         private el: ElementRef,
         private _sanitizer: DomSanitizer,
-        private linksendService: LinkSenderService
+        private linksendService: LinkSenderService,
+        private chromeService: ChromeExtensionService
     ) {
         // 초기화 진행
         this.editorWidth = '100%';
@@ -193,7 +204,7 @@ export class OutlineComponent implements OnInit {
         if (this.isResized === false) {
             this.isResized = true;
         }
-        this.linkFrameZIndex = '8';
+
 
 
         if (!($event.x === 0)) {
@@ -219,10 +230,11 @@ export class OutlineComponent implements OnInit {
     }
     public dividerClick() {
         this.dividerZIndex = '100';
+        this.linkFrameZIndex = '8';
     }
     public dividerDeActive() {
         this.dividerZIndex = '9';
-        }
+    }
 
 
     public screenResizeEnd($event: DragEvent) {
@@ -262,7 +274,7 @@ export class OutlineComponent implements OnInit {
             }
         }
 
-        if(this.isActiveCrtLinkFrameBtn !== this.navService.isInput){
+        if (this.isActiveCrtLinkFrameBtn !== this.navService.isInput) {
             this.createLinkFrame();
         }
     }
@@ -298,6 +310,17 @@ export class OutlineComponent implements OnInit {
 
     public leaveEditorTab(): void {
         this.editorTabState = "deActive";
+    }
+
+    driveWindowOpen() {
+        if (this.isDriveWindowOpen === "deActive") {
+            this.chromeService.isDriveWindowOpen = true;
+            this.isDriveWindowOpen = "active"
+        }else{
+            this.chromeService.isDriveWindowOpen = false;
+            this.isDriveWindowOpen = "deActive";
+        }
+
     }
 
     // drop(e:DragEvent){

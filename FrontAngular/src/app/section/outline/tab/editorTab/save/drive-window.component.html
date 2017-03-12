@@ -1,0 +1,18 @@
+<ul id="fileCollection" class="collection">
+
+    <li class="collection-itme">
+        <span class="title"><h3>Google Drive</h3> </span>
+        <i class="material-icons secondary-content ">insert_chart</i>
+
+    </li>
+    <li class="collection-item avatar" *ngFor="let file of files">
+        <img src="" alt="" class="circle">
+        <span class="title">{{file.name}}</span>
+        <p>{{file.iconLink}}</p>
+        <p>{{file.id}} <br>
+
+        </p>
+        <a href="file.webContentLink" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+
+</ul>

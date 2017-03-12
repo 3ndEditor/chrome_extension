@@ -1,3 +1,4 @@
+import { ChromeExtensionService } from './chrome-extension.service';
 import { KeymapService } from './keymap/keymap.service';
 import { KeymapDirective } from './keymap/keymap.directive';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +10,8 @@ import { NgModule } from '@angular/core';
     imports: [CommonModule, FormsModule,],
     exports: [CommonModule, FormsModule, KeymapDirective ],
     declarations: [KeymapDirective],
-    providers: [KeymapService],
+    providers: [KeymapService,
+    ChromeExtensionService
+    ],
 })
 export class SharedModule { }

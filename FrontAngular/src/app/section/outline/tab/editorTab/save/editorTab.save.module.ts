@@ -1,10 +1,10 @@
+import { DriveWindowComponent } from './drive-window.component';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { SaveComponent } from './editorTab.save.component';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-    imports: [CommonModule, SharedModule],
+    imports: [SharedModule],
     exports: [SaveComponent],
     declarations: [SaveComponent],
     providers: [],
