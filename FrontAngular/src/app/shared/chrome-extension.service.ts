@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 
 declare var chrome: any;
@@ -5,30 +6,39 @@ declare var chrome: any;
 @Injectable()
 export class ChromeExtensionService {
     public isDriveWindowOpen: boolean = false;
-
-
     private driveFileList;
 
+    constructor(private router: Router) {
 
+    }
 
     private xhrWithAuth(method: string, url: string, interactive: boolean, callback, params) {
-        var access_token;
-        var retry = true;
-
+        let access_token;
+        let retry = true;
+        let that = this;
 
         getToken();
 
         function getToken() {
+            try {
+                chrome.identity.getAuthToken({ interactive: interactive }, function (token) {
+                    if (chrome.runtime.lastError) {
+                        console.log(chrome.runtime.lastError);
 
-            chrome.identity.getAuthToken({ interactive: interactive }, function (token) {
-                if (chrome.runtime.lastError) {
-                    console.log(chrome.runtime.lastError);
-                    callback(chrome.runtime.lastError);
-                    return;
-                }
-                access_token = token;
-                requestStart();
-            });
+                        callback(chrome.runtime.lastError);
+                        return;
+                    }
+                    access_token = token;
+                    requestStart();
+                });
+
+            } catch (e) {
+                console.log(e);
+                that.router.navigate(['welcome']);
+                
+
+            }
+
         }
         function formatParams(params) {
             return "?" + Object
@@ -43,20 +53,179 @@ export class ChromeExtensionService {
             var xhr = new XMLHttpRequest();
             xhr.open(method, url + formatParams(params), true);
             xhr.setRequestHeader('Authorization', 'Bearer ' + access_token);
-            xhr.onload = requestComplete;
+            xhr.onload = function requestComplete() {
+                if (xhr.status == 401 && retry) {
+                    retry = false;
+                    chrome.identity.removeCachedAuthToken({ token: access_token },
+                        getToken);
+                } else {
+                    callback(null, xhr.status, xhr.response);
+                }
+            }
             xhr.send();
         }
-
-        function requestComplete() {
-            if (this.status == 401 && retry) {
-                retry = false;
-                chrome.identity.removeCachedAuthToken({ token: access_token },
-                    getToken);
-            } else {
-                callback(null, this.status, this.response);
-            }
-        }
+        // function requestComplete() {
+        //     if (this.status == 401 && retry) {
+        //         retry = false;
+        //         chrome.identity.removeCachedAuthToken({ token: access_token },
+        //             getToken);
+        //     } else {
+        //         console.log(this);
+        //         console.log(this.response)
+        //         callback(null, this.status, this.response);
+        //     }
+        // }
     }
+
+
+
+    public checkGetToken(): Promise<boolean> {
+        let result;
+        let params = {
+            // corpus : "",
+            // orderBy: "createdTime", // 만들어진 순서 
+            // pageSize : "",
+            // pageToken : "",
+            // q : "",
+            // spaces : "",
+        };
+        let method: string = 'GET';
+        let url: string = 'https://www.googleapis.com/plus/v1/people/me';
+        let that = this;
+
+        let STATE_START = 1;
+        let STATE_ACQUIRING_AUTHTOKEN = 2;
+        let STATE_AUTHTOKEN_ACQUIRED = 3;
+
+        let state = STATE_START;
+
+        let signin_button = document.querySelector('#signin');
+        let signout_button = document.querySelector('#signOut');
+        let user_info_div = document.querySelector('#user_info');
+        console.log(signin_button);
+
+        return new Promise<boolean>(function (resolve, reject) {
+            signin_button.addEventListener('click', interactiveSignIn);
+            signout_button.addEventListener('click', revokeToken);
+            that.xhrWithAuth(method, url, false, onsuccess, params);
+
+            function onsuccess(error, status, response) {
+                if (!error && status == 200) {
+                    changeState(STATE_AUTHTOKEN_ACQUIRED);
+                    user_info_div.innerHTML = "" + (response);
+                    var user_info = JSON.parse(response);
+                    resolve(true);
+                    populateUserInfo(user_info);
+                } else {
+                    reject(false);
+                    that.router.navigate(['welcome']);
+                    changeState(STATE_START);
+                }
+            }
+
+
+
+
+            function disableButton(button) {
+                button.classList.add('disabled', 'disabled');
+            }
+
+            function enableButton(button) {
+                button.classList.remove('disabled');
+            }
+
+            function changeState(newState) {
+                state = newState;
+                // console.log(signin_button + "///"+signout_button)
+                switch (state) {
+                    case STATE_START:
+                        enableButton(signin_button);
+                        disableButton(signout_button);
+                        // disableButton(revoke_button);
+                        break;
+                    case STATE_ACQUIRING_AUTHTOKEN:
+                        // user_info_div.innerHTML = ('Acquiring token...');
+                        disableButton(signin_button);
+                        disableButton(signout_button);
+                        // disableButton(revoke_button);
+                        break;
+                    case STATE_AUTHTOKEN_ACQUIRED:
+                        disableButton(signin_button);
+                        enableButton(signout_button);
+                        // enableButton(revoke_button);
+                        break;
+                }
+            }
+            function populateUserInfo(user_info) {
+                user_info_div.innerHTML = "Hello " + user_info.displayName;
+
+                fetchImageBytes(user_info);
+            }
+
+            function fetchImageBytes(user_info) {
+                if (!user_info || !user_info.image || !user_info.image.url) return;
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', user_info.image.url, true);
+                xhr.responseType = 'blob';
+                xhr.onload = onImageFetched;
+                xhr.send();
+            }
+
+            function onImageFetched(e) {
+                if (this.status != 200) return;
+                var imgElem = document.createElement('img');
+                var objUrl = window.URL.createObjectURL(this.response);
+                imgElem.src = objUrl;
+                imgElem.onload = function () {
+                    window.URL.revokeObjectURL(objUrl);
+                }
+                user_info_div.insertAdjacentElement("afterbegin", imgElem);
+            }
+            function interactiveSignIn() {
+                changeState(STATE_ACQUIRING_AUTHTOKEN);
+
+                // chrome.identity.getAuthToken({ 'interactive': true }, function (token) {
+                //     if (chrome.runtime.lastError) {
+                //         // user_info_div.innerHTML = "" + chrome.runtime.lastError;
+                //         changeState(STATE_START);
+                //     } else {
+                //         // user_info_div.innerHTML = 'Token acquired:' + token +
+                //         //     '. See chrome://identity-internals for details.';
+                //         changeState(STATE_AUTHTOKEN_ACQUIRED);
+                that.xhrWithAuth(method, url, true, onsuccess, params);
+                //     }
+                // });
+            }
+            function revokeToken() {
+                // user_info_div.innerHTML = "";
+                chrome.identity.getAuthToken({ 'interactive': false },
+                    function (current_token) {
+                        if (!chrome.runtime.lastError) {
+
+                            // @corecode_begin removeAndRevokeAuthToken
+                            // @corecode_begin removeCachedAuthToken
+                            // Remove the local cached token
+                            chrome.identity.removeCachedAuthToken({ token: current_token },
+                                function () { });
+                            // @corecode_end removeCachedAuthToken
+
+                            // Make a request to revoke token in the server
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', 'https://accounts.google.com/o/oauth2/revoke?token=' +
+                                current_token);
+                            xhr.send();
+                            // @corecode_end removeAndRevokeAuthToken
+
+                            // Update the user interface accordingly
+                            changeState(STATE_START);
+                            user_info_div.innerHTML = ('Token revoked and removed from cache. ' +
+                                'Check chrome://identity-internals to confirm.');
+                        }
+                    });
+            }
+        })
+    }
+
 
 
     public getFileList(): Promise<Array<Object>> {

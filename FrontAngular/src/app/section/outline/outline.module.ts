@@ -2,7 +2,6 @@ import { DriveWindowComponent } from './tab/editorTab/save/drive-window.componen
 import { LinkSenderService } from '../../shared/link-sender.service';
 import { SanitizeHtmlPipe } from '../../shared/sanitizeHtml.pipe';
 import { BrowserModule } from '@angular/platform-browser';
-import { InvalidUrlPageComponent } from '../../invalid-url-page.component';
 import { SharedModule } from '../../shared/shared.module';
 import { TabModule } from './tab/tab.module';
 import { linkFrameModule } from './linkFrame/linkFrame.module';
