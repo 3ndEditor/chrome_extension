@@ -1,3 +1,4 @@
+import { ChromeExtensionService } from '../shared/chrome-extension.service';
 import { KeymapService, ShortKey } from '../shared/keymap/keymap.service';
 import { Router, UrlTree } from '@angular/router';
 import { NavBarService } from '../shared/nav-bar.service';
@@ -48,18 +49,27 @@ export class HeaderComponent implements OnInit {
     private isHelpActive: boolean;
     private settingUrl: UrlTree;
     private keymap: ShortKey[];
+
+    private fileName : string ;
+    private saveState : string ; 
+    private author : string ;
+    private writeTime : string ;
     constructor(
         private el: ElementRef,
         private renderer: Renderer,
         private keymapService: KeymapService,
         private navService: NavBarService,
-        private router: Router) {
+        private router: Router,
+        private chromeService : ChromeExtensionService
+        ) {
 
         this.isHelpActive = false;
         this.isShowLoginModal = 'deActive';
         // this.keymapService
         this.keymap = this.keymapService.getKeymap();
-
+        this.author = this.chromeService.fileAthor;
+        this.fileName = this.chromeService.fileName;
+        this.saveState = this.chromeService.savedState;
 
     }
 

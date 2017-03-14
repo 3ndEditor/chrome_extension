@@ -41,6 +41,8 @@ export class linkFrameComponent implements OnInit {
   @Input() iframeHeight: string;
   @Input() iframeOpacity: number;
   result: Observable<string[]>;
+
+  // private iframeRatio = '300%';
   private state: string = 'close';
 
   //  sanitization 을 통과한 url을 만들기 위한 변수

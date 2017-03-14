@@ -8,6 +8,11 @@ export class ChromeExtensionService {
     public isDriveWindowOpen: boolean = false;
     private driveFileList;
 
+    public fileName : string ;
+    public fileAthor : string;
+    public savedState : string;
+    public writeTime : string ; // 시간 객체로 확인해봐야겠어. 
+    
     constructor(private router: Router) {
 
     }
@@ -35,10 +40,7 @@ export class ChromeExtensionService {
             } catch (e) {
                 console.log(e);
                 that.router.navigate(['welcome']);
-                
-
             }
-
         }
         function formatParams(params) {
             return "?" + Object
@@ -115,6 +117,9 @@ export class ChromeExtensionService {
                     user_info_div.innerHTML = "" + (response);
                     var user_info = JSON.parse(response);
                     resolve(true);
+                    that.fileAthor = user_info.displayName;
+                    that.savedState = "파일 생성이 필요합니다."
+                    that.fileName = "test!"
                     populateUserInfo(user_info);
                 } else {
                     reject(false);

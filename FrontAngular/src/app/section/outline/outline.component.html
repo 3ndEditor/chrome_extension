@@ -5,7 +5,7 @@
     <!--<input [(ngModel)]="value"> <br><p>{{value}}</p>-->
     <!--링크 프레임(아이프레임으로 구현되는 곳)이 들어가는 자리임. 링크프레임생성버튼 활성유무에 따라 없어지고 나타난다. -->
     <linkFrame [@navbarAction]="navbarAction" class="z-depth-3" [ngStyle]="{'width': linkFrameWidth, 'transform': linkFrameTransform,'z-index': linkFrameZIndex }"
-        [iframeOpacity]="iframeOpacity" [iframeHeight]="iframeHeight"></linkFrame>
+        [iframeOpacity]="iframeOpacity" ></linkFrame>
 
         <span id="devider" [@navbarAction]="navbarAction" draggable="true" [ngStyle]="{ 'z-index': dividerZIndex ,'width': dividerWidth, 'transform': dividerTransform}"
             (drag)="screenResizeStart($event)" (dragend)="screenResizeEnd($event)" (mousedown)="dividerClick()" (mouseup)="dividerDeActive()"></span>
@@ -28,7 +28,7 @@
 </div>
 
 
-<drive-window class="z-depth-5" [@openDriveWindow]="isDriveWindowOpen"  ></drive-window>
+<drive-window class="z-depth-5" [@openDriveWindow]="isDriveWindowOpen" (closeDriveWindow)="driveWindowOpen()"  ></drive-window>
 
 
 
