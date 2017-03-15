@@ -38,7 +38,9 @@ import { DragulaService, dragula } from 'ng2-dragula/ng2-dragula';
   ]
 })
 export class linkFrameComponent implements OnInit {
-  @Input() iframeHeight: string;
+  @Input() iframeHeight :string ='200vh';
+  @Input() iframeWidth: string ='200%';
+  @Input() iframeScale: string = 'scale(0.5)'; //scale(0.0)
   @Input() iframeOpacity: number;
   result: Observable<string[]>;
 
@@ -48,10 +50,10 @@ export class linkFrameComponent implements OnInit {
   //  sanitization 을 통과한 url을 만들기 위한 변수
   private trustResourceURL: SafeResourceUrl;
   private linkUrl: string = '';
-  private urlChecker : string;
+  private urlChecker: string;
 
   constructor(private _sanitizer: DomSanitizer, private connectService: LinkFrameService, private rd: Renderer,
-    private dragulaService: DragulaService, private linkSendService : LinkSenderService) {
+    private dragulaService: DragulaService, private linkSendService: LinkSenderService) {
 
     // 맨 처음 띄워줄 화면
     let defaultUrl = "http://www.tistory.com/";
@@ -59,18 +61,18 @@ export class linkFrameComponent implements OnInit {
 
     // sanitization 을 통과해야 angular app 에서 쓸 수 있다.
     this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl(defaultUrl);
-    
+
 
   }
 
   // iframe의 url을 바꾼다.
   onEnter(inputUrl: string) {
-    this.linkUrl = inputUrl;    
+    this.linkUrl = inputUrl;
     var urlPattern = new RegExp('^(?:https?):\/\/');
     if (urlPattern.test(inputUrl)) {
       this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.linkUrl);
     } else {
-      this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl("http://"+this.linkUrl);
+      this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl("http://" + this.linkUrl);
     }
   }
 
@@ -93,10 +95,10 @@ export class linkFrameComponent implements OnInit {
 
 
   ngAfterViewInit() { }
-  
+
   ngAfterContentChecked() {
     // console.log(this.linkSendService.sendURL);
-    if(this.urlChecker !== this.linkSendService.sendURL){
+    if (this.urlChecker !== this.linkSendService.sendURL) {
       var urlPattern = new RegExp('^(?:https?):\/\/');
       console.log(this.linkSendService.sendURL);
       this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.linkSendService.sendURL);

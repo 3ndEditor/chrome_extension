@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: '3ndEditor',
-    canActivate: [AuthGuard], // 로그인 검사를 하는 가드. 토큰을 얻을 수 없는 상황이라면 
+    // canActivate: [AuthGuard], // 로그인 검사를 하는 가드. 토큰을 얻을 수 없는 상황이라면 
     children: [
       {
         path: '',

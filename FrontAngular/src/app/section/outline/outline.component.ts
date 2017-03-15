@@ -104,8 +104,13 @@ export class OutlineComponent implements OnInit {
     private isActiveCrtLinkFrameBtn: boolean = false;
     private navbarAction: string = "false";
     private editorNavbarAction: string;
+
+    //iframe 사용변수
     private iframeOpacity: number = 0;
-    private iframeHeight: string = '90vh';
+    private iframeWidth: string ;
+    private iframeScale: string ; 
+
+
     private isResized: boolean = false;
     private linkFrameZIndex: string;
     private dividerZIndex: string;
@@ -139,6 +144,7 @@ export class OutlineComponent implements OnInit {
         this.navbarAction = this.navService.action + "";
         this.linkTabState = "deActive";
         this.editorTabState = "deActive";
+        
     }
 
     /**
@@ -257,23 +263,21 @@ export class OutlineComponent implements OnInit {
                     this.linkFrameTransform = 'translate3d(0,0,0)';
                     this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,0,0)';
                     this.dividerTransform = 'translate3d(' + savedDiveiderTransX + 'px,0,0)';
-                    this.iframeHeight = '100vh';
+                    // this.iframeHeight = '100vh';
                 } else {
                     this.linkFrameTransform = 'translate3d(0,9%,0)';
                     this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,9%,0)';
                     this.dividerTransform = 'translate3d(' + savedDiveiderTransX + 'px,9%,0)';
-                    this.iframeHeight = '90vh';
+                    // this.iframeHeight = '90vh';
                 }
 
             } else {
                 if (this.navService.action) {
                     this.editorTransform = 'translate3d(0,0,0)'
                     this.linkFrameTransform = 'translate3d(0,0,0)';
-                    this.iframeHeight = '100vh';
                 } else {
                     this.editorTransform = 'translate3d(0,9%,0)'
                     this.linkFrameTransform = 'translate3d(0,9%,0)';
-                    this.iframeHeight = '90vh';
                 }
 
             }
@@ -333,12 +337,16 @@ export class OutlineComponent implements OnInit {
     //     console.log(e);
     // }
 
-    ngOnChanges() {
+    applyFrameScale(){
+        return this.navService.frameConfig.getScale();
     }
-
+    applyFrameWidth(){
+        return this.navService.frameConfig.getWidth();
+    }
+    applyFrameHeight(){
+        return this.navService.frameConfig.getHeight();
+    }
     ngAfterViewInit() {
-        
-        
             this.contentOnEditor = this.editorElement.el.nativeElement.innerHTML;
             console.log(this.contentOnEditor);
         

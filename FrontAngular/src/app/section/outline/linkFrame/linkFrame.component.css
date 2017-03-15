@@ -3,14 +3,15 @@
 
 
 iframe{
-   width: 200%;
-    height: 200vh;
+    height: 100vh;
     border: 0;
+
+   /*width: 200%;
    -ms-transform: scale(0.5);
     -moz-transform: scale(0.5);
     -o-transform: scale(0.5);
     -webkit-transform: scale(0.5);
-    transform: scale(0.5);
+    transform: scale(0.5);*/
     
     -ms-transform-origin: 0 0;
     -moz-transform-origin: 0 0;

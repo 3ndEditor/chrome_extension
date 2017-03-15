@@ -5,34 +5,26 @@
     <!--<input [(ngModel)]="value"> <br><p>{{value}}</p>-->
     <!--링크 프레임(아이프레임으로 구현되는 곳)이 들어가는 자리임. 링크프레임생성버튼 활성유무에 따라 없어지고 나타난다. -->
     <linkFrame [@navbarAction]="navbarAction" class="z-depth-3" [ngStyle]="{'width': linkFrameWidth, 'transform': linkFrameTransform,'z-index': linkFrameZIndex }"
-        [iframeOpacity]="iframeOpacity" ></linkFrame>
+        [iframeOpacity]="iframeOpacity" [iframeHeight]="applyFrameHeight()" [iframeWidth]="applyFrameWidth()" [iframeScale]="applyFrameScale()"></linkFrame>
 
-        <span id="devider" [@navbarAction]="navbarAction" draggable="true" [ngStyle]="{ 'z-index': dividerZIndex ,'width': dividerWidth, 'transform': dividerTransform}"
-            (drag)="screenResizeStart($event)" (dragend)="screenResizeEnd($event)" (mousedown)="dividerClick()" (mouseup)="dividerDeActive()"></span>
+    <span id="devider" [@navbarAction]="navbarAction" draggable="true" [ngStyle]="{ 'z-index': dividerZIndex ,'width': dividerWidth, 'transform': dividerTransform}"
+        (drag)="screenResizeStart($event)" (dragend)="screenResizeEnd($event)" (mousedown)="dividerClick()" (mouseup)="dividerDeActive()"></span>
 
-            <!--에디터 프레임(미디움 에디터로 구현되는 곳)이 들어가는 자리, 링크프레임생성버튼 활성유무에 따라 크기가 조절된다. (12->6)-->
-            <editor #firstEditor class="" [@navbarAction]="navbarAction" [dragula]='"first-bag"'
-             [routeData]="inputParam" [ngStyle]="{'width': editorWidth,'transform': editorTransform,'outline':editorFocusOutline }">
-             </editor>
+    <!--에디터 프레임(미디움 에디터로 구현되는 곳)이 들어가는 자리, 링크프레임생성버튼 활성유무에 따라 크기가 조절된다. (12->6)-->
+    <editor #firstEditor class="" [@navbarAction]="navbarAction" [dragula]='"first-bag"' [routeData]="inputParam" [ngStyle]="{'width': editorWidth,'transform': editorTransform,'outline':editorFocusOutline }">
+    </editor>
 
 
-                <!--탭의 usage에 따라 tab의 종류를 다르게 불러옴-->
-                <tab id="linkTab" [@navbarAction]="navbarAction" [@openLinkTab]="linkTabState" [usage]="tabUsage_link"></tab>
-                <tab id="editorTab" [@navbarAction]="navbarAction" [@openEditorTab]="editorTabState" [usage]="tabUsage_editor" 
-                (mouseleave)="leaveEditorTab()" (driveWindowOpen)="driveWindowOpen()"></tab>
-                <!--화면의 양극쪽에 마우스가 올려질 때 탭을 나타냄. linkTab은 링크프레임이 true일 때만 활성화-->
-                <div id="linkTabEnterDetector" [@navbarAction]="navbarAction" *ngIf="isActiveCrtLinkFrameBtn==true" (mouseenter)="enterLinkTab()"></div>
-                <div id="editorTabEnterDetector" [@navbarAction]="navbarAction" (mouseenter)="enterEditorTab()"></div>
-                <div id="linkTabLeaveDetector" [@navbarAction]="navbarAction" *ngIf="linkTabState==='active'" (mouseleave)="leaveLinkTab()"></div>
-                <!--<div id="editorTabLeaveDetector" *ngIf="editorTabState==='active'" (mouseleave)="leaveEditorTab()"></div>-->
+    <!--탭의 usage에 따라 tab의 종류를 다르게 불러옴-->
+    <tab id="linkTab" [@navbarAction]="navbarAction" [@openLinkTab]="linkTabState" [usage]="tabUsage_link"></tab>
+    <tab id="editorTab" [@navbarAction]="navbarAction" [@openEditorTab]="editorTabState" [usage]="tabUsage_editor" (mouseleave)="leaveEditorTab()"
+        (driveWindowOpen)="driveWindowOpen()"></tab>
+    <!--화면의 양극쪽에 마우스가 올려질 때 탭을 나타냄. linkTab은 링크프레임이 true일 때만 활성화-->
+    <div id="linkTabEnterDetector" [@navbarAction]="navbarAction" *ngIf="isActiveCrtLinkFrameBtn==true" (mouseenter)="enterLinkTab()"></div>
+    <div id="editorTabEnterDetector" [@navbarAction]="navbarAction" (mouseenter)="enterEditorTab()"></div>
+    <div id="linkTabLeaveDetector" [@navbarAction]="navbarAction" *ngIf="linkTabState==='active'" (mouseleave)="leaveLinkTab()"></div>
+    <!--<div id="editorTabLeaveDetector" *ngIf="editorTabState==='active'" (mouseleave)="leaveEditorTab()"></div>-->
 </div>
 
 
-<drive-window class="z-depth-5" 
-[@openDriveWindow]="isDriveWindowOpen" (closeDriveWindow)="driveWindowOpen()"
-[contentOnEditor]="contentOnEditor"></drive-window>
-
-
-
-
-
+<drive-window class="z-depth-5" [@openDriveWindow]="isDriveWindowOpen" (closeDriveWindow)="driveWindowOpen()" [contentOnEditor]="contentOnEditor"></drive-window>

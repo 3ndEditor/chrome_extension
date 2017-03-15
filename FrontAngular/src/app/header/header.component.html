@@ -46,23 +46,26 @@
             <li><a href="">{{fileName}}</a></li>
             <li><a href="">{{saveState}}</a></li>
             <li><a href="">{{author}}</a></li>
+
+            <!--화면 배율 조정 아이콘-->
             <li>
-                <a>
+                <a (click)="reduceFrame()">
                     <i class="fa fa-caret-left" aria-hidden="true"></i>
                 </a>
             </li>
             <li>
 
-                <a class="dropdown-button " data-activates='linkFrameRatio' data-position="bottom" data-delay="50" data-tooltip="Frame Ratio" class="waves-effect  tooltipped" >
-                    100%
+                <a class="dropdown-button " data-activates='linkFrameRatio' data-position="bottom" data-delay="50" data-tooltip="Frame Ratio"
+                    class="waves-effect  tooltipped">
+                    {{frameRatio}}
                     </a>
             </li>
             <li>
-                <a>
+                <a (click)="enlargeFrame()">
                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                 </a>
             </li>
-
+            <!---->
 
 
         </ul>

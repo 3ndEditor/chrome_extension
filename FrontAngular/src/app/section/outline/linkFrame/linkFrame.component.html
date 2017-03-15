@@ -6,8 +6,10 @@
   </div>
 
   <!--<div class="wrap col s12">-->
-    <iframe #somevar [dragula]="'bag-one'" [ngStyle]="{ 'opacity':iframeOpacity,'height':iframeHeight}" sandbox="allow-same-origin allow-forms allow-modals allow-scripts"
-      [src]="trustResourceURL">
-    </iframe>
+  <iframe #somevar [dragula]="'bag-one'" 
+  [ngStyle]="{ 'opacity':iframeOpacity,'height':iframeHeight,'width': iframeWidth,'-ms-transform':iframeScale , '-moz-transform':iframeScale,
+    '-o-transform': iframeScale,'-webkit-transform':iframeScale,'transform': iframeScale}" sandbox="allow-same-origin allow-forms allow-modals allow-scripts"
+    [src]="trustResourceURL">
+  </iframe>
   <!--</div>-->
 </div>

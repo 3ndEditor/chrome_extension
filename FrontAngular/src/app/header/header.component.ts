@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit {
     private isHelpActive: boolean;
     private settingUrl: UrlTree;
     private keymap: ShortKey[];
-
+    private frameRatio : string = '100%';
     private fileName : string ;
     private saveState : string ; 
     private author : string ;
@@ -117,6 +117,14 @@ export class HeaderComponent implements OnInit {
     goSetting() {
         this.settingUrl = this.router.createUrlTree(['3ndEditor', 'setting']);
         this.router.navigateByUrl(this.settingUrl);
+    }
+    enlargeFrame(){
+        this.navService.enlargeFrame();
+        this.frameRatio = this.navService.getRatioValue()+"%";
+    }
+    reduceFrame(){
+        this.navService.reduceFrame();
+        this.frameRatio = this.navService.getRatioValue()+"%";
     }
 
 
