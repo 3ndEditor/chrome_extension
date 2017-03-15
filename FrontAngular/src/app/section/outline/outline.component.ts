@@ -1,3 +1,4 @@
+import { EditorComponent } from './editor/editor.component';
 import { ChromeExtensionService } from '../../shared/chrome-extension.service';
 import { LinkSenderService } from '../../shared/link-sender.service';
 
@@ -116,6 +117,10 @@ export class OutlineComponent implements OnInit {
     // drive 사용변수
     private isDriveWindowOpen: string = "deActive";
     private driveData: JSON;
+
+    //
+    @ViewChild('firstEditor') editorElement :EditorComponent;
+    private contentOnEditor ;
     constructor(
         private route: ActivatedRoute,
         private dragulaService: DragulaService,
@@ -332,6 +337,13 @@ export class OutlineComponent implements OnInit {
     }
 
     ngAfterViewInit() {
+        
+        
+            this.contentOnEditor = this.editorElement.el.nativeElement.innerHTML;
+            console.log(this.contentOnEditor);
+        
+        
+
         dragula(
             [
                 this.el.nativeElement.querySelector("editor"),
