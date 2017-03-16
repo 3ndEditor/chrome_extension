@@ -3,34 +3,10 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 
 declare var chrome: any;
 
-declare var $: any;
-
-
-// export class RequestBody {
-//     private method: string;
-//     private url: string;
-//     private interactive: boolean;
-//     private callback;
-//     private parmas;
-//     constructor() {}
-
-//     static crate(method:string, url :string, interactive:boolean, callback, params){
-
-//     }
-// }
-
-
-
-
-
-
-
-
-
-
 @Injectable()
 export class ChromeExtensionService {
-
+    private currentFileId : string ;
+    private currentFileName: string;
 
     public isDriveWindowOpen: boolean = false;
     private driveFileList;
@@ -39,7 +15,9 @@ export class ChromeExtensionService {
     public savedState: string;
     public writeTime: string; // 시간 객체로 확인해봐야겠어. 
 
-
+    public getCurrentFileId(){
+        return this.currentFileId;
+    }
 
     constructor(private router: Router) {
 
@@ -57,7 +35,7 @@ export class ChromeExtensionService {
         let access_token;
         let retry = true;
         let that = this;
-
+        console.log("xhr 을 시작합니다");
         getToken();
 
 
@@ -71,7 +49,7 @@ export class ChromeExtensionService {
                 chrome.identity.getAuthToken({ interactive: interactive }, function (token) {
                     if (chrome.runtime.lastError) {
                         console.log(chrome.runtime.lastError);
-
+                        console.log("토큰을 구하는 과정에서의 에러입니다.");
                         callback(chrome.runtime.lastError);
                         return;
                     }
@@ -80,7 +58,7 @@ export class ChromeExtensionService {
                 });
 
             } catch (e) {
-                console.log(e);
+                console.log(e +"토큰을 구하지 못했어요! 토큰을 구하십쇼 토큰이 없으면 시행조차도 안되기때문");
                 that.router.navigate(['welcome']);
             }
         }
@@ -104,13 +82,14 @@ export class ChromeExtensionService {
             if (requestHeader) {
                 Object
                     .keys(requestHeader)
-                    .forEach(header=>{
-                        xhr.setRequestHeader(header,requestHeader[header]);
+                    .forEach(header => {
+                        xhr.setRequestHeader(header, requestHeader[header]);
                     })
 
             }
             xhr.onload = function requestComplete() {
                 if (xhr.status == 401 && retry) {
+                    console.log("리퀘스트 결과에 따른 401 에러입니다.");
                     retry = false;
                     chrome.identity.removeCachedAuthToken({ token: access_token },
                         getToken);
@@ -175,7 +154,7 @@ export class ChromeExtensionService {
             signout_button.addEventListener('click', revokeToken);
 
             // 실질적으로 리퀘스트를 보내는 시점이다. 
-            that.xhrWithAuth(method, url, false, onsuccess, params, null,null);
+            that.xhrWithAuth(method, url, false, onsuccess, params, null, null);
 
             // 리퀘스트를 보내고나서 성공적으로 통신이 되면 해당 객체를 수행하고, Promise에 대한 객체를 resolve한다.
             // 만약 통신이 실패했다면 reject를 수행한다. 
@@ -264,7 +243,7 @@ export class ChromeExtensionService {
                 //         // user_info_div.innerHTML = 'Token acquired:' + token +
                 //         //     '. See chrome://identity-internals for details.';
                 //         changeState(STATE_AUTHTOKEN_ACQUIRED);
-                that.xhrWithAuth(method, url, true, onsuccess, params, null,null);
+                that.xhrWithAuth(method, url, true, onsuccess, params, null, null);
                 //     }
                 // });
             }
@@ -308,14 +287,14 @@ export class ChromeExtensionService {
         let result;
         let params = {
             // corpus : "",
-            orderBy: "createdTime", // 만들어진 순서 
+            orderBy: "createdDate desc", // 만들어진순서 역순서(최신의)
             // pageSize : "",
             // pageToken : "",
             // q : "",
             // spaces : "",
         };
         let method: string = 'GET';
-        let url: string = 'https://www.googleapis.com/drive/v3/files';
+        let url: string = 'https://www.googleapis.com/drive/v2/files';
         let that = this;
         // 여기 스코프에 대해 한번 정리하고 가야겠다. 
         // 이 메소드를 호출한 곳은 프로미스 객체를 받는다. 프로미스는 매개변수로 들어간 함수를 실행한다.
@@ -327,19 +306,19 @@ export class ChromeExtensionService {
         return new Promise<Object>(function (resolve, reject) {
 
             // 실질적인 요청보내기 작업
-            that.xhrWithAuth(method, url, true, onsuccess, params, null,null);
+            that.xhrWithAuth(method, url, true, onsuccess, params, null, null);
 
             // 성공했을때 하는 작업. 실해하게되면 
             function onsuccess(error, status, response) {
                 if (!error && status == 200) {
                     let fileList = JSON.parse(response);
-                    console.log(fileList + "1")
-                    result = fileList['files'];
-                    console.log(result + "2");
+                    result = fileList['items'];
+                    console.log(result);
                     resolve(result);
                 } else {
                     console.log("Get FileList fail!!!" + error);
                 }
+
             }
 
 
@@ -347,12 +326,45 @@ export class ChromeExtensionService {
 
 
     }
+    ////////////////////////////////////////////////////////////////////////////////////////
+    public getFileContent(fileId,fileName) {
+        let params = {
+            alt: "media"
+        }
+        let method: string = 'GET';
+        let url: string = 'https://www.googleapis.com/drive/v2/files/' + fileId;
+        let that = this;
+
+        return new Promise<Object>(function (resolve, reject) {
+
+            // 실질적인 요청보내기 작업
+            that.xhrWithAuth(method, url, true, onsuccess, params, null, null);
+
+            // 성공했을때 하는 작업. 실해하게되면 
+            function onsuccess(error, status, response) {
+                if (!error && status == 200) {
+                    let fileContent = response;
+                    that.currentFileId = fileId;
+                    that.currentFileName = fileName;
+                    console.log(fileContent);
+
+                    resolve(fileContent);
+                } else {
+                    console.log("Get FileContent fail!!!" + error);
+                }
+            }
+        })
+
+    }
+
 
 
     ////////////////////////////////////////////////////////////////////////////////////////
     // Jsonp 모듈은 get 방식만 가능하다. 
-    public createFileWithMetaData(params, requestBody) {
+    public createFileWithMetaData(requestBody) {
+        let params = {
 
+        };
         let method: string = 'POST';
         let url: string = 'https://www.googleapis.com/drive/v3/files';
         let that = this;
@@ -362,13 +374,16 @@ export class ChromeExtensionService {
         return new Promise<Object>(function (resolve, reject) {
 
             // 실질적인 요청보내기 작업
-            that.xhrWithAuth(method, url, true, onsuccess, params, JSON.stringify(requestBody),requestHeader );
+            // 메타데이터는 스트링 화 시켜서 보내야함.
+            that.xhrWithAuth(method, url, true, onsuccess, params, JSON.stringify(requestBody), requestHeader);
 
             // 성공했을때 하는 작업. 실해하게되면 
             function onsuccess(error, status, response) {
                 if (!error && status == 200) {
                     let createdFile = JSON.parse(response);
                     console.log(createdFile);
+                    that.currentFileId = createdFile.id;
+                    that.currentFileName = createdFile.name;
                     resolve(createdFile);
                 } else {
                     console.log("Get FileList fail!!!" + error);
@@ -377,6 +392,35 @@ export class ChromeExtensionService {
 
 
         })
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+    public saveContent(fileId,requestBody) {
+        let params = {
+            uploadType : "media",
+        }
+        let method: string = 'PATCH';
+        let url: string = 'https://www.googleapis.com/upload/drive/v3/files/' + fileId;
+        let that = this;
+
+        return new Promise<Object>(function (resolve, reject) {
+
+            // 실질적인 요청보내기 작업
+            that.xhrWithAuth(method, url, true, onsuccess, params, requestBody, null);
+
+            // 성공했을때 하는 작업. 실해하게되면 
+            function onsuccess(error, status, response) {
+                if (!error && status == 200) {
+                    let fileContent = response;
+                    console.log(fileContent);
+                    resolve(fileContent);
+                } else {
+                    console.log("Get FileContent fail!!!" + error);
+                }
+            }
+        })
+
     }
 
 

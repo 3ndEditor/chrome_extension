@@ -11,8 +11,9 @@
         (drag)="screenResizeStart($event)" (dragend)="screenResizeEnd($event)" (mousedown)="dividerClick()" (mouseup)="dividerDeActive()"></span>
 
     <!--에디터 프레임(미디움 에디터로 구현되는 곳)이 들어가는 자리, 링크프레임생성버튼 활성유무에 따라 크기가 조절된다. (12->6)-->
-    <editor #firstEditor class="" [@navbarAction]="navbarAction" [dragula]='"first-bag"' [routeData]="inputParam" [ngStyle]="{'width': editorWidth,'transform': editorTransform,'outline':editorFocusOutline }">
+    <editor #firstEditor (keyup)="saveOperator()"  class="" [@navbarAction]="navbarAction" [dragula]='"first-bag"' [routeData]="inputParam" [ngStyle]="{'width': editorWidth,'transform': editorTransform,'outline':editorFocusOutline }">
     </editor>
+    <!--<input #keyword2 (keyup)="saveOperator(keyword2.value)"/>-->
 
 
     <!--탭의 usage에 따라 tab의 종류를 다르게 불러옴-->
@@ -27,4 +28,4 @@
 </div>
 
 
-<drive-window class="z-depth-5" [@openDriveWindow]="isDriveWindowOpen" (closeDriveWindow)="driveWindowOpen()" [contentOnEditor]="contentOnEditor"></drive-window>
+<drive-window class="z-depth-5" [@openDriveWindow]="isDriveWindowOpen" (closeDriveWindow)="driveWindowOpen()" [editorElement]="contentOnEditor"></drive-window>

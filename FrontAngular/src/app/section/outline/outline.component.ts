@@ -1,3 +1,5 @@
+import { KeyboardEvent } from '@angular/platform-browser/src/facade/browser';
+import { Observable, Subject } from 'rxjs/Rx';
 import { EditorComponent } from './editor/editor.component';
 import { ChromeExtensionService } from '../../shared/chrome-extension.service';
 import { LinkSenderService } from '../../shared/link-sender.service';
@@ -107,8 +109,8 @@ export class OutlineComponent implements OnInit {
 
     //iframe 사용변수
     private iframeOpacity: number = 0;
-    private iframeWidth: string ;
-    private iframeScale: string ; 
+    private iframeWidth: string;
+    private iframeScale: string;
 
 
     private isResized: boolean = false;
@@ -124,8 +126,10 @@ export class OutlineComponent implements OnInit {
     private driveData: JSON;
 
     //
-    @ViewChild('firstEditor') editorElement :EditorComponent;
-    private contentOnEditor ;
+    editorContentOperator;
+    private lineStream = new Subject<string>();
+    @ViewChild('firstEditor') editorElement: EditorComponent;
+    private contentOnEditor;
     constructor(
         private route: ActivatedRoute,
         private dragulaService: DragulaService,
@@ -144,7 +148,19 @@ export class OutlineComponent implements OnInit {
         this.navbarAction = this.navService.action + "";
         this.linkTabState = "deActive";
         this.editorTabState = "deActive";
-        
+
+        ///////
+        let that = this;
+        this.editorContentOperator = this.lineStream
+            .debounceTime(5000) // 입력후 5 초 뒤에 저장할 수 있도록
+            .distinctUntilChanged() // 내용의 변화가 없으면 요청을 보내지 않음 
+            .forEach(content=>that.chromeService.saveContent(that.chromeService.getCurrentFileId(),content));
+            
+            
+
+    }
+    saveOperator() {
+        this.lineStream.next(this.editorElement.el.nativeElement.innerHTML);
     }
 
     /**
@@ -325,7 +341,7 @@ export class OutlineComponent implements OnInit {
         if (this.isDriveWindowOpen === "deActive") {
             this.chromeService.isDriveWindowOpen = true;
             this.isDriveWindowOpen = "active"
-        }else{
+        } else {
             this.chromeService.isDriveWindowOpen = false;
             this.isDriveWindowOpen = "deActive";
         }
@@ -337,20 +353,21 @@ export class OutlineComponent implements OnInit {
     //     console.log(e);
     // }
 
-    applyFrameScale(){
+    applyFrameScale() {
         return this.navService.frameConfig.getScale();
     }
-    applyFrameWidth(){
+    applyFrameWidth() {
         return this.navService.frameConfig.getWidth();
     }
-    applyFrameHeight(){
+    applyFrameHeight() {
         return this.navService.frameConfig.getHeight();
     }
-    ngAfterViewInit() {
-            this.contentOnEditor = this.editorElement.el.nativeElement.innerHTML;
-            console.log(this.contentOnEditor);
-        
-        
+
+    ngAfterContentInit() {
+        this.contentOnEditor = this.editorElement.el;
+        console.log(this.contentOnEditor);
+
+
 
         dragula(
             [
