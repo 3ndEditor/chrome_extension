@@ -26,6 +26,13 @@ linkFrame {
   
 }
 
+input{
+  position: fixed;
+  top: 30%;
+  z-index: 9999;
+
+}
+
 
 
 #devider{

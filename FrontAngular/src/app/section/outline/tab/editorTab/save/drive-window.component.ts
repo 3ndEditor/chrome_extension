@@ -12,6 +12,8 @@ export class DriveWindowComponent implements OnInit {
     private files: Array<Object>;
     private isActiveSearch: boolean;
     private isSelectedTab: number = 1;
+    private isCompletedGetList: boolean = false;
+
     @Input() editorElement: ElementRef;
 
     @Output() closeDriveWindow = new EventEmitter();
@@ -33,6 +35,7 @@ export class DriveWindowComponent implements OnInit {
                 name: i
             })
         }
+        this.isCompletedGetList = true;
     }
 
     // ngAfterContentChecked() {
@@ -57,11 +60,12 @@ export class DriveWindowComponent implements OnInit {
         this.closeDriveWindow.emit()
     }
     insertFileContent(file) {
-        
-        this.chromeService.getFileContent(file.id,file.title).then(result => {
+        this.chromeService.getFileContent(file).then(result => {
             console.log("drivewindow" + result);
             this.renderer.selectRootElement(this.editorElement.nativeElement).insertAdjacentHTML('beforeend', result)
-        });
+        }).then(() => {
+            this.closeDriveWindow.emit();
+        })
     }
 
     // 에디터에 있는 내용으로 파일 생성해보기 
@@ -74,8 +78,9 @@ export class DriveWindowComponent implements OnInit {
         // var contentBlob = new Blob([this.contentOnEditor], {
         //     type: 'text/html',
         // });
-        this.chromeService.createFileWithMetaData(requestBody).then(result => {
-            alert(result);
+        this.chromeService.createFileWithMetaData(requestBody).then(() => {
+            this.renderer.selectRootElement(this.editorElement.nativeElement).insertAdjacentHTML('beforeend', "새 파일")
+            this.closeDriveWindow.emit();
         })
     }
     clickNewTab() {
@@ -86,7 +91,11 @@ export class DriveWindowComponent implements OnInit {
         let that = this;
         this.chromeService.getFileList().then((result) => {
             that.files = result;
+            that.isCompletedGetList = true;
         })
+
+    }
+    fileIconSource(fileMimeType) {
 
     }
 

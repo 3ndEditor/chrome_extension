@@ -28,7 +28,7 @@ import {
                 // 초기에 width 와 height 값을 0으로 지정해서 보이지 않도록 한다.
                 state('deActive', style({ opacity: 0, transform: 'translateX(100%)' })),
                 state('active', style({ opacity: 1 })),
-                transition('deActive <=> active', animate(200)),
+                transition('deActive <=> active', animate(300)),
             ]
         ),
     ]
@@ -50,10 +50,10 @@ export class HeaderComponent implements OnInit {
     private settingUrl: UrlTree;
     private keymap: ShortKey[];
     private frameRatio : string = '100%';
-    private fileName : string ;
-    private saveState : string ; 
-    private author : string ;
-    private writeTime : string ;
+    private saveState : string;
+
+    private fontColor = "grey-text";
+    private backGrondColor = "grey lighten-4";
     constructor(
         private el: ElementRef,
         private renderer: Renderer,
@@ -67,14 +67,12 @@ export class HeaderComponent implements OnInit {
         this.isShowLoginModal = 'deActive';
         // this.keymapService
         this.keymap = this.keymapService.getKeymap();
-        this.author = this.chromeService.fileAthor;
-        this.fileName = this.chromeService.fileName;
-        this.saveState = this.chromeService.savedState;
 
     }
 
     showLoginModal() {
         this.isShowLoginModal = (this.isShowLoginModal === 'active') ? 'deActive' : 'active';
+        
 
     }
 
@@ -94,7 +92,11 @@ export class HeaderComponent implements OnInit {
     }
 
     ngAfterContentChecked(){
+        if(this.saveState ===this.chromeService.getSavedState()){
 
+        } else{
+            this.saveState = this.chromeService.getSavedState()
+        }
     }
 
     ngOnInit() {

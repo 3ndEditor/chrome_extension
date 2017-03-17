@@ -19,14 +19,15 @@ declare var chrome: any
 export class AuthGuard implements CanActivate, CanActivateChild {
     private isGetToken: boolean;
 
-    constructor(private router: Router,private chromeService:ChromeExtensionService) { }
+    constructor(private router: Router, private chromeService: ChromeExtensionService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
 
-        
 
-        return this.chromeService.checkGetToken();
-        
+
+        return this.chromeService.checkGetToken()
+        .then(trueResult=>{return trueResult})
+        .catch(falseResult=>{return falseResult});
 
 
 

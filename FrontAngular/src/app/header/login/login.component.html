@@ -2,26 +2,15 @@
 
   <div class="card-content black-text" style="padding-bottom:0">
     <div class="row">
-      <img class="col s4 m4 l4" [src]="userImageUrl">
       <span class="card-title">
-        <!--<div id="user_info">{{loginState}} </div>-->
         <div id="user_info"></div>
       </span>
     </div>
   </div>
-
   <div class="card-action black-text" (mouseenter)="mouseenter()" (mouseout)="mouseout()" style="padding: 0; font-size: 150%">
-    <!--<div (click)="signIn()" (mouseenter)="mouseenter()"  [ngClass]="btnActivate"  class="center-align" *ngIf="loginState =='signIn'" style="width: 100%">
-      <span (click)="signIn()" (mouseenter)="mouseenter()" (mouseout)="mouseenter()" *ngIf="loginState =='signIn'">{{loginState}}</span>-->
-    <!--</div>-->
-    <!--<div (click)="signOut()"(mouseenter)="mouseenter()"  [ngClass]="btnActivate" class="center-align" *ngIf="loginState =='signOut'" style="width: 100%">
-      <span (click)="signOut()" (mouseenter)="mouseenter()" (mouseout)="mouseenter()" *ngIf="loginState =='signOut'">{{loginState}} </span>
-    </div>-->
     <div class="row" style="margin: 0;" >
-    <a id="signin" class="btn waves-effect waves-light col s6">Sign in</a>
-    <a id="signOut" class="btn waves-effect waves-light col s6" >Get personal data</a>
+    <a id="signin" class="grey-text grey lighten-4 btn waves-effect waves-light col s6">Sign In</a>
+    <a id="signOut" class="grey-text grey lighten-4 btn waves-effect waves-light col s6" >Sigh Out</a>
     </div>
-    <!--<button id="revoke" disabled>Revoke token</button>-->
-
   </div>
 </div>

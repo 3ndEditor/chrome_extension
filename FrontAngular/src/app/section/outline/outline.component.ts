@@ -126,7 +126,8 @@ export class OutlineComponent implements OnInit {
     private driveData: JSON;
 
     //
-    editorContentOperator;
+
+
     private lineStream = new Subject<string>();
     @ViewChild('firstEditor') editorElement: EditorComponent;
     private contentOnEditor;
@@ -151,17 +152,28 @@ export class OutlineComponent implements OnInit {
 
         ///////
         let that = this;
-        this.editorContentOperator = this.lineStream
-            .debounceTime(5000) // 입력후 5 초 뒤에 저장할 수 있도록
+        this.lineStream
+            .debounceTime(2000) // 입력후 5 초 뒤에 저장할 수 있도록
             .distinctUntilChanged() // 내용의 변화가 없으면 요청을 보내지 않음 
-            .forEach(content=>that.chromeService.saveContent(that.chromeService.getCurrentFileId(),content));
-            
-            
+            .forEach(content => {
+                if (that.chromeService.getCurrentFileId()) {
+                    that.chromeService.saveContent(that.chromeService.getCurrentFileId(), content)
+                }else{
+                    console.log("파일 아이디 없잖아!!");
+                }
+            })
+
+
+
+
 
     }
     saveOperator() {
         this.lineStream.next(this.editorElement.el.nativeElement.innerHTML);
     }
+
+
+    
 
     /**
     * 버튼 활성화 유무에 따른 화면 분할 메소드
