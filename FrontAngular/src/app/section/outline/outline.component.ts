@@ -25,6 +25,8 @@ import {
 } from '@angular/core';
 import { DragulaService, dragula } from 'ng2-dragula/ng2-dragula';
 
+declare var jsPDF : any;
+
 // 초기값과 애니메이션에도 동일한 값을 주기 위해 클래스밖 전역변수(?)로 빼내었다.
 var savedDividerWidth: number = 10;
 var savedLinkFrameWidth: number = (innerWidth * 0.5) - savedDividerWidth;
@@ -142,6 +144,9 @@ export class OutlineComponent implements OnInit {
         private linksendService: LinkSenderService,
         private chromeService: ChromeExtensionService
     ) {
+
+        
+        
         // 초기화 진행
         this.editorWidth = '100%';
         this.linkFrameWidth = '0px';

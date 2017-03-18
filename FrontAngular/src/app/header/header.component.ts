@@ -49,8 +49,8 @@ export class HeaderComponent implements OnInit {
     private isHelpActive: boolean;
     private settingUrl: UrlTree;
     private keymap: ShortKey[];
-    private frameRatio : string = '100%';
-    private saveState : string;
+    private frameRatio: string = '100%';
+    private saveState: string;
 
     private fontColor = "grey-text";
     private backGrondColor = "grey lighten-4";
@@ -60,8 +60,8 @@ export class HeaderComponent implements OnInit {
         private keymapService: KeymapService,
         private navService: NavBarService,
         private router: Router,
-        private chromeService : ChromeExtensionService
-        ) {
+        private chromeService: ChromeExtensionService
+    ) {
 
         this.isHelpActive = false;
         this.isShowLoginModal = 'deActive';
@@ -72,29 +72,29 @@ export class HeaderComponent implements OnInit {
 
     showLoginModal() {
         this.isShowLoginModal = (this.isShowLoginModal === 'active') ? 'deActive' : 'active';
-        
+
 
     }
 
-    findShortKeyCode(keyName:string): string {
+    findShortKeyCode(keyName: string): string {
         let memo = this.keymap.find(shortkey => {
-            if(shortkey.getKeyName() === keyName){
+            if (shortkey.getKeyName() === keyName) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         });
-        if(memo){
+        if (memo) {
             return memo.getKeyCode();
-        }else{
+        } else {
         }
-        
+
     }
 
-    ngAfterContentChecked(){
-        if(this.saveState ===this.chromeService.getSavedState()){
+    ngAfterContentChecked() {
+        if (this.saveState === this.chromeService.getSavedState()) {
 
-        } else{
+        } else {
             this.saveState = this.chromeService.getSavedState()
         }
     }
@@ -120,14 +120,18 @@ export class HeaderComponent implements OnInit {
         this.settingUrl = this.router.createUrlTree(['3ndEditor', 'setting']);
         this.router.navigateByUrl(this.settingUrl);
     }
-    enlargeFrame(){
+    enlargeFrame() {
         this.navService.enlargeFrame();
-        this.frameRatio = this.navService.getRatioValue()+"%";
+        this.frameRatio = this.navService.getRatioValue() + "%";
     }
-    reduceFrame(){
+    reduceFrame() {
         this.navService.reduceFrame();
-        this.frameRatio = this.navService.getRatioValue()+"%";
+        this.frameRatio = this.navService.getRatioValue() + "%";
     }
+    goEditor() {
+        this.settingUrl = this.router.createUrlTree(['3ndEditor']);
+        this.router.navigateByUrl(this.settingUrl);
 
+    }
 
 }

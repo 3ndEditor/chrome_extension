@@ -3,13 +3,11 @@
   height: 100%; margin: 0; padding: 0;
 }
 
-#activeBtn {
-  position: fixed;
-  bottom: 0;
-  height: 10%;
-  z-index: 40;
+setting{
+  width:100%;
+  position: fixed; 
+  z-index: 9989;
 }
-
 
 linkFrame {
   /*position 값을 고정시켜두면 하나의 레이어층이 생기는 효과를 받는것 같다. 그러나 어디까지나 부모 태그 안에서의 제한을 지니고 있다.*/

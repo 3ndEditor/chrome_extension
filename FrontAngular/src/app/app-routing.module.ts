@@ -1,3 +1,4 @@
+import { NoTokenPageComponent } from './section/error-page/no-token-page.component';
 import { AuthGuard } from './header/auth-guard/auth-guard.service';
 import { SettingKeymapComponent } from './section/setting/setting-keymap.component';
 import { SettingComponent } from './section/setting/setting.component';
@@ -55,7 +56,7 @@ const routes: Routes = [
   },
   {
     path: 'welcome',
-    component: InvalidUrlPageComponent,
+    component: NoTokenPageComponent,
     pathMatch: 'full'
 
   },
