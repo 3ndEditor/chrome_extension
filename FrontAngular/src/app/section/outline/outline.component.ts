@@ -1,3 +1,7 @@
+import { KeyboardEvent } from '@angular/platform-browser/src/facade/browser';
+import { Observable, Subject } from 'rxjs/Rx';
+import { EditorComponent } from './editor/editor.component';
+import { ChromeExtensionService } from '../../shared/chrome-extension.service';
 import { LinkSenderService } from '../../shared/link-sender.service';
 
 import { DomSanitizer } from '@angular/platform-browser';
@@ -20,6 +24,8 @@ import {
     ViewChild
 } from '@angular/core';
 import { DragulaService, dragula } from 'ng2-dragula/ng2-dragula';
+
+declare var jsPDF : any;
 
 // 초기값과 애니메이션에도 동일한 값을 주기 위해 클래스밖 전역변수(?)로 빼내었다.
 var savedDividerWidth: number = 10;
@@ -61,7 +67,16 @@ var savedDiveiderTransX: number = 0;
                 state('active', style({ transform: 'translate3d(0,9%,0)', opacity: 0.8 })),
                 transition('deActive <=> active', animate(200)),
             ]
-        )
+        ),
+        trigger(
+            'openDriveWindow',
+            [
+                state('deActive', style({ opacity: 0, })),
+                state('active', style({ opacity: 1, "z-index": '9999' })),
+                transition('deActive <=> active', animate(200)),
+            ]
+        ),
+
     ]
 })
 
@@ -93,8 +108,13 @@ export class OutlineComponent implements OnInit {
     private isActiveCrtLinkFrameBtn: boolean = false;
     private navbarAction: string = "false";
     private editorNavbarAction: string;
+
+    //iframe 사용변수
     private iframeOpacity: number = 0;
-    private iframeHeight: string = '90vh';
+    private iframeWidth: string;
+    private iframeScale: string;
+
+
     private isResized: boolean = false;
     private linkFrameZIndex: string;
     private dividerZIndex: string;
@@ -104,9 +124,16 @@ export class OutlineComponent implements OnInit {
     private tabUsage_trashCan: string = "trashCan";
     private linkTabState: string;
     private editorTabState: string;
+    // drive 사용변수
+    private isDriveWindowOpen: string = "deActive";
+    private driveData: JSON;
 
-    private testHtml;
+    //
 
+
+    private lineStream = new Subject<string>();
+    @ViewChild('firstEditor') editorElement: EditorComponent;
+    private contentOnEditor;
     constructor(
         private route: ActivatedRoute,
         private dragulaService: DragulaService,
@@ -115,16 +142,44 @@ export class OutlineComponent implements OnInit {
         private renderer: Renderer,
         private el: ElementRef,
         private _sanitizer: DomSanitizer,
-        private linksendService: LinkSenderService
+        private linksendService: LinkSenderService,
+        private chromeService: ChromeExtensionService
     ) {
+
+        
+        
         // 초기화 진행
         this.editorWidth = '100%';
         this.linkFrameWidth = '0px';
-        this.dividerWidth = (savedDividerWidth * 40) + 'px';
+        this.dividerWidth = (savedDividerWidth * 100) + 'px';
         this.navbarAction = this.navService.action + "";
         this.linkTabState = "deActive";
         this.editorTabState = "deActive";
+
+        ///////
+        let that = this;
+        this.lineStream
+            .debounceTime(2000) // 입력후 5 초 뒤에 저장할 수 있도록
+            .distinctUntilChanged() // 내용의 변화가 없으면 요청을 보내지 않음 
+            .forEach(content => {
+                if (that.chromeService.getCurrentFileId()) {
+                    that.chromeService.saveContent(that.chromeService.getCurrentFileId(), content)
+                }else{
+                    console.log("파일 아이디 없잖아!!");
+                }
+            })
+
+
+
+
+
     }
+    saveOperator() {
+        this.lineStream.next(this.editorElement.el.nativeElement.innerHTML);
+    }
+
+
+    
 
     /**
     * 버튼 활성화 유무에 따른 화면 분할 메소드
@@ -194,7 +249,7 @@ export class OutlineComponent implements OnInit {
         if (this.isResized === false) {
             this.isResized = true;
         }
-        this.linkFrameZIndex = '8';
+
 
 
         if (!($event.x === 0)) {
@@ -220,10 +275,11 @@ export class OutlineComponent implements OnInit {
     }
     public dividerClick() {
         this.dividerZIndex = '100';
+        this.linkFrameZIndex = '8';
     }
     public dividerDeActive() {
         this.dividerZIndex = '9';
-        }
+    }
 
 
     public screenResizeEnd($event: DragEvent) {
@@ -241,29 +297,27 @@ export class OutlineComponent implements OnInit {
                     this.linkFrameTransform = 'translate3d(0,0,0)';
                     this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,0,0)';
                     this.dividerTransform = 'translate3d(' + savedDiveiderTransX + 'px,0,0)';
-                    this.iframeHeight = '100vh';
+                    // this.iframeHeight = '100vh';
                 } else {
                     this.linkFrameTransform = 'translate3d(0,9%,0)';
                     this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,9%,0)';
                     this.dividerTransform = 'translate3d(' + savedDiveiderTransX + 'px,9%,0)';
-                    this.iframeHeight = '90vh';
+                    // this.iframeHeight = '90vh';
                 }
 
             } else {
                 if (this.navService.action) {
                     this.editorTransform = 'translate3d(0,0,0)'
                     this.linkFrameTransform = 'translate3d(0,0,0)';
-                    this.iframeHeight = '100vh';
                 } else {
                     this.editorTransform = 'translate3d(0,9%,0)'
                     this.linkFrameTransform = 'translate3d(0,9%,0)';
-                    this.iframeHeight = '90vh';
                 }
 
             }
         }
 
-        if(this.isActiveCrtLinkFrameBtn !== this.navService.isInput){
+        if (this.isActiveCrtLinkFrameBtn !== this.navService.isInput) {
             this.createLinkFrame();
         }
     }
@@ -301,15 +355,38 @@ export class OutlineComponent implements OnInit {
         this.editorTabState = "deActive";
     }
 
+    driveWindowOpen() {
+        if (this.isDriveWindowOpen === "deActive") {
+            this.chromeService.isDriveWindowOpen = true;
+            this.isDriveWindowOpen = "active"
+        } else {
+            this.chromeService.isDriveWindowOpen = false;
+            this.isDriveWindowOpen = "deActive";
+        }
+
+    }
+
     // drop(e:DragEvent){
     //     console.log("tttt");
     //     console.log(e);
     // }
 
-    ngOnChanges() {
+    applyFrameScale() {
+        return this.navService.frameConfig.getScale();
+    }
+    applyFrameWidth() {
+        return this.navService.frameConfig.getWidth();
+    }
+    applyFrameHeight() {
+        return this.navService.frameConfig.getHeight();
     }
 
-    ngAfterViewInit() {
+    ngAfterContentInit() {
+        this.contentOnEditor = this.editorElement.el;
+        console.log(this.contentOnEditor);
+
+
+
         dragula(
             [
                 this.el.nativeElement.querySelector("editor"),

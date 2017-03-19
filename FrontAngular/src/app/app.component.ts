@@ -43,9 +43,9 @@ export class AppComponent {
     private headerDetectorY : string;
     constructor(private navService: NavBarService) {
         this.navbarAction = "false";
-        window.onbeforeunload = function (e) {
-            return window.confirm("");
-        };
+        // window.onbeforeunload = function (e) {
+        //     return window.confirm("");
+        // };
     }
 
     /**
@@ -70,7 +70,6 @@ export class AppComponent {
     }
     headerMouseLeave() {
         if (this.navService.action === true) {
-            console.log(this.headerMouseAction);
            if(this.headerMouseAction==="true"){
                 this.headerMouseAction = "false";
                 this.headerDetectorY = "translateY(0,0,0)";

@@ -1,3 +1,4 @@
+import { ChromeExtensionService } from '../../shared/chrome-extension.service';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs/Rx';
 import {
@@ -10,30 +11,39 @@ import {
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 
+
+
+declare var chrome: any
+
 @Injectable()
-export class AuthGuard implements CanActivate,CanActivateChild{
-    
+export class AuthGuard implements CanActivate, CanActivateChild {
+    private isGetToken: boolean;
 
-    constructor(private router: Router) { }
+    constructor(private router: Router, private chromeService: ChromeExtensionService) { }
 
-    canActivate(route:ActivatedRouteSnapshot,state:RouterStateSnapshot):boolean {
-        let url :string = state.url;
-        console.log("test");
-        // return  this.checkLogin(url);
-        return false;
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+
+
+
+        return this.chromeService.checkGetToken()
+        .then(trueResult=>{return trueResult})
+        .catch(falseResult=>{return falseResult});
+
+
+
     }
-    
-    canActivateChild(route:ActivatedRouteSnapshot,state:RouterStateSnapshot):boolean {
-        return
+
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        return true;
     }
 
     checkLogin(url: string): boolean {
 
-    
 
-    
 
-    return false;
-  }
+
+
+        return false;
+    }
 
 }

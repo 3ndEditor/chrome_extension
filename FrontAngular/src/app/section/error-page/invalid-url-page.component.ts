@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'invalid-url-page',
-    template: `
-       <h1> {{alertMsg}} </h1>
-       
-       <a routerLink="">돌아가기</a>
+    templateUrl: 'invalid-url-page.component.html',
+    styleUrls:['invalid-url-page.component.css']
     
     
-    `
+    
 })
 export class InvalidUrlPageComponent implements OnInit {
     private alertMsg:string;

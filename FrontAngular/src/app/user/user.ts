@@ -10,12 +10,17 @@ const LOGINUSERS = [
     new LoginUser('index',
     
      `
-        <div class="center-align container"> 
+        <div class="center-align"> 
         <img  src="assets/image/Logo_3ndEditor.png" />
          <p>   보다 빠르고 , 간편하게 리서칭을 도와주는 도구 </p>
          <p>   3ndEdiotr는 간단한 문서를 만드는데 매우 효과적입니다! </p>
          <p>   언제, 어디에서나 이용할 수 있습니다! </p>
+
         <div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         
     
     `),

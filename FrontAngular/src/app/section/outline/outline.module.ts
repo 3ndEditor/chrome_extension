@@ -1,7 +1,7 @@
+import { DriveWindowComponent } from './tab/editorTab/save/drive-window.component';
 import { LinkSenderService } from '../../shared/link-sender.service';
 import { SanitizeHtmlPipe } from '../../shared/sanitizeHtml.pipe';
 import { BrowserModule } from '@angular/platform-browser';
-import { InvalidUrlPageComponent } from '../../invalid-url-page.component';
 import { SharedModule } from '../../shared/shared.module';
 import { TabModule } from './tab/tab.module';
 import { linkFrameModule } from './linkFrame/linkFrame.module';
@@ -13,7 +13,7 @@ import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 @NgModule({
     imports: [EditorModule, SharedModule, linkFrameModule, DragulaModule, TabModule, BrowserModule],
     exports: [],
-    declarations: [OutlineComponent],
+    declarations: [OutlineComponent,DriveWindowComponent],
     providers: [LinkSenderService],
 })
 export class OutlineModule { }

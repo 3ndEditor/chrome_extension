@@ -2,21 +2,34 @@
     "manifest_version": 2,
     "name": "3ndEditorExtension",
     "description": "This extension helps user's WebSurffingactivity.ItisgoingtotransmitdataselectedbyusertoourserverDB.ThenyoumanagetoeasyinourWebsite",
-    "version": "1.0",
+    "version": "1.0.1",
     "browser_action": {
         "default_icon": "icon.png"
     },
     "background": {
+        
         "scripts": [
-            "edit.mode.js"
+            "background.js" 
         ]
     },
+    
     "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com;  object-src 'self'",
+    "oauth2": {
+        "client_id": "199152716518-215q2h06mpql0he73mucqmfn0oldprl8.apps.googleusercontent.com",
+        "scopes": [
+            "openid", "email", "profile","https://www.googleapis.com/auth/drive"
+        ]
+    },
     "permissions": [
         "tabs",
         "activeTab",
         "webRequest",
         "*://*/",
-        "webRequestBlocking"
+        "webRequestBlocking",
+        "identity",
+        "https://apis.google.com/js/platform.js",
+        "https://ssl.gstatic.com/",
+        "https://accounts.google.com/*",
+        "https://www.googleapis.com/*"
     ]
 }

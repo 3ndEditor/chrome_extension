@@ -6,7 +6,7 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 
 
 export class ShortKey {
-    constructor(private keyName: string, private keyCode: string) {
+    constructor(private keyName: string, private keyAlias: string, private keyCode: string) {
 
     }
 
@@ -14,12 +14,20 @@ export class ShortKey {
         return this.keyName;
     }
 
+    getKeyAlias() {
+        return this.keyAlias;
+    }
+
     getKeyCode() {
         return this.keyCode
     }
 
-    setKeyCode(keyCode:string) {
-        this.keyCode  = keyCode;
+    setKeyAlias(keyAlias: string) {
+        this.keyAlias = keyAlias;
+    }
+
+    setKeyCode(keyCode: string) {
+        this.keyCode = keyCode;
     }
 }
 
@@ -27,10 +35,10 @@ export class ShortKey {
 @Injectable()
 export class KeymapService {
     private globalKeymap: ShortKey[] = [
-        new ShortKey("help_key", '112'), //f1
-        new ShortKey("wide_key", '87'), //w
-        new ShortKey("create_frame_key", '83'), //s
-        new ShortKey("header_fixed_key", '69'), //e
+        new ShortKey("help_key", 'F1', '112'), //f1
+        new ShortKey("wide_key", 'W', '87'), //w
+        new ShortKey("create_frame_key", 'S', '83'), //s
+        new ShortKey("header_fixed_key", "E", '69'), //e
     ]
     // private globalKeymap : object[] = [
     //     {

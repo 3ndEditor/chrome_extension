@@ -21,7 +21,27 @@ export class EditorComponent implements OnInit {
     //파이프 공부해서 파이프 작성해보도록 한다. 
 
     private isInit: boolean = false;
+
+    
+
     @Input() routeData: string;
+    constructor(public el: ElementRef, public renderer: Renderer) {
+        //  에디터 생성!!
+        // @types 에 타입을 지정해준다. 다만 사용법이 다 달라서 해당 내부를 뜯어봐야 어떻게 가져다 쓸지 보인다.
+
+        new MediumEditor(this.renderer.selectRootElement(this.el.nativeElement), this.editorOptions);
+
+        
+
+
+
+        // 에디터에 대한 커스텀 이벤트 리스너 추가 
+        this.el.nativeElement.addEventListener('drop', ($event: DragEvent) => {
+            $event.preventDefault();
+            var data = $event.dataTransfer.getData
+        })
+        
+    }
     editorOptions: MediumEditor.CoreOptions = {
         activeButtonClass: 'medium-editor-button-active',
         buttonLabels: 'fontawesome',
@@ -44,7 +64,7 @@ export class EditorComponent implements OnInit {
                     attrs: {
                         'data-custom-attr': 'attr-value-h1'
                     }
-                }`, 
+                }`,
                 'bold', // 굵게
                 'italic', //이태릭
                 'underline', //밑줄
@@ -142,19 +162,7 @@ export class EditorComponent implements OnInit {
 
 
 
-    constructor(public el: ElementRef, public renderer: Renderer) {
-        //  에디터 생성!!
-        // @types 에 타입을 지정해준다. 다만 사용법이 다 달라서 해당 내부를 뜯어봐야 어떻게 가져다 쓸지 보인다.
 
-        new MediumEditor(this.renderer.selectRootElement(this.el.nativeElement), this.editorOptions);
-
-
-        // 에디터에 대한 커스텀 이벤트 리스너 추가 
-        this.el.nativeElement.addEventListener('drop', ($event: DragEvent) => {
-            $event.preventDefault();
-            var data = $event.dataTransfer.getData
-        })
-    }
     ngAfterViewInit() {
 
     }

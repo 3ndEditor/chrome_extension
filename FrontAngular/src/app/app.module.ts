@@ -2,7 +2,6 @@ import { NavBarService } from './shared/nav-bar.service';
 import { CanDeactivateGuard } from './header/auth-guard/can-deactivate-guard.service';
 import { AuthGuard } from './header/auth-guard/auth-guard.service';
 import { SectionModule } from './section/section.module';
-import { InvalidUrlPageComponent } from './invalid-url-page.component';
 import { LoginUserService } from './user/user';
 import { UserResolveService } from './user/user-resolve.service';
 import { HeaderModule } from './header/header.module';
@@ -17,7 +16,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent, InvalidUrlPageComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

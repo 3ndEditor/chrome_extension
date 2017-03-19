@@ -1,0 +1,34 @@
+.row{
+    transform: translate3d(0,8vh,0);
+    
+}
+
+.parallax-container {
+      height: 50vh;
+      position: relative;
+      
+    }
+.section{
+    height: 50vh;
+}    
+.overlay{
+    background: black;
+    width: 100%;
+    height: 50vh;
+
+}
+#getTokenImg{
+    opacity: 0.5
+}
+
+#getTokenText{
+    position: absolute;
+    top: 50%;
+    left: 43%;
+    background: transparent;
+    
+}
+#getTokenBtn{
+    z-index: 9999;
+}
+        

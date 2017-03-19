@@ -10,7 +10,7 @@ declare var Materialize:any;
             <div class="col s2">{{keyName}}:</div>
             <div class="col s1"></div>
             <div class="col s3">
-                <input id="{{keyName}}" maxlength="1" (keydown)="covertKeyCode($event)" type="text" class="validate" [(ngModel)]="value">
+                <input id="{{keyAlias}}" maxlength="1" (keydown)="covertKeyCode($event)" type="text" class="validate" [(ngModel)]="keyAlias">
                 
             </div>
             <div class="col s1">
@@ -33,24 +33,29 @@ export class KeySetting {
     @Input() shortkey: ShortKey;
     private keyName: string
     private keyCode: string
-    private value: string;
+    private keyAlias: string;
+    
     constructor() {
 
     }
     ngAfterViewInit() {
         this.keyName = this.shortkey.getKeyName();
         this.keyCode = this.shortkey.getKeyCode();
-        this.value = this.keyCode;
+        this.keyAlias = this.shortkey.getKeyAlias();
     }
 
     covertKeyCode($event: KeyboardEvent) {
 
-        this.value = $event.key;
+        this.keyAlias = $event.key;
         this.keyCode = $event.keyCode + "";
     }
 
     getKeyCode() {
         return this.keyCode;
+    }
+
+    getKeyAlias(){
+        return this.keyAlias;
     }
     getKeyName(){
         return this.keyName;
@@ -84,6 +89,7 @@ export class SettingKeymapComponent implements OnInit {
             if (keySetting.getKeyCode() === this.shortkeys[index].getKeyCode()) {
             } else {
                 this.shortkeys[index].setKeyCode(keySetting.getKeyCode());
+                this.shortkeys[index].setKeyAlias(keySetting.getKeyAlias())
                 Materialize.toast('[' +keySetting.getKeyName()+'] '+ 'Change Complete!', 2500);
             }
         }, this);

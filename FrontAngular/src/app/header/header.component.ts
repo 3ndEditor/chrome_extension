@@ -1,3 +1,4 @@
+import { ChromeExtensionService } from '../shared/chrome-extension.service';
 import { KeymapService, ShortKey } from '../shared/keymap/keymap.service';
 import { Router, UrlTree } from '@angular/router';
 import { NavBarService } from '../shared/nav-bar.service';
@@ -27,7 +28,7 @@ import {
                 // 초기에 width 와 height 값을 0으로 지정해서 보이지 않도록 한다.
                 state('deActive', style({ opacity: 0, transform: 'translateX(100%)' })),
                 state('active', style({ opacity: 1 })),
-                transition('deActive <=> active', animate(200)),
+                transition('deActive <=> active', animate(300)),
             ]
         ),
     ]
@@ -48,43 +49,54 @@ export class HeaderComponent implements OnInit {
     private isHelpActive: boolean;
     private settingUrl: UrlTree;
     private keymap: ShortKey[];
+    private frameRatio: string = '100%';
+    private saveState: string;
+
+    private fontColor = "grey-text";
+    private backGrondColor = "grey lighten-4";
     constructor(
         private el: ElementRef,
         private renderer: Renderer,
         private keymapService: KeymapService,
         private navService: NavBarService,
-        private router: Router) {
+        private router: Router,
+        private chromeService: ChromeExtensionService
+    ) {
 
         this.isHelpActive = false;
         this.isShowLoginModal = 'deActive';
         // this.keymapService
         this.keymap = this.keymapService.getKeymap();
 
-
     }
 
     showLoginModal() {
         this.isShowLoginModal = (this.isShowLoginModal === 'active') ? 'deActive' : 'active';
 
+
     }
 
-    findShortKeyCode(keyName:string): string {
+    findShortKeyCode(keyName: string): string {
         let memo = this.keymap.find(shortkey => {
-            if(shortkey.getKeyName() === keyName){
+            if (shortkey.getKeyName() === keyName) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         });
-        if(memo){
+        if (memo) {
             return memo.getKeyCode();
-        }else{
+        } else {
         }
-        
+
     }
 
-    ngAfterContentChecked(){
+    ngAfterContentChecked() {
+        if (this.saveState === this.chromeService.getSavedState()) {
 
+        } else {
+            this.saveState = this.chromeService.getSavedState()
+        }
     }
 
     ngOnInit() {
@@ -108,6 +120,18 @@ export class HeaderComponent implements OnInit {
         this.settingUrl = this.router.createUrlTree(['3ndEditor', 'setting']);
         this.router.navigateByUrl(this.settingUrl);
     }
+    enlargeFrame() {
+        this.navService.enlargeFrame();
+        this.frameRatio = this.navService.getRatioValue() + "%";
+    }
+    reduceFrame() {
+        this.navService.reduceFrame();
+        this.frameRatio = this.navService.getRatioValue() + "%";
+    }
+    goEditor() {
+        this.settingUrl = this.router.createUrlTree(['3ndEditor']);
+        this.router.navigateByUrl(this.settingUrl);
 
+    }
 
 }
