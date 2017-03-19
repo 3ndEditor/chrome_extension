@@ -1,5 +1,6 @@
 import { Link } from './link';
 
-export class Links{
+export class Folder {
+    name : string;
     links : Link[];
 }

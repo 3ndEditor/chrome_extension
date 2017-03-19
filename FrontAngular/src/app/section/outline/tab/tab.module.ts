@@ -1,3 +1,4 @@
+import { MockService } from '../../../shared/mock/mock.service';
 import { JsonpModule } from '@angular/http';
 import { ShareModule } from './editorTab/share/editorTab.share.module';
 import { ExportModule } from './editorTab/export/editorTab.export.module';
@@ -12,6 +13,6 @@ import { NgModule } from '@angular/core';
     imports: [CommonModule,LinkModule,TrashCanModule,SaveModule,ExportModule,ShareModule,JsonpModule],
     exports: [TabComponent],
     declarations: [TabComponent],
-    providers: [],
+    providers: [MockService],
 })
 export class TabModule { }

@@ -1,13 +1,17 @@
 <div id="linkTab-color" *ngIf="usage==='linkTab'" >
-    <ul class="center">
-        <li class="top-bar"> URL List</li>
-        <li>
-            <linkPack></linkPack>
-        </li>
-        <li>
-            <trash-can class="tab-btn waves-effect"></trash-can>
-        </li>
-    </ul>
+    <div *ngFor="let folder of listFolder; let i = index;">
+        <ul class="center waves-effect" (click)="openFolder(folder.links, i)">
+            <li class="top-bar"> {{folder.name}} </li>
+            <li *ngIf="isClicked[i] != 'true'" >
+                <div>Test</div>
+                <linkPack [linkList]="links"></linkPack>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="linkTab-color" class="tab-btn waves-effect" *ngIf="usage==='trashCan'">
+   <trash-can class="center" ></trash-can> 
 </div>
 
 <div id="editorTab-color" *ngIf="usage==='editorTab'">

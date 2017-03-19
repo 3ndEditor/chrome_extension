@@ -19,6 +19,7 @@
                 <!--탭의 usage에 따라 tab의 종류를 다르게 불러옴-->
                 <tab id="linkTab" [@navbarAction]="navbarAction" [@openLinkTab]="linkTabState" [usage]="tabUsage_link"></tab>
                 <tab id="editorTab" [@navbarAction]="navbarAction" [@openEditorTab]="editorTabState" [usage]="tabUsage_editor" (mouseleave)="leaveEditorTab()"></tab>
+                <tab id="trashCan"[@openLinkTab]="linkTabState" [usage]="tabUsage_trashCan"></tab>
                 <!--화면의 양극쪽에 마우스가 올려질 때 탭을 나타냄. linkTab은 링크프레임이 true일 때만 활성화-->
                 <div id="linkTabEnterDetector" [@navbarAction]="navbarAction" *ngIf="isActiveCrtLinkFrameBtn==true" (mouseenter)="enterLinkTab()"></div>
                 <div id="editorTabEnterDetector" [@navbarAction]="navbarAction" (mouseenter)="enterEditorTab()"></div>

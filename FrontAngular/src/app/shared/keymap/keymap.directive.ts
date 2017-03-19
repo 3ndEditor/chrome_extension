@@ -49,11 +49,6 @@ export class KeymapDirective {
                 
                 this.keyAction.emit();
             }
-
         }
-
     }
-
-
 }
-

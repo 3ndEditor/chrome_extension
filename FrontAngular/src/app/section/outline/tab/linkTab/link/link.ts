@@ -1,5 +1,4 @@
 export class Link{
     url : string;
-    fixed : any;
-    trashed : boolean;
+    order : number;
 }

@@ -62,9 +62,4 @@ export class KeymapService {
     getKeymap() {
         return this.globalKeymap;
     }
-
-
-
-
-
 }

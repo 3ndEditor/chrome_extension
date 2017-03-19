@@ -26,7 +26,6 @@ import './app.rxjs-operators';
                 transition('false <=> true', animate(150)),
             ]
         )
-
     ]
 })
 export class AppComponent {
@@ -78,6 +77,4 @@ export class AppComponent {
             }
         }
     }
-
-
 }

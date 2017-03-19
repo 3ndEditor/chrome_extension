@@ -3,29 +3,30 @@
 </div>    
 <div class="view">
     <div class="scrollBlind" >
-        <div [dragula]='"fixed-link"' [dragulaModel]='listLinkFixed' >
-            <div class="z-depth-2 FixedLink" *ngFor="let linkA of listLinkFixed">
+        <div>This is Test</div>
+        <div [dragula]='"link"' [dragulaModel]='linkList' >
+            <div class="z-depth-2 FixedLink" *ngFor="let link of linkList">
                 <div class="linkbox waves-effect tooltipped" data-position="right" data-delay="300" data-tooltip="Title"
-                    (click)="sendURL(linkA.url)">
+                    (click)="sendURL(link.url)">
                     <div>
-                        <img class="left" src="assets/image/fixedBar.png" width="4" height="30"/>
-                        <img src="https://www.google.com/s2/favicons?domain={{linkA.url}}" alt="favicon" width="30"  height="30">
+                        <img src="https://www.google.com/s2/favicons?domain={{link.url}}" alt="favicon" width="30"  height="30">
                     </div>
                 </div>
             </div>
        </div>
-       <div [dragula]='"unfixed-link"' [dragulaModel]='listLinkUnfixed'>
+       
+       <!--<div [dragula]='"unfixed-link"' [dragulaModel]='listLinkUnfixed'>
           <div class="z-depth-2 UnfixedLink" *ngFor="let linkB of listLinkUnfixed; let i = index">
                <div class="linkbox waves-effect tooltipped" data-position="right" data-delay="300" data-tooltip="Title"
-                    (click)="sendURL(linkB.url)">
+                    (click)="sendURL(linkB.url)">-->
                    <!-- url로 타이틀 받아오기  http://textance.herokuapp.com/title/{{linkA.url}}-->
-                   <div>
+                   <!--<div>
                        <img class="left" src="assets/image/unfixedBar.png" width="4" height="30"/>
                         <img src="https://www.google.com/s2/favicons?domain={{linkB.url}}" alt="favicon" width="30"  height="30">
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <button (click)="consoleEvent()">콘솔</button><br>
     
         <input [(ngModel)]="value"> <br><p>{{value}}</p>

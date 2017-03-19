@@ -101,6 +101,7 @@ export class OutlineComponent implements OnInit {
     // tab 사용 변수
     private tabUsage_link: string = "linkTab";
     private tabUsage_editor: string = "editorTab";
+    private tabUsage_trashCan: string = "trashCan";
     private linkTabState: string;
     private editorTabState: string;
 

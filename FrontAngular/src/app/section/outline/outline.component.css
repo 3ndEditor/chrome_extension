@@ -60,6 +60,20 @@ editor {
   opacity: 0.8;
 }
 
+#trashCan{
+  position: fixed;
+  /*overflow: hidden;*/
+  left: 0;
+  top: 80%;
+  right: auto;
+  bottom: auto;
+  width: 5%;
+  height: 91%;
+  min-width: 50px;
+  z-index: 9998;
+  opacity: 0.8;
+}
+
 #editorTab{
   position: fixed;
   left: auto;
