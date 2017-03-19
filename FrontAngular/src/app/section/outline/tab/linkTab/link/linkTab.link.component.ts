@@ -2,7 +2,12 @@ import { LinkSenderService } from '../../../../../shared/link-sender.service';
 import { Links } from './links';
 import { FormsModule } from '@angular/forms';
 import { Link } from './link';
+<<<<<<< HEAD
 import { Component, EventEmitter, Input, OnInit, Output, Provider } from '@angular/core';
+=======
+import { MockService } from '../mock/mock.service';
+import { Component, EventEmitter, OnInit, Output, Provider } from '@angular/core';
+>>>>>>> 98c6d493650dadb093b7de09defab61c21e22d29
 import { DragulaService, dragula } from 'ng2-dragula/ng2-dragula';
 
 
