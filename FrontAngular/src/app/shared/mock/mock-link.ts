@@ -1,57 +1,21 @@
-import { Folder } from '../../section/outline/tab/linkTab/link/folder';
+import { Link } from '../../section/outline/tab/linkTab/link/link'
 
-export let FOLDERS: Folder[]=
-[
+export let LINKS: Link[]=
+ [
     {
-        name : 'TrashCan',
-        links : [
-            {
-               url : 'http://www.3ndEditor.com',
-               order : 0
-            },
-            {
-                url : 'http://www.nate.com',
-                   order : 0
-            }
-        ]      
+        GROUP : ["Potal", 1],   /* Group name, Count */                
+        URL : "http://www.naver.com"                
     },
     {
-        name : 'Default',
-        links : [
-            {
-               url : 'http://www.google.com',
-               order : 1
-            },
-            {
-               url : 'http://www.naver.com',
-               order : 2
-            }
-        ]      
+        GROUP : ["Potal", 2],                
+        URL : "http://www.google.com"         
     },
     {
-        name : 'Custom01',
-        links : [
-           {
-               url : 'http://www.daum.net',
-               order : 1
-           },
-           {
-               url : 'http://www.youtube.com',
-               order : 2
-           }
-        ] 
+        GROUP : ["None", 1],                
+        URL : "http://www.daum.net"                
     },
     {
-       name : 'Custom02',
-       links : [
-           {
-               url : 'http://github.com',
-               order : 1
-           },
-           {
-               url : 'http://www.naver.com',
-               order : 2
-           }
-       ] 
-    }
+        GROUP : ["Trash", 1],                
+        URL : "http://www.nate.com"                
+    }    
 ]

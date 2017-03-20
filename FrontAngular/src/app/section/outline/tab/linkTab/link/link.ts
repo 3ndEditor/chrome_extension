@@ -1,4 +1,4 @@
 export class Link{
-    url : string;
-    order : number;
+    GROUP : any;
+    URL : string;
 }

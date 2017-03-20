@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { FOLDERS } from './mock-link';
+import { LINKS } from './mock-link';
 
 
 export interface DataServiceStructure{
-    getFolder();
+    getLinks();
 }
 
 @Injectable()
 export class MockService implements DataServiceStructure{
     constructor(){}
-    getFolder(){
-        return FOLDERS;
+    getLinks(){
+        return LINKS;
     }
 }

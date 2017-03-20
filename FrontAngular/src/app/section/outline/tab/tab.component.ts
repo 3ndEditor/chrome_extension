@@ -1,5 +1,4 @@
-import { Links } from './linkTab/link/links';
-import { Folder } from './linkTab/link/folder';
+import { Link } from './linkTab/link/link';
 import { LinkSenderService } from '../../../shared/link-sender.service';
 import { MockService } from '../../../shared/mock/mock.service';
 import { LinkComponent } from './linkTab/link/linkTab.link.component';
@@ -36,23 +35,33 @@ export class TabComponent implements OnInit{
     // 부모 컴포넌트 바인딩을 통해 usage의 값을 정확히 해야함.
     @Input() usage : string;
     private isClicked : boolean[] = [];
-    private listFolder : Folder[] = [];
-    private links : Links;
+    private links : Link[] = [];
+    private folder : any[] = [];
     private showLinks : string = "false";
 
     constructor(
         private mockService : MockService,
         private linkSendService : LinkSenderService){
-            this.listFolder = mockService.getFolder();
+            this.links = mockService.getLinks();
+
+            for(var i=0; i < this.links.length; i++){
+                if(this.links[i].GROUP[0] == )
+
+                // 그룹의 이름을 담을 변수가 필요.
+            }
+
+
+            this.folder[]
+
             this.isClicked[0] = false;
             console.log(this.isClicked[0]);
 
             // folder의 갯수만큼 isClicked변수를 생성.
-            for(var i=0; i<this.listFolder.length; i++){
+            for(var i=0; i<this.links.length; i++){
                 this.isClicked[i] = false;
             }
 
-            console.log(this.listFolder[0].name + ", " + this.listFolder[0].links[0].url);
+            console.log(this.links[0].GROUP + ", " + this.links[0].URL);
         }
 
     openWindow(){
@@ -68,10 +77,10 @@ export class TabComponent implements OnInit{
         this.linkSendService.sendAction(url);
     }
 
-    openFolder(links:Links, i:number){
+    openFolder(links:Link[], i:number){
         this.isClicked[i] = true;
         this.links = links;
         this.showLinks = 'true';
-        console.log(this.links[0].url + ",  " + this.links[0].order + ",  " + this.isClicked[0] + ",  " + this.isClicked[1] + ",  " + this.isClicked[2] + ",  " + this.isClicked[3] + ",  " + i);
+        console.log(this.links[0].GROUP + ",  " + this.links[0].URL + ",  " + this.isClicked[0] + ",  " + this.isClicked[1] + ",  " + this.isClicked[2] + ",  " + this.isClicked[3] + ",  " + i);
     }
 }
