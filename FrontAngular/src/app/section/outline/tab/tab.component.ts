@@ -4,12 +4,22 @@ import { LinkSenderService } from '../../../shared/link-sender.service';
 import { MockService } from '../../../shared/mock/mock.service';
 import { LinkComponent } from './linkTab/link/linkTab.link.component';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { animate, Component, EventEmitter, Input, OnInit, Output, state, style, transition, trigger } from '@angular/core';
 
 @Component({
     selector: 'tab',
     templateUrl: 'tab.component.html',
-    styleUrls:['tab.component.css']
+    styleUrls:['tab.component.css'],
+    animations: [
+        trigger(
+            'showLinks',
+            [
+                state('false', style({ height: '0%'})),
+                state('true', style({ height: '99%' })),
+                transition('false <=> true', animate(500))
+            ]
+        )
+    ]
 })
 export class TabComponent implements OnInit{
     /**
@@ -25,10 +35,10 @@ export class TabComponent implements OnInit{
 
     // 부모 컴포넌트 바인딩을 통해 usage의 값을 정확히 해야함.
     @Input() usage : string;
-    isClicked : boolean[] = [];
-    listFolder : Folder[] = [];
-    links : Links;
-    // @Output() linkList = new EventEmitter<Object>();
+    private isClicked : boolean[] = [];
+    private listFolder : Folder[] = [];
+    private links : Links;
+    private showLinks : string = "false";
 
     constructor(
         private mockService : MockService,
@@ -61,6 +71,7 @@ export class TabComponent implements OnInit{
     openFolder(links:Links, i:number){
         this.isClicked[i] = true;
         this.links = links;
+        this.showLinks = 'true';
         console.log(this.links[0].url + ",  " + this.links[0].order + ",  " + this.isClicked[0] + ",  " + this.isClicked[1] + ",  " + this.isClicked[2] + ",  " + this.isClicked[3] + ",  " + i);
     }
 }

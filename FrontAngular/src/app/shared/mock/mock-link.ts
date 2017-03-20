@@ -3,7 +3,7 @@ import { Folder } from '../../section/outline/tab/linkTab/link/folder';
 export let FOLDERS: Folder[]=
 [
     {
-        name : 'TrashCan Folder',
+        name : 'TrashCan',
         links : [
             {
                url : 'http://www.3ndEditor.com',
@@ -16,7 +16,7 @@ export let FOLDERS: Folder[]=
         ]      
     },
     {
-        name : 'Default Folder',
+        name : 'Default',
         links : [
             {
                url : 'http://www.google.com',
@@ -29,7 +29,7 @@ export let FOLDERS: Folder[]=
         ]      
     },
     {
-        name : 'Custom Folder01',
+        name : 'Custom01',
         links : [
            {
                url : 'http://www.daum.net',
@@ -42,7 +42,7 @@ export let FOLDERS: Folder[]=
         ] 
     },
     {
-       name : 'Custom Folder02',
+       name : 'Custom02',
        links : [
            {
                url : 'http://github.com',

@@ -1,10 +1,10 @@
 <div id="linkTab-color" *ngIf="usage==='linkTab'" >
     <div *ngFor="let folder of listFolder; let i = index;">
-        <ul class="center waves-effect" (click)="openFolder(folder.links, i)">
-            <li class="top-bar"> {{folder.name}} </li>
+        <ul class="center waves-effect">
+            <li (click)="openFolder(folder.links, i)"> {{folder.name}} </li>
             <li *ngIf="isClicked[i] != 'true'" >
-                <div>Test</div>
                 <linkPack [linkList]="links"></linkPack>
+                <!--<linkPack   [@showLinks]="showLinks" [linkList]="links"></linkPack>-->
             </li>
         </ul>
     </div>
@@ -16,7 +16,7 @@
 
 <div id="editorTab-color" *ngIf="usage==='editorTab'">
     <ul class="center">
-        <li class="top-bar">Editor Tab</li>
+        <li class="top-bar">Edi</li>
         <li (click)="openWindow()" >
             <save id="google_drive"  class="tab-btn waves-effect"></save>
         </li>

@@ -1,6 +1,6 @@
 .view{
   overflow:hidden;
-  height: 550px
+  height: auto;
 }
 
 .scrollBlind{
