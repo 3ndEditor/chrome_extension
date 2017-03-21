@@ -43,7 +43,11 @@ export class HeaderComponent implements OnInit {
      * @todo 추가적으로 해야할 사항
      */
 
+     
+          
     @Output() lockAction = new EventEmitter<Object>();
+    private isLinkFrameActivated : boolean = false;
+
     private isShowLoginModal: string;
     private loginModalHeight: string;
     private isHelpActive: boolean;

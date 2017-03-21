@@ -82,6 +82,9 @@ export class ChromeExtensionService {
 
             }
         }
+        
+        
+        
 
 
         function formatParams(params) {
@@ -89,7 +92,6 @@ export class ChromeExtensionService {
                 .keys(params)
                 .map(function (key) {
                     return key + "=" + params[key]
-
                 })
                 .join("&");
         }
@@ -168,6 +170,7 @@ export class ChromeExtensionService {
         let signout_button = document.querySelector('#signOut');
         let user_info_div = document.querySelector('#user_info');
 
+        
 
         return new Promise<boolean>(function (resolve, reject) {
             signin_button.addEventListener('click', interactiveSignIn);
@@ -424,6 +427,7 @@ export class ChromeExtensionService {
         return new Promise<Object>(function (resolve, reject) {
 
             // 실질적인 요청보내기 작업
+            
             that.savedState = "저장 중..."
             that.xhrWithAuth(method, url, onsuccess, params, requestBody, null);
 
@@ -443,7 +447,7 @@ export class ChromeExtensionService {
 
     }
 
-
+    
 
 
 

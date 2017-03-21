@@ -1,3 +1,4 @@
+import { SharedModule } from '../shared/shared.module';
 import { NoTokenPageComponent } from './error-page/no-token-page.component';
 import { SettingModule } from './setting/setting.module';
 import { OutlineModule } from './outline/outline.module';
@@ -7,7 +8,7 @@ import { InvalidUrlPageComponent } from './error-page/invalid-url-page.component
 import { NgModule } from '@angular/core';
 
 @NgModule({
-    imports: [SectionRoutingModule,OutlineModule,SettingModule],
+    imports: [SectionRoutingModule,OutlineModule,SettingModule,SharedModule],
     exports: [SectionComponent,InvalidUrlPageComponent,NoTokenPageComponent],
     declarations: [SectionComponent,InvalidUrlPageComponent,NoTokenPageComponent],
     providers: [],

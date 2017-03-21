@@ -10,16 +10,16 @@
     </div>
     <div class="section white">
         <div class="row container">
-            <h3 class="header">Parallax</h3>
-            <button (click)="interactiveGetToken()" class="grey lighten-1 btn waves-effect waves-light" type="submit" name="action">
-                    <i class="fa fa-google large" aria-hidden="true"></i>
-                    START WITH GOOGLE
+            <h3 class="header">웹 서칭과 편집을 한 화면에서!</h3>
+            <button [ngClass]="isBtnActivate"  (click)="interactiveGetToken()" class=" btn waves-effect waves-light" type="submit" name="action">
+                    
+                    시작하기
                 </button>
         </div>
         <div class="row container">
-            <span class="light" style="font-size: 2em">3nd Editor를 사용하려면 크롬브라우저에 로그인 하셔야 합니다.<br>
-            위 버튼을 누르면 잠시 후 권한 획득 창이 나타납니다. 
-            권한을 부여하셨으면 <i class=" material-icons">vpn_key</i> 를 누르고 로그인하세요.
+            <span class="light" style="font-size: 2em"><br>
+            
+            
             
             </span>
         </div>
@@ -27,7 +27,7 @@
     <div class="parallax-container">
         <div class="parallax"><img src="assets/image/newsandpen.jpg" style="display: block; transform: translate3d(-50%, 59px, 0px);"></div>
     </div>
-    <footer class="page-footer">
+    <footer class="page-footer grey lighten-4">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
@@ -57,3 +57,5 @@
 
 
 </div>
+
+<div id="toast-container"></div>

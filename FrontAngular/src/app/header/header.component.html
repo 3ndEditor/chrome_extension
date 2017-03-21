@@ -44,7 +44,7 @@
         <a data-activates="dropdown"   class="dropdown-button button-collapse "><i class="material-icons">menu</i></a>
         <a class="button-collapse"></a>
 
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <ul id="nav-mobile" *ngIf="isLinkFrameActivated"  class="left hide-on-med-and-down">
             <!--화면 배율 조정 아이콘-->
             <li>
                 <a (click)="reduceFrame()">

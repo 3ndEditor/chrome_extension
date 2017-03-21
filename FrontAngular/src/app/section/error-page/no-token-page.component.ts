@@ -2,7 +2,7 @@ import { ChromeExtensionService } from '../../shared/chrome-extension.service';
 import { Component, OnInit } from '@angular/core';
 
 declare var $: any;
-
+declare var Materialize :any;
 @Component({
     selector: 'no-token',
     templateUrl: 'no-token-page.component.html',
@@ -10,6 +10,8 @@ declare var $: any;
 })
 export class NoTokenPageComponent implements OnInit {
 
+
+    private isBtnActivate : string;
     constructor(private chromeService: ChromeExtensionService) { }
 
     ngOnInit() {
@@ -20,7 +22,10 @@ export class NoTokenPageComponent implements OnInit {
     }
 
     interactiveGetToken() {
-        this.chromeService.interactiveGetToken()
+        this.chromeService.interactiveGetToken();
+        Materialize.toast('잠시만 기다려주세요!',3500);
+        this.isBtnActivate = "disabled"
+
     }
 
 }
