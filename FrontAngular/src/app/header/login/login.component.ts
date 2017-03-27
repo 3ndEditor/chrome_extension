@@ -59,12 +59,6 @@ export class LoginComponent implements OnInit {
 
     
 
-    public mouseenter() {
-        this.btnActivate = "z-depth-2 grey lighten-3 ";
-    }
-    public mouseout() {
-        this.btnActivate = "";
-    }
 
 
 

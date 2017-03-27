@@ -25,7 +25,8 @@ import {
 } from '@angular/core';
 import { DragulaService, dragula } from 'ng2-dragula/ng2-dragula';
 
-declare var jsPDF : any;
+// declare var jsPDF : any;
+declare var $: any;
 
 // 초기값과 애니메이션에도 동일한 값을 주기 위해 클래스밖 전역변수(?)로 빼내었다.
 var savedDividerWidth: number = 10;
@@ -68,15 +69,6 @@ var savedDiveiderTransX: number = 0;
                 transition('deActive <=> active', animate(200)),
             ]
         ),
-        trigger(
-            'openDriveWindow',
-            [
-                state('deActive', style({ opacity: 0, })),
-                state('active', style({ opacity: 1, "z-index": '9999' })),
-                transition('deActive <=> active', animate(200)),
-            ]
-        ),
-
     ]
 })
 
@@ -124,7 +116,6 @@ export class OutlineComponent implements OnInit {
     private linkTabState: string;
     private editorTabState: string;
     // drive 사용변수
-    private isDriveWindowOpen: string = "deActive";
     private driveData: JSON;
 
     //
@@ -145,8 +136,8 @@ export class OutlineComponent implements OnInit {
         private chromeService: ChromeExtensionService
     ) {
 
-        
-        
+
+
         // 초기화 진행
         this.editorWidth = '100%';
         this.linkFrameWidth = '0px';
@@ -163,7 +154,7 @@ export class OutlineComponent implements OnInit {
             .forEach(content => {
                 if (that.chromeService.getCurrentFileId()) {
                     that.chromeService.saveContent(that.chromeService.getCurrentFileId(), content)
-                }else{
+                } else {
                     console.log("파일 아이디 없잖아!!");
                 }
             })
@@ -178,7 +169,7 @@ export class OutlineComponent implements OnInit {
     }
 
 
-    
+
 
     /**
     * 버튼 활성화 유무에 따른 화면 분할 메소드
@@ -333,6 +324,10 @@ export class OutlineComponent implements OnInit {
         });
     }
 
+    ngAfterViewInit() {
+        $('#driveWindow').modal();
+    }
+
     /**
     * 탭 상태 적용 메소드
     * @param void
@@ -354,16 +349,6 @@ export class OutlineComponent implements OnInit {
         this.editorTabState = "deActive";
     }
 
-    driveWindowOpen() {
-        if (this.isDriveWindowOpen === "deActive") {
-            this.chromeService.isDriveWindowOpen = true;
-            this.isDriveWindowOpen = "active"
-        } else {
-            this.chromeService.isDriveWindowOpen = false;
-            this.isDriveWindowOpen = "deActive";
-        }
-
-    }
 
     // drop(e:DragEvent){
     //     console.log("tttt");

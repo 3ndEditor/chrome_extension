@@ -43,10 +43,10 @@ export class HeaderComponent implements OnInit {
      * @todo 추가적으로 해야할 사항
      */
 
-     
-          
+
+
     @Output() lockAction = new EventEmitter<Object>();
-    private isLinkFrameActivated : boolean = false;
+    private isLinkFrameActivated: boolean = false;
 
     private isShowLoginModal: string;
     private loginModalHeight: string;
@@ -74,10 +74,14 @@ export class HeaderComponent implements OnInit {
 
     }
 
-    showLoginModal() {
-        this.isShowLoginModal = (this.isShowLoginModal === 'active') ? 'deActive' : 'active';
-
-
+    showLoginModal($event) {
+        if ($event === undefined) {
+            this.isShowLoginModal = (this.isShowLoginModal === 'active') ? 'deActive' : 'active';
+        } else {
+            if (!$event.target.classList.contains('area')) {
+                this.isShowLoginModal = (this.isShowLoginModal === 'active') ? 'deActive' : 'active';
+            }
+        }
     }
 
     findShortKeyCode(keyName: string): string {

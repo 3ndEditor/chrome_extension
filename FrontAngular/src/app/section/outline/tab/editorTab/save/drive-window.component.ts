@@ -1,6 +1,6 @@
 import { ChromeExtensionService } from '../../../../../shared/chrome-extension.service';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer } from '@angular/core';
-
+declare var $: any;
 @Component({
     selector: 'drive-window',
     templateUrl: 'drive-window.component.html',
@@ -13,10 +13,7 @@ export class DriveWindowComponent implements OnInit {
     private isActiveSearch: boolean;
     private isSelectedTab: number = 1;
     private isCompletedGetList: boolean = false;
-
     @Input() editorElement: ElementRef;
-
-    @Output() closeDriveWindow = new EventEmitter();
     constructor(private chromeService: ChromeExtensionService, private renderer: Renderer) {
         this.isActiveSearch = false;
         this.files = [{
@@ -56,15 +53,14 @@ export class DriveWindowComponent implements OnInit {
     }
 
     closeWindow() {
-
-        this.closeDriveWindow.emit()
+        $('#driveWindow').modal('close');
     }
     insertFileContent(file) {
         this.chromeService.getFileContent(file).then(result => {
             console.log("drivewindow" + result);
             this.renderer.selectRootElement(this.editorElement.nativeElement).insertAdjacentHTML('beforeend', result)
         }).then(() => {
-            this.closeDriveWindow.emit();
+            $('#driveWindow').modal('close');
         })
     }
 
@@ -79,8 +75,8 @@ export class DriveWindowComponent implements OnInit {
         //     type: 'text/html',
         // });
         this.chromeService.createFileWithMetaData(requestBody).then(() => {
-            this.renderer.selectRootElement(this.editorElement.nativeElement).insertAdjacentHTML('beforeend', "새 파일")
-            this.closeDriveWindow.emit();
+            this.renderer.selectRootElement(this.editorElement.nativeElement).insertAdjacentHTML('beforeend', "새 파일");
+            $('#driveWindow').modal('close');
         })
     }
     clickNewTab() {
