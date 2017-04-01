@@ -87,7 +87,7 @@ export class OutlineComponent implements OnInit {
 
     private inputParam: string;
 
-
+    private pageContent : string;
 
     // 애니메이션 관련 변수
     private editorFocusOutline: string;
@@ -354,6 +354,14 @@ export class OutlineComponent implements OnInit {
     //     console.log("tttt");
     //     console.log(e);
     // }
+
+    pageGet(linkUrl){
+        this.chromeService.pageGet(linkUrl).then((result)=>{
+            this.pageContent = result;
+        });
+    }
+
+
 
     applyFrameScale() {
         return this.navService.frameConfig.getScale();

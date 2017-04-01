@@ -48,6 +48,7 @@ export class HeaderComponent implements OnInit {
     @Output() lockAction = new EventEmitter<Object>();
     private isLinkFrameActivated: boolean = false;
 
+    private isFullScreen: boolean = false;
     private isShowLoginModal: string;
     private loginModalHeight: string;
     private isHelpActive: boolean;
@@ -55,7 +56,6 @@ export class HeaderComponent implements OnInit {
     private keymap: ShortKey[];
     private frameRatio: string = '100%';
     private saveState: string;
-
     private fontColor = "grey-text";
     private backGrondColor = "grey lighten-4";
     constructor(
@@ -112,7 +112,14 @@ export class HeaderComponent implements OnInit {
 
 
     openWith() {
-        document.body.webkitRequestFullScreen();
+        if (!this.isFullScreen) {
+            this.isFullScreen = true;
+            document.body.webkitRequestFullScreen();
+             
+        }else{
+            this.isFullScreen = false;
+            document.webkitCancelFullScreen();
+        }
     }
     openHelp() {
         this.isHelpActive = this.isHelpActive ? false : true;
@@ -123,6 +130,7 @@ export class HeaderComponent implements OnInit {
     }
     createLinkFrame() {
         this.navService.navInputFrame();
+        this.isLinkFrameActivated = this.isLinkFrameActivated ? false : true;
     }
     goSetting() {
         this.settingUrl = this.router.createUrlTree(['3ndEditor', 'setting']);

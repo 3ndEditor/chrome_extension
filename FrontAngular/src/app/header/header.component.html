@@ -44,9 +44,9 @@
         <a data-activates="dropdown"   class="dropdown-button button-collapse "><i class="material-icons">menu</i></a>
         <a class="button-collapse"></a>
 
-        <ul id="nav-mobile" *ngIf="isLinkFrameActivated"  class="left hide-on-med-and-down">
+        <ul id="nav-mobile"   class="left hide-on-med-and-down">
             <!--화면 배율 조정 아이콘-->
-            <li>
+            <li *ngIf="isLinkFrameActivated">
                 <a (click)="reduceFrame()">
                     <i [ngClass]="fontColor" class="fa fa-caret-left" aria-hidden="true"></i>
                 </a>
@@ -78,14 +78,15 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
 
             <li>
-                <a [ngClass]="fontColor" data-position="bottom" data-delay="50" data-tooltip="Input Browser" class="waves-effect  tooltipped" keyMap [keyCode]="findShortKeyCode('create_frame_key')"
+                <a [ngClass]="fontColor" data-position="bottom" data-delay="50" data-tooltip="browser" class="waves-effect  tooltipped" keyMap [keyCode]="findShortKeyCode('create_frame_key')"
                     [isCtrKey]="'false'" [isAltKey]="'true'" (keyAction)="createLinkFrame()" (click)="createLinkFrame()">
-                    <i class=" material-icons">input</i>
+                    <i *ngIf="!isLinkFrameActivated"  class="fa fa-caret-square-o-right fa-2x" aria-hidden="true"></i>
+                    <i  *ngIf="isLinkFrameActivated" class="fa fa-caret-square-o-left fa-2x" aria-hidden="true"></i>
                 </a>
             </li>
             <li>
-                <a [ngClass]="fontColor" data-position="bottom" data-delay="50" data-tooltip="Login" class="waves-effect  tooltipped" (click)="showLoginModal()">
-                    <i class=" material-icons">vpn_key</i>
+                <a [ngClass]="fontColor" data-position="bottom" data-delay="50" data-tooltip="User" class="waves-effect  tooltipped" (click)="showLoginModal()">
+                    <i class=" material-icons ">perm_identity</i>
                 </a>
             </li>
             <li>

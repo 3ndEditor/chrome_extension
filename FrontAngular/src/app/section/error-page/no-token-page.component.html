@@ -3,16 +3,21 @@
         <div class="parallax">
             <div class="overlay"></div>
             <img id="getTokenImg" src="assets/image/testwelcome.gif">
-            <div class="btn " id='getTokenText' class="center-align">
-                제품에 대한 설명 텍스트
+            <div id='getTokenText' class="white-text center-align">
+                <h4>Why can't you make it easy? </h4>
             </div>
         </div>
     </div>
     <div class="section white">
         <div class="row container">
-            <h3 class="header">웹 서칭과 편집을 한 화면에서!</h3>
-            <button [ngClass]="isBtnActivate"  (click)="interactiveGetToken()" class=" btn waves-effect waves-light" type="submit" name="action">
-                    
+            <h4 class="header">한 화면에서 웹 서칭과 글 작성을 동시에</h4>
+            <p>
+                노트북에서도 듀얼 모니터 쓰듯이 쓸 수 없을까?<br>
+                쓰려고하는 글감만 따로 모아 볼 수는 없을까?<br>
+                Alt + Tap 누르기 귀찮다 <br>
+                
+            </p>
+            <button id="initBtn" [ngClass]="isBtnActivate" (click)="interactiveGetToken()" class=" btn waves-effect waves-light" type="submit" name="action">
                     시작하기
                 </button>
         </div>
@@ -31,24 +36,24 @@
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">Footer Content</h5>
-                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                    <h5 class="black-text"></h5>
+                    <p class="black-text text-lighten-4"></p>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Links</h5>
+                    <h5 class="black-text"></h5>
                     <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                        <!--<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
                         <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
                         <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>-->
                     </ul>
                 </div>
             </div>
         </div>
         <div class="footer-copyright">
-            <div class="container">
-                © 2014 Copyright Text
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            <div class="black-text container">
+                © 2017 Copyright Youngtae Kim
+                <a class="black-text text-lighten-4 right" href="#!"></a>
             </div>
         </div>
     </footer>

@@ -17,6 +17,32 @@ export class ChromeExtensionService {
 
     }
 
+
+
+    public pageGet(linkUrl: string) {
+
+
+        return new Promise<string>(function (resolve,reject) {
+            let xhr = new XMLHttpRequest();
+
+
+            xhr.open('GET', linkUrl, true);
+            xhr.onload = (result: any) => {
+                //   this.iframeHtml.nativeElement.contentWindow.document.open()
+                //   this.iframeHtml.nativeElement.contentWindow.document.write(result.currentTarget.response)
+                //   console.log(this.iframeHtml.nativeElement.contentWindow.document);
+                //   console.log($('body',this.iframeHtml.nativeElement.contentWindow.document));
+                resolve(result.currentTarget.response);
+                //   this.iframeHtml.nativeElement.contentWindow.document.close()
+
+            }
+            xhr.send();
+
+
+        })
+
+    }
+
     public getCurrentFileId() {
         return this.currentFileId;
     }
@@ -82,9 +108,9 @@ export class ChromeExtensionService {
 
             }
         }
-        
-        
-        
+
+
+
 
 
         function formatParams(params) {
@@ -170,7 +196,7 @@ export class ChromeExtensionService {
         let signout_button = document.querySelector('#signOut');
         let user_info_div = document.querySelector('#user_info');
 
-        
+
 
         return new Promise<boolean>(function (resolve, reject) {
             signin_button.addEventListener('click', interactiveSignIn);
@@ -427,7 +453,7 @@ export class ChromeExtensionService {
         return new Promise<Object>(function (resolve, reject) {
 
             // 실질적인 요청보내기 작업
-            
+
             that.savedState = "저장 중..."
             that.xhrWithAuth(method, url, onsuccess, params, requestBody, null);
 
@@ -447,7 +473,7 @@ export class ChromeExtensionService {
 
     }
 
-    
+
 
 
 

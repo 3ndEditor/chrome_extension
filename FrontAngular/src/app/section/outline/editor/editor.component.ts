@@ -22,7 +22,7 @@ export class EditorComponent implements OnInit {
 
     private isInit: boolean = false;
 
-    
+    @Input() pageContent : string;
 
     @Input() routeData: string;
     constructor(public el: ElementRef, public renderer: Renderer) {
@@ -70,9 +70,9 @@ export class EditorComponent implements OnInit {
                 'underline', //밑줄
                 // 'anchor', // 링크보다도 걍 툴팁만들어준다고 보는게 맘편함,
                 'fontsize',
-                'h1',
-                'h2',
-                'h3',
+                // 'h1',
+                // 'h2',
+                // 'h3',
                 // 'h4',
                 // 'h5',
                 // 'h6',
@@ -81,17 +81,17 @@ export class EditorComponent implements OnInit {
                 'strikethrough', //취소선
                 'subscript',  // 아래쪽에 조그맣게
                 'superscript', //  위쪽에 조그맣게
-                'image', // 해당 블록을 이미지의 src주소에 넣어버림.
+                // 'image', // 해당 블록을 이미지의 src주소에 넣어버림.
                 // 'pre', // <P>를 <pre>로 바꾸어줌,
                 'orderedlist', //<ol>
                 'unorderedlist', //<ul>
-                'indent', // 오른쪽 탭기능이라고 보면됨
-                'outdent', // 반대쪽으로 가게함.
+                // 'indent', // 오른쪽 탭기능이라고 보면됨
+                // 'outdent', // 반대쪽으로 가게함.
                 'justifyLeft', // 왼쪽 정렬
                 'justifyCenter', // 가운데 정렬
                 'justifyRight', // 오른족 정렬
                 'justifyFull', // 풀정렬
-                'removeFormat', //모든 포맷을 풀어버림.
+                // 'removeFormat', //모든 포맷을 풀어버림.
                 //필요하다면 객체 형식으로 커스텀 버튼 만들어 낼 수 있음. 
             ],
 
@@ -172,5 +172,7 @@ export class EditorComponent implements OnInit {
         // 아웃라인 컴포넌트에서 미리 새니티제이션을 마친 스트링을 이너 html로 넣어줄수도 있다. 하지만 정말 html만 들어갈뿐더러 이미지 리소스같은건 건드릴수 없음 
         // 새니티제이션을 패스시키려면 각 태그를 분석한 후에 각각 맞는 새니티제이션을 해주어야 함. 
         this.renderer.selectRootElement(this.el.nativeElement).insertAdjacentHTML('beforeend', this.routeData);
+
+        this.renderer.selectRootElement(this.el.nativeElement).insertAdjacentHTML('beforeend', this.pageContent);
     }
 }

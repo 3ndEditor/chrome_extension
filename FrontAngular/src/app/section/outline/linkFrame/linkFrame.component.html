@@ -1,15 +1,23 @@
 <div>
   <div style="margin-bottom: 0;">
-    <input #inputUrl type="url" placeholder="http://" (keyup.enter)="onEnter(inputUrl.value)" style="margin-bottom: 0; height: 50%"
+    
+    <input #inputUrl class="" type="url" placeholder="http://" (keyup.enter)="onEnter(inputUrl.value)" style="margin-bottom: 0; height: 50%"
     />
-    <!--<span class="col s1 m1 l1"  style="padding: 0"><i class="tiny material-icons">call_received</i></span>-->
+    
+    
   </div>
 
-  <!--<div class="wrap col s12">-->
-  <iframe #somevar [dragula]="'bag-one'" 
+  <div id="frame">
+    <button id="gg" (click)="pageGet()">페이지 가져오기</button>
+  
+    
+  <iframe id="iframe" #somevar [dragula]="'bag-one'" 
   [ngStyle]="{ 'opacity':iframeOpacity,'height':iframeHeight,'width': iframeWidth,'-ms-transform':iframeScale , '-moz-transform':iframeScale,
     '-o-transform': iframeScale,'-webkit-transform':iframeScale,'transform': iframeScale}" sandbox="allow-same-origin allow-forms allow-modals allow-scripts"
     [src]="trustResourceURL">
+    <!--[src]="trustResourceURL">-->
   </iframe>
-  <!--</div>-->
+  </div>
 </div>
+
+

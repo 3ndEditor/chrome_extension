@@ -4,21 +4,27 @@ import { Observable } from 'rxjs/Observable';
 import { LinkFrameService } from './linkFrame.service.promise';
 import { DomSanitizer, SafeHtml, SafeResourceUrl } from '@angular/platform-browser';
 import {
-  animate,
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  Renderer,
-  state,
-  style,
-  transition,
-  trigger,
-  ViewChild
+    animate,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    Renderer,
+    state,
+    style,
+    transition,
+    trigger,
+    ViewChild
 } from '@angular/core';
 
 import { DragulaService, dragula } from 'ng2-dragula/ng2-dragula';
 
+
+
+
+declare var $: any;
 @Component({
   selector: 'linkFrame',
   templateUrl: 'linkFrame.component.html',
@@ -38,8 +44,8 @@ import { DragulaService, dragula } from 'ng2-dragula/ng2-dragula';
   ]
 })
 export class linkFrameComponent implements OnInit {
-  @Input() iframeHeight :string ='200vh';
-  @Input() iframeWidth: string ='200%';
+  @Input() iframeHeight: string = '200vh';
+  @Input() iframeWidth: string = '200%';
   @Input() iframeScale: string = 'scale(0.5)'; //scale(0.0)
   @Input() iframeOpacity: number;
   result: Observable<string[]>;
@@ -47,20 +53,51 @@ export class linkFrameComponent implements OnInit {
   // private iframeRatio = '300%';
   private state: string = 'close';
 
+  @Output() urlInfomation  = new EventEmitter<string>();
+
   //  sanitization 을 통과한 url을 만들기 위한 변수
   private trustResourceURL: SafeResourceUrl;
   private linkUrl: string = '';
   private urlChecker: string;
 
+  @ViewChild('somevar') private iframeHtml: ElementRef;
+
+
   constructor(private _sanitizer: DomSanitizer, private connectService: LinkFrameService, private rd: Renderer,
     private dragulaService: DragulaService, private linkSendService: LinkSenderService) {
 
     // 맨 처음 띄워줄 화면
-    let defaultUrl = "http://www.tistory.com/";
-    this.urlChecker = defaultUrl;
-
+    this.linkUrl = "http://www.tistory.com/";
+    this.urlChecker = this.linkUrl;
+    
     // sanitization 을 통과해야 angular app 에서 쓸 수 있다.
-    this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl(defaultUrl);
+    this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.linkUrl);
+
+
+
+  }
+
+  pageGet() {
+    this.urlInfomation.emit(this.linkUrl);
+
+
+
+
+    // var xhr = new XMLHttpRequest();
+    // var url = "https://www.google.com";
+
+    // xhr.open('GET', url, true);
+    // xhr.onload = (result:any) => {
+    //   this.iframeHtml.nativeElement.contentWindow.document.open()
+    //   this.iframeHtml.nativeElement.contentWindow.document.write(result.currentTarget.response)
+    //   console.log(this.iframeHtml.nativeElement.contentWindow.document);
+    //   console.log($('body',this.iframeHtml.nativeElement.contentWindow.document));
+
+    //   this.iframeHtml.nativeElement.contentWindow.document.close()
+
+    // }
+    // xhr.send();
+
 
 
   }
@@ -94,7 +131,10 @@ export class linkFrameComponent implements OnInit {
   //  iframe 내부로 접근하는 방법은 현재 막혀 있다. 보안 문제를 더 공부하고 도전해야 겠다.
 
 
-  ngAfterViewInit() { }
+  ngAfterViewInit() {
+
+
+  }
 
   ngAfterContentChecked() {
     // console.log(this.linkSendService.sendURL);

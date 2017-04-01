@@ -23,7 +23,7 @@ export class NoTokenPageComponent implements OnInit {
 
     interactiveGetToken() {
         this.chromeService.interactiveGetToken();
-        Materialize.toast('잠시만 기다려주세요!',3500);
+        Materialize.toast('잠시 기다려주세요. 구글 로그인을 진행합니다.',5000);
         this.isBtnActivate = "disabled"
 
     }
