@@ -31,9 +31,9 @@ declare var Materialize:any;
 })
 export class KeySetting {
     @Input() shortkey: ShortKey;
-    private keyName: string
-    private keyCode: string
-    private keyAlias: string;
+     keyName: string
+    keyCode: string
+     keyAlias: string;
     
     constructor() {
 
@@ -72,7 +72,7 @@ export class KeySetting {
 })
 export class SettingKeymapComponent implements OnInit {
 
-    private shortkeys: ShortKey[];
+    shortkeys: ShortKey[];
     constructor(private keymapService: KeymapService,private router:Router) {
         this.shortkeys = this.keymapService.getKeymap();
 

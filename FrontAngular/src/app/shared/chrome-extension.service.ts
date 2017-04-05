@@ -22,15 +22,15 @@ export class ChromeExtensionService {
     public pageGet(linkUrl: string) {
 
 
-        return new Promise<string>(function (resolve,reject) {
+        return new Promise<string>(function (resolve, reject) {
             let xhr = new XMLHttpRequest();
 
 
             xhr.open('GET', linkUrl, true);
             xhr.onload = (result: any) => {
-                //   this.iframeHtml.nativeElement.contentWindow.document.open()
                 //   this.iframeHtml.nativeElement.contentWindow.document.write(result.currentTarget.response)
                 //   console.log(this.iframeHtml.nativeElement.contentWindow.document);
+                //   this.iframeHtml.nativeElement.contentWindow.document.open()
                 //   console.log($('body',this.iframeHtml.nativeElement.contentWindow.document));
                 resolve(result.currentTarget.response);
                 //   this.iframeHtml.nativeElement.contentWindow.document.close()
@@ -57,14 +57,20 @@ export class ChromeExtensionService {
 
     public interactiveGetToken() {
         let that = this;
-        try {
-            chrome.identity.getAuthToken({ interactive: true }, function (token) {
-                that.router.navigate(['3ndEditor']);
-            });
-        } catch (e) {
-            console.log(e + "토큰을 구하지 못했어요! 토큰을 구하십쇼 토큰이 없으면 시행조차도 안되기때문");
-            alert("웁스!")
-        }
+        return new Promise<boolean>(function (resolve, reject) {
+            try {
+                // 크롬 자체 기능으로 토큰을 성공적으로 가져오면 두번째 매개변수 콜백함수를 실행한다.
+                chrome.identity.getAuthToken({ interactive: true }, function (token) {
+                    that.router.navigate(['3ndEditor']);
+                    resolve();
+                });
+            } catch (e) {
+                console.log(e + "토큰을 구하지 못했어요! 토큰을 구하십쇼 토큰이 없으면 시행조차도 안되기때문");
+                // 실패했음을 알림
+                    reject();
+            }
+
+        })
     }
 
 
@@ -211,7 +217,7 @@ export class ChromeExtensionService {
                 if (!error && status == 200) {
                     changeState(STATE_AUTHTOKEN_ACQUIRED);
                     var user_info = JSON.parse(response);
-                    resolve(true);
+                    resolve(user_info);
                     that.fileAthor = user_info.displayName;
                     populateUserInfo(user_info);
                 } else {

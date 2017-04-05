@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
     
 })
 export class InvalidUrlPageComponent implements OnInit {
-    private alertMsg:string;
+    public alertMsg:string;
     constructor() {
         this.alertMsg = "잘못된 경로입니다."
 

@@ -3,26 +3,26 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 
 
 export class FrameConfig {
-    constructor(private width: string, private scale: string,private height:string) { };
-    public setHeight(height){
+    constructor(private width: string, private scale: string, private height: string) { };
+    public setHeight(height) {
         this.height = height;
     }
 
-    public setWidth(width){
+    public setWidth(width) {
         this.width = width;
-        
+
     }
-    public setScale(scale){
-        this.scale=scale
+    public setScale(scale) {
+        this.scale = scale
     }
-    public getHeight(){
+    public getHeight() {
         return this.height;
     }
 
-    public getWidth(){
+    public getWidth() {
         return this.width
     }
-    public getScale(){
+    public getScale() {
         return this.scale;
     }
 }
@@ -37,14 +37,14 @@ export class NavBarService {
     public isInput: boolean = false;
 
     public frameConfig: FrameConfig;
-    private ratioValue: number = 200;
-    private scaleValue: number = 0.5;
+    private ratioValue: number = 125;
+    private scaleValue: number = 0.8;
     private TOTALVALUE: number = 100;
 
     constructor() {
         this.frameConfig = new FrameConfig(this.ratioValue + "%",
-         "scale(" + this.scaleValue + ")",
-         this.ratioValue+"vh");
+            "scale(" + this.scaleValue + ")",
+            this.ratioValue + "vh");
     }
     public navAction() {
         this.action = this.action === false ? true : false;
@@ -55,20 +55,22 @@ export class NavBarService {
 
     public enlargeFrame() {
         this.scaleValue += 0.1;
-        this.ratioValue = (this.TOTALVALUE / this.scaleValue)
-        this.frameConfig.setScale("scale(" + this.scaleValue + ")");
-        this.frameConfig.setWidth(this.ratioValue + "%");
-        this.frameConfig.setHeight(this.ratioValue + "vh");
+        this.frameConfigAct();
     }
     public reduceFrame() {
         this.scaleValue -= 0.1;
+        this.frameConfigAct();
+    }
+
+    frameConfigAct() {
         this.ratioValue = (this.TOTALVALUE / this.scaleValue)
         this.frameConfig.setScale("scale(" + this.scaleValue + ")");
         this.frameConfig.setWidth(this.ratioValue + "%");
         this.frameConfig.setHeight(this.ratioValue + "vh");
 
     }
-    public getRatioValue(){
-        return Math.round(this.scaleValue*200);
+
+    public getRatioValue() {
+        return Math.round(this.scaleValue * 125);
     }
 }

@@ -123,9 +123,9 @@ export class EditorComponent implements OnInit {
             /* This example includes the default options for paste,
                if nothing is passed this is what it used */
             forcePlainText: false,
-            cleanPastedHTML: false,
+            cleanPastedHTML: true,
             cleanReplacements: [],
-            cleanAttrs: ['class', 'style', 'dir'],
+            cleanAttrs: ['class', 'style','href', 'dir'],
             cleanTags: ['meta'],
             unwrapTags: []
         },
@@ -173,6 +173,6 @@ export class EditorComponent implements OnInit {
         // 새니티제이션을 패스시키려면 각 태그를 분석한 후에 각각 맞는 새니티제이션을 해주어야 함. 
         this.renderer.selectRootElement(this.el.nativeElement).insertAdjacentHTML('beforeend', this.routeData);
 
-        this.renderer.selectRootElement(this.el.nativeElement).insertAdjacentHTML('beforeend', this.pageContent);
+        // this.renderer.selectRootElement(this.el.nativeElement).insertAdjacentHTML('beforeend', this.pageContent);
     }
 }

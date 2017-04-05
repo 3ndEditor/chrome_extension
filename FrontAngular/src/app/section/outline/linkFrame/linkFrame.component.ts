@@ -56,11 +56,11 @@ export class linkFrameComponent implements OnInit {
   @Output() urlInfomation  = new EventEmitter<string>();
 
   //  sanitization 을 통과한 url을 만들기 위한 변수
-  private trustResourceURL: SafeResourceUrl;
+  trustResourceURL: SafeResourceUrl;
   private linkUrl: string = '';
   private urlChecker: string;
 
-  @ViewChild('somevar') private iframeHtml: ElementRef;
+  @ViewChild('usedFrame') iframeHtml: ElementRef;
 
 
   constructor(private _sanitizer: DomSanitizer, private connectService: LinkFrameService, private rd: Renderer,
@@ -78,6 +78,8 @@ export class linkFrameComponent implements OnInit {
   }
 
   pageGet() {
+
+    
     this.urlInfomation.emit(this.linkUrl);
 
 
@@ -139,6 +141,7 @@ export class linkFrameComponent implements OnInit {
   ngAfterContentChecked() {
     // console.log(this.linkSendService.sendURL);
     if (this.urlChecker !== this.linkSendService.sendURL) {
+      this.linkUrl = this.linkSendService.sendURL;
       var urlPattern = new RegExp('^(?:https?):\/\/');
       console.log(this.linkSendService.sendURL);
       this.trustResourceURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.linkSendService.sendURL);

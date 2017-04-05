@@ -1,3 +1,4 @@
+import { OwnServerService } from './own-server.service';
 import { ChromeExtensionService } from './chrome-extension.service';
 import { KeymapService } from './keymap/keymap.service';
 import { KeymapDirective } from './keymap/keymap.directive';
@@ -11,7 +12,8 @@ import { NgModule } from '@angular/core';
     exports: [CommonModule, FormsModule, KeymapDirective ],
     declarations: [KeymapDirective],
     providers: [KeymapService,
-    ChromeExtensionService
+    ChromeExtensionService,
+    OwnServerService
     ],
 })
 export class SharedModule { }

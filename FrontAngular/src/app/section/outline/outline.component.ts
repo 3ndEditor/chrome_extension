@@ -1,3 +1,4 @@
+import { OwnServerService } from '../../shared/own-server.service';
 import { KeyboardEvent } from '@angular/platform-browser/src/facade/browser';
 import { Observable, Subject } from 'rxjs/Rx';
 import { EditorComponent } from './editor/editor.component';
@@ -85,20 +86,21 @@ export class OutlineComponent implements OnInit {
      * @todo 추가적으로 해야할 사항
      */
 
-    private inputParam: string;
+    inputParam: string;
 
-    private pageContent : string;
+    pageContent: string;
 
     // 애니메이션 관련 변수
-    private editorFocusOutline: string;
-    private linkFrameWidth: string;
-    private editorWidth: string;
-    private editorTransform: string;
-    private dividerWidth: string;
-    private linkFrameTransform: string;
-    private dividerTransform: string;
-    private isActiveCrtLinkFrameBtn: boolean = false;
-    private navbarAction: string = "false";
+    editorFocusOutline: string;
+    linkFrameWidth: string;
+    editorWidth: string;
+    editorTransform: string;
+    dividerWidth: string;
+    linkFrameTransform: string;
+    dividerTransform: string;
+    isActiveCrtLinkFrameBtn: boolean = false;
+    
+    navbarAction: string = "false";
     private editorNavbarAction: string;
 
     //iframe 사용변수
@@ -109,12 +111,12 @@ export class OutlineComponent implements OnInit {
 
     private isResized: boolean = false;
     private linkFrameZIndex: string;
-    private dividerZIndex: string;
+    dividerZIndex: string;
     // tab 사용 변수
-    private tabUsage_link: string = "linkTab";
-    private tabUsage_editor: string = "editorTab";
-    private linkTabState: string;
-    private editorTabState: string;
+    tabUsage_link: string = "linkTab";
+    tabUsage_editor: string = "editorTab";
+    linkTabState: string;
+    editorTabState: string;
     // drive 사용변수
     private driveData: JSON;
 
@@ -123,7 +125,7 @@ export class OutlineComponent implements OnInit {
 
     private lineStream = new Subject<string>();
     @ViewChild('firstEditor') editorElement: EditorComponent;
-    private contentOnEditor;
+    contentOnEditor;
     constructor(
         private route: ActivatedRoute,
         private dragulaService: DragulaService,
@@ -133,7 +135,8 @@ export class OutlineComponent implements OnInit {
         private el: ElementRef,
         private _sanitizer: DomSanitizer,
         private linksendService: LinkSenderService,
-        private chromeService: ChromeExtensionService
+        private chromeService: ChromeExtensionService,
+        private ownServerService: OwnServerService
     ) {
 
 
@@ -191,9 +194,9 @@ export class OutlineComponent implements OnInit {
                     this.dividerTransform = 'translate3d(' + (innerWidth * 0.45 - savedDividerWidth) + 'px,0,0)';
                     this.linkFrameTransform = 'translate3d(0,0,0)';
                 } else {
-                    this.editorTransform = 'translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,9%,0)';
+                    this.editorTransform = 'translate3d(' + (innerWidth * 0.5 + savedDividerWidth) + 'px,10%,0)';
                     this.dividerTransform = 'translate3d(' + (innerWidth * 0.45 - savedDividerWidth) + 'px,9%,0)';
-                    this.linkFrameTransform = 'translate3d(0,9%,0)'
+                    this.linkFrameTransform = 'translate3d(0,10%,0)'
                 }
                 savedEdiotrTransX = (innerWidth * 0.5 + savedDividerWidth);
                 savedDiveiderTransX = (innerWidth * 0.45 - savedDividerWidth);
@@ -205,9 +208,9 @@ export class OutlineComponent implements OnInit {
                     this.dividerTransform = 'translate3d(' + (savedDiveiderTransX) + 'px,0,0)';
                     this.linkFrameTransform = 'translate3d(0,0,0)';
                 } else {
-                    this.editorTransform = 'translate3d(' + (savedEdiotrTransX) + 'px,9%,0)';
-                    this.dividerTransform = 'translate3d(' + (savedDiveiderTransX) + 'px,9%,0)';
-                    this.linkFrameTransform = 'translate3d(0,9%,0)'
+                    this.editorTransform = 'translate3d(' + (savedEdiotrTransX) + 'px,10%,0)';
+                    this.dividerTransform = 'translate3d(' + (savedDiveiderTransX) + 'px,10%,0)';
+                    this.linkFrameTransform = 'translate3d(0,10%,0)'
                 }
 
             }
@@ -223,8 +226,8 @@ export class OutlineComponent implements OnInit {
                 this.editorTransform = 'translate3d(0,0,0)'
                 this.linkFrameTransform = 'translate3d(0,0,0)';
             } else {
-                this.editorTransform = 'translate3d(0,9%,0)'
-                this.linkFrameTransform = 'translate3d(0,9%,0)';
+                this.editorTransform = 'translate3d(0,10%,0)'
+                this.linkFrameTransform = 'translate3d(0,10%,0)';
             }
 
         }
@@ -236,6 +239,7 @@ export class OutlineComponent implements OnInit {
     * @returns void
     */
     public screenResizeStart($event: DragEvent): void {
+        $event.preventDefault();
         if (this.isResized === false) {
             this.isResized = true;
         }
@@ -250,9 +254,9 @@ export class OutlineComponent implements OnInit {
                 savedDividerTransForm = this.dividerTransform;
 
             } else {
-                this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,9%,0)';
-                this.linkFrameTransform = 'translate3d(0,9%,0)';
-                this.dividerTransform = 'translate3d(' + ($event.x - savedDividerWidth * 35) + 'px,9%,0)';
+                this.editorTransform = 'translate3d(' + ($event.x + savedDividerWidth) + 'px,10%,0)';
+                this.linkFrameTransform = 'translate3d(0,10%,0)';
+                this.dividerTransform = 'translate3d(' + ($event.x - savedDividerWidth * 35) + 'px,10%,0)';
                 savedDividerTransForm = this.dividerTransform;
             }
             this.linkFrameWidth = ($event.x - savedDividerWidth) + 'px';
@@ -264,7 +268,7 @@ export class OutlineComponent implements OnInit {
         }
     }
     public dividerClick() {
-        this.dividerZIndex = '100';
+        this.dividerZIndex = '9999';
         this.linkFrameZIndex = '8';
     }
     public dividerDeActive() {
@@ -289,9 +293,9 @@ export class OutlineComponent implements OnInit {
                     this.dividerTransform = 'translate3d(' + savedDiveiderTransX + 'px,0,0)';
                     // this.iframeHeight = '100vh';
                 } else {
-                    this.linkFrameTransform = 'translate3d(0,9%,0)';
-                    this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,9%,0)';
-                    this.dividerTransform = 'translate3d(' + savedDiveiderTransX + 'px,9%,0)';
+                    this.linkFrameTransform = 'translate3d(0,10%,0)';
+                    this.editorTransform = 'translate3d(' + savedEdiotrTransX + 'px,10%,0)';
+                    this.dividerTransform = 'translate3d(' + savedDiveiderTransX + 'px,10%,0)';
                     // this.iframeHeight = '90vh';
                 }
 
@@ -300,8 +304,8 @@ export class OutlineComponent implements OnInit {
                     this.editorTransform = 'translate3d(0,0,0)'
                     this.linkFrameTransform = 'translate3d(0,0,0)';
                 } else {
-                    this.editorTransform = 'translate3d(0,9%,0)'
-                    this.linkFrameTransform = 'translate3d(0,9%,0)';
+                    this.editorTransform = 'translate3d(0,10%,0)'
+                    this.linkFrameTransform = 'translate3d(0,10%,0)';
                 }
 
             }
@@ -355,10 +359,13 @@ export class OutlineComponent implements OnInit {
     //     console.log(e);
     // }
 
-    pageGet(linkUrl){
-        this.chromeService.pageGet(linkUrl).then((result)=>{
-            this.pageContent = result;
-        });
+    pageGet(linkUrl) {
+        
+        this.ownServerService.submitUserId('ff');
+        
+        // this.chromeService.pageGet(linkUrl).then((result) => {
+        //     this.editorElement.el.nativeElement.insertAdjacentHTML('beforeend', result);
+        // });
     }
 
 

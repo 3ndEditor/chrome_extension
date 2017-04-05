@@ -35,18 +35,18 @@ export class AppComponent {
      * @file app.component.ts 
      * @author youngtae 2017.01.23
      * @brief 최상위 Root Component 이다.
-     * @see 참고사항 헤더와 라우터 아웃렛을 가지고 있다.
+     * @see 참고사항 헤더와 섹션을 가지고 있다.
      * @todo 추가적으로 해야할 사항
      */
 
-    private navbarAction: string;
-    private headerMouseAction: string;
+    navbarAction: string;
+    headerMouseAction: string;
     private headerDetectorY : string;
     constructor(private navService: NavBarService) {
         this.navbarAction = "false";
-        // window.onbeforeunload = function (e) {
-        //     return window.confirm("");
-        // };
+        window.onbeforeunload = function (e) {
+            return window.confirm("");
+        };
     }
 
     /**

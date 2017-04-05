@@ -10,8 +10,8 @@ export class DriveWindowComponent implements OnInit {
     private newFileName: string;
     private isOpen: boolean = false;
     private files: Array<Object>;
-    private isActiveSearch: boolean;
-    private isSelectedTab: number = 1;
+    isActiveSearch: boolean;
+    isSelectedTab: number = 1;
     private isCompletedGetList: boolean = false;
     @Input() editorElement: ElementRef;
     constructor(private chromeService: ChromeExtensionService, private renderer: Renderer) {

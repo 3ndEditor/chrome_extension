@@ -1,17 +1,17 @@
 <div>
-  <div style="margin-bottom: 0;">
+  <div style="margin-top: 50;">
     
-    <input #inputUrl class="" type="url" placeholder="http://" (keyup.enter)="onEnter(inputUrl.value)" style="margin-bottom: 0; height: 50%"
+    <input #inputUrl class="col s9" type="url" placeholder="http://" (keyup.enter)="onEnter(inputUrl.value)" style="margin-bottom: 0; margin-top: 10; height: 5vh "
     />
-    
+    <button  style="height:5vh" class="col s3" id="gg" (click)="pageGet()">페이지 내용보내기 =></button>
     
   </div>
 
   <div id="frame">
-    <button id="gg" (click)="pageGet()">페이지 가져오기</button>
+    
   
     
-  <iframe id="iframe" #somevar [dragula]="'bag-one'" 
+  <iframe id="iframe" #usedFrame [dragula]="'bag-one'" 
   [ngStyle]="{ 'opacity':iframeOpacity,'height':iframeHeight,'width': iframeWidth,'-ms-transform':iframeScale , '-moz-transform':iframeScale,
     '-o-transform': iframeScale,'-webkit-transform':iframeScale,'transform': iframeScale}" sandbox="allow-same-origin allow-forms allow-modals allow-scripts"
     [src]="trustResourceURL">

@@ -1,3 +1,4 @@
+import { OwnServerService } from '../../shared/own-server.service';
 import { ChromeExtensionService } from '../../shared/chrome-extension.service';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs/Rx';
@@ -19,15 +20,18 @@ declare var chrome: any
 export class AuthGuard implements CanActivate, CanActivateChild {
     private isGetToken: boolean;
 
-    constructor(private router: Router, private chromeService: ChromeExtensionService) { }
+    constructor(private router: Router, private chromeService: ChromeExtensionService, private ownServerService: OwnServerService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
 
 
 
         return this.chromeService.checkGetToken()
-        .then(trueResult=>{return trueResult})
-        .catch(falseResult=>{return falseResult});
+            .then(user_info => {
+
+                return true
+            })
+            .catch(falseResult => { return falseResult });
 
 
 

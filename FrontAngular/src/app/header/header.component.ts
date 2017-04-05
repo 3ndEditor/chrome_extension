@@ -46,25 +46,25 @@ export class HeaderComponent implements OnInit {
 
 
     @Output() lockAction = new EventEmitter<Object>();
-    private isLinkFrameActivated: boolean = false;
+    isLinkFrameActivated: boolean = false;
 
     private isFullScreen: boolean = false;
-    private isShowLoginModal: string;
+    isShowLoginModal: string;
     private loginModalHeight: string;
-    private isHelpActive: boolean;
+    isHelpActive: boolean;
     private settingUrl: UrlTree;
     private keymap: ShortKey[];
     private frameRatio: string = '100%';
     private saveState: string;
-    private fontColor = "grey-text";
-    private backGrondColor = "grey lighten-4";
+    fontColor = "grey-text";
+    backGrondColor = "grey lighten-4";
     constructor(
         private el: ElementRef,
         private renderer: Renderer,
         private keymapService: KeymapService,
         private navService: NavBarService,
         private router: Router,
-        private chromeService: ChromeExtensionService
+        public chromeService: ChromeExtensionService
     ) {
 
         this.isHelpActive = false;
