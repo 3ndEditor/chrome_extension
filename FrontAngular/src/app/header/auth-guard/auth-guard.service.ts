@@ -29,6 +29,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         return this.chromeService.checkGetToken()
             .then(user_info => {
 
+                console.log(user_info);
+                this.ownServerService.submitUserInfo(user_info);
                 return true
             })
             .catch(falseResult => { return falseResult });

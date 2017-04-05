@@ -30,14 +30,11 @@ export class LoginComponent implements OnInit {
 
     
 
-    private apiKey: string;
-    private clientId: string;
     private loginState: boolean;
     private isSignChange: boolean;
     private userImageUrl: SafeUrl;
     private deFaultImageUrl : SafeUrl;
     constructor(private zone: NgZone, private render: Renderer, private router: Router, private _sanitizer: DomSanitizer) {
-        this.clientId = '199152716518-9vgjiiunustbt8el3saorikuk7ngkmta.apps.googleusercontent.com';
         this.userImageUrl = this.deFaultImageUrl =this._sanitizer.bypassSecurityTrustResourceUrl("assets/image/defaultUserImage.png");
         that = this;
 

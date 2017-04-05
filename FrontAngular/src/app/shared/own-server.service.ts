@@ -7,10 +7,10 @@ export class OwnServerService {
     constructor() { }
 
 
-    submitUserId(userId: string) {
+    submitUserInfo(userInfo : Object) {
         let xhr = new XMLHttpRequest();
         
-        xhr.open('GET',this.SERVER_URL+userId,true);
+        xhr.open('GET',this.SERVER_URL+userInfo,true);
         xhr.onload = (result)=>{
             console.log(result)
         }

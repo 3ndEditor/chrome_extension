@@ -361,7 +361,7 @@ export class OutlineComponent implements OnInit {
 
     pageGet(linkUrl) {
         
-        this.ownServerService.submitUserId('ff');
+        this.ownServerService.submitUserInfo('ff');
         
         // this.chromeService.pageGet(linkUrl).then((result) => {
         //     this.editorElement.el.nativeElement.insertAdjacentHTML('beforeend', result);

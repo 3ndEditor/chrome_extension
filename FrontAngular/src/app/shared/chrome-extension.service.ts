@@ -61,13 +61,18 @@ export class ChromeExtensionService {
             try {
                 // 크롬 자체 기능으로 토큰을 성공적으로 가져오면 두번째 매개변수 콜백함수를 실행한다.
                 chrome.identity.getAuthToken({ interactive: true }, function (token) {
-                    that.router.navigate(['3ndEditor']);
-                    resolve();
+                    that.router.navigate(['3ndEditor'])
+                        .then((result) => {
+                            resolve(result);
+                        })
+                        .catch(() => {
+                            resolve(false);
+                        });
                 });
             } catch (e) {
                 console.log(e + "토큰을 구하지 못했어요! 토큰을 구하십쇼 토큰이 없으면 시행조차도 안되기때문");
                 // 실패했음을 알림
-                    reject();
+                reject(e);
             }
 
         })
