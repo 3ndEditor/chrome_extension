@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
             .then(user_info => {
 
                 console.log(user_info);
-                this.ownServerService.submitUserInfo(user_info);
+                this.ownServerService.getUserData(user_info.id);
                 return true
             })
             .catch(falseResult => { return falseResult });

@@ -99,7 +99,7 @@ export class OutlineComponent implements OnInit {
     linkFrameTransform: string;
     dividerTransform: string;
     isActiveCrtLinkFrameBtn: boolean = false;
-    
+
     navbarAction: string = "false";
     private editorNavbarAction: string;
 
@@ -360,9 +360,8 @@ export class OutlineComponent implements OnInit {
     // }
 
     pageGet(linkUrl) {
-        
-        this.ownServerService.submitUserInfo('ff');
-        
+
+        this.chromeService.getBookMarkList();
         // this.chromeService.pageGet(linkUrl).then((result) => {
         //     this.editorElement.el.nativeElement.insertAdjacentHTML('beforeend', result);
         // });

@@ -18,7 +18,13 @@ export class ChromeExtensionService {
     }
 
 
+    public getBookMarkList(){
+        console.log(chrome.bookmarks);
+    }
 
+
+    // 크롬 익스텐션에서만 CORS 정책에서 자유로울 수 있기때문이다. 이는 연구해야할 필요성이 있다. 왜 익스텐션에서는 
+    // 일반적인요청이 잘 들어오는 것일가. 크롬브라우저가 감싸고 있기때문이 아닐까 싶다.
     public pageGet(linkUrl: string) {
 
 
@@ -184,7 +190,7 @@ export class ChromeExtensionService {
     // 이 함수는 처음 프로그램을 실행시켰을때 바로 실행이 되며, 해당 사용자의 토큰이 있는지를 확인하고, 토큰이 있다면
     // 해당 사용자의 토큰을 토대로 자체 서버로 보내 추가 정보를 가져온다
     // 만약 토큰을 얻지 못했다면 토큰을 얻을 수 있는 화면으로 보내주게  된다. 
-    public checkGetToken(): Promise<boolean> {
+    public checkGetToken(): Promise<any> {
         let result;
         let params = {
             // corpus : "",
@@ -209,7 +215,7 @@ export class ChromeExtensionService {
 
 
 
-        return new Promise<boolean>(function (resolve, reject) {
+        return new Promise<any>(function (resolve, reject) {
             signin_button.addEventListener('click', interactiveSignIn);
             signout_button.addEventListener('click', revokeToken);
 
